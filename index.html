@@ -348,6 +348,8 @@ body{font-family:'Barlow',sans-serif;background:var(--paper);color:var(--ink);fo
 .calc.c-mode-dark #c-s2{border-left-color:var(--copper);}
 /* Spend and state field labels in stage 2 */
 .calc.c-mode-dark .field-label{color:rgba(255,255,255,0.45);}
+.calc.c-mode-dark .c-field-lbl{color:rgba(255,255,255,0.88);font-size:12px;}
+.calc.c-mode-dark .c-field-aside{color:#fff;font-size:15px;font-family:'DM Mono',monospace;font-weight:500;letter-spacing:0;text-transform:none;}
 .calc.c-mode-dark .field-label .step{color:var(--copper);}
 .calc.c-mode-dark .spend-input,.calc.c-mode-dark .sel-wrap select{background:rgba(255,255,255,0.06);color:#fff;border-color:rgba(255,255,255,0.15);}
 .calc.c-mode-dark .spend-currency,.calc.c-mode-dark .spend-suffix{color:rgba(255,255,255,0.4);}
@@ -385,6 +387,43 @@ body{font-family:'Barlow',sans-serif;background:var(--paper);color:var(--ink);fo
 /* Result intro copy */
 .c-result-intro{padding:14px 0 4px;}
 .c-intro-text{font-family:'Barlow',sans-serif;font-size:clamp(15px,2.2vw,17px);color:var(--ink-mid);line-height:1.7;font-style:italic;}
+
+/* ── STAGE 2 UX PASS ─────────────────────────────────────────────────── */
+.c-chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px;}
+.c-chip{background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.16);color:rgba(255,255,255,0.75);cursor:pointer;font-family:'DM Mono',monospace;font-size:11px;letter-spacing:0.1em;padding:9px 14px;transition:all 0.18s;flex-shrink:0;line-height:1;}
+.c-chip:hover{border-color:var(--copper);color:var(--copper-pale);}
+.c-chip.active{background:var(--copper);border-color:var(--copper);color:#fff;font-weight:600;}
+.c-nav-row{display:flex;gap:10px;margin-top:28px;}
+.c-nav-next{flex:7;margin-top:0!important;}
+.c-back-vis{flex:3;background:transparent;border:1px solid rgba(255,255,255,0.22);color:rgba(255,255,255,0.6);cursor:pointer;font-family:'DM Mono',monospace;font-size:11px;letter-spacing:0.14em;text-transform:uppercase;transition:all 0.18s;padding:15px 0;display:flex;align-items:center;justify-content:center;gap:5px;}
+.c-back-vis::before{content:'←';font-size:12px;transition:transform 0.18s;}
+.c-back-vis:hover{border-color:var(--copper);color:var(--copper-pale);}
+.c-back-vis:hover::before{transform:translateX(-3px);}
+.c-optional{font-size:0.78em;opacity:0.62;}
+.calc.c-mode-dark .spend-input::placeholder{color:rgba(255,255,255,0.3);}
+/* ────────────────────────────────────────────────────────────────────── */
+
+/* ── STAGE 3 NARRATIVE PASS ──────────────────────────────────────────── */
+.c-waste-intro{font-family:'Barlow',sans-serif;font-size:clamp(16px,2.4vw,19px);color:rgba(255,255,255,0.82);margin-bottom:8px;line-height:1.5;}
+.c-waste-intro strong{color:#fff;}
+.c-on-bill{font-family:'Barlow',sans-serif;font-size:clamp(14px,2vw,16px);color:rgba(255,255,255,0.52);letter-spacing:0.04em;margin-top:4px;margin-bottom:28px;}
+.c-asset-beat{border-top:1px solid rgba(255,255,255,0.1);padding-top:22px;margin-bottom:22px;}
+.c-asset-beat p{font-size:clamp(15px,2.2vw,17px);color:rgba(255,255,255,0.82);line-height:1.75;}
+.c-asset-beat strong{color:#fff;}
+.c-ded-beat{border-top:1px solid rgba(255,255,255,0.1);padding-top:22px;margin-bottom:22px;}
+.c-ded-beat p{font-size:clamp(15px,2.2vw,17px);color:rgba(255,255,255,0.82);line-height:1.75;margin-bottom:12px;}
+.c-ded-beat strong{color:#fff;}
+.c-ded-beat p:last-child{margin-bottom:0;}
+.c-sqft-invite{font-family:'Playfair Display',serif;font-style:italic;font-size:clamp(16px,2.4vw,19px);color:rgba(255,255,255,0.88);line-height:1.6;margin-bottom:16px;}
+/* ────────────────────────────────────────────────────────────────────── */
+
+/* ── SMS TEXT CTA ──────────────────────────────────────────────────────── */
+.txt-cta{padding:28px 0 6px;}
+.txt-cta-btn{display:flex;align-items:center;justify-content:center;gap:10px;background:var(--copper);color:#fff;font-family:'Barlow',sans-serif;font-size:clamp(15px,2.2vw,17px);font-weight:600;letter-spacing:0.01em;padding:17px 28px;text-decoration:none;transition:background 0.18s;cursor:pointer;}
+.txt-cta-btn:hover{background:#b8742a;}
+.txt-cta-ico{font-size:20px;line-height:1;flex-shrink:0;}
+.txt-cta-sub{font-size:12px;color:var(--slate);letter-spacing:0.05em;margin-top:10px;text-align:center;font-family:'DM Mono',monospace;}
+/* ────────────────────────────────────────────────────────────────────── */
 @media(max-width:560px){.calc.c-mode-dark .calc-head{padding:10px 22px 6px;}}
 /* ────────────────────────────────────────────────────────────────────── */
 @media(max-width:560px){.c-wrap{padding:26px 22px 0;}.c-summary{padding:12px 22px;}}
@@ -446,41 +485,44 @@ body{font-family:'Barlow',sans-serif;background:var(--paper);color:var(--ink);fo
       </div>
     </div>
 
-    <!-- Stage 2: personalized insight + direct inputs (no DOM moves) -->
+    <!-- Stage 2: state first, then spend chips + custom text input -->
     <div id="c-s2" style="display:none">
       <div class="c-progress"><span class="c-progress-step done"></span><span class="c-progress-step active"></span><span class="c-progress-step"></span><span class="c-progress-label">2 / 3</span></div>
       <div id="c-claim-s2"></div>
       <span class="c-ask">What state, and roughly what is your annual electricity spend?</span>
-      <div style="margin-top:16px;">
-        <div class="c-field-lbl">Annual spend <span id="c2-mo" class="c-field-aside"></span></div>
-        <div class="spend-input-row">
-          <span class="spend-currency">$</span>
-          <input type="text" inputmode="numeric" id="c2-spend" class="spend-input" value="250,000" oninput="c2Spend()">
-          <span class="spend-suffix">per year</span>
-        </div>
-        <input type="range" id="c2-rng" class="rng" min="12000" max="20000000" step="5000" value="250000" oninput="c2Rng()">
-        <div class="slider-ends"><span>$12K</span><span>$20M</span></div>
-      </div>
-      <div style="margin-top:20px;">
+      <div style="margin-top:18px;">
         <div class="c-field-lbl">Primary state <span id="c2-split" class="c-field-aside"></span></div>
         <div class="sel-wrap"><select id="c2-state" onchange="c2State()"></select></div>
       </div>
-      <button class="c-next-btn" onclick="goStage('s3')" style="margin-top:28px;">Next</button>
-      <button class="c-back-btn" onclick="goStage('s1')">Back</button>
+      <div style="margin-top:22px;">
+        <div class="c-field-lbl">Annual electricity spend <span id="c2-mo" class="c-field-aside"></span></div>
+        <div id="c2-chips" class="c-chips"></div>
+        <div class="spend-input-row" style="margin-top:10px;">
+          <span class="spend-currency">$</span>
+          <input type="text" inputmode="numeric" id="c2-spend" class="spend-input" placeholder="or enter exact amount" oninput="c2Spend()">
+          <span class="spend-suffix">/ year</span>
+        </div>
+      </div>
+      <div class="c-nav-row">
+        <button class="c-next-btn c-nav-next" onclick="goStage('s3')">Next</button>
+        <button class="c-back-vis" onclick="goStage('s1')">Back</button>
+      </div>
     </div>
 
     <!-- Stage 3: dollar reveal + sqft -->
     <div id="c-s3" style="display:none">
       <div class="c-progress"><span class="c-progress-step done"></span><span class="c-progress-step done"></span><span class="c-progress-step active"></span><span class="c-progress-label">3 / 3</span></div>
       <div id="c-claim-s3" class="c-card"></div>
-      <span class="c-ask">Square footage? <em style="font-style:italic;letter-spacing:0;text-transform:none;color:var(--slate);font-size:11px;">Optional &mdash; sharpens your deduction number.</em></span>
+      <span class="c-ask">Approximate square footage? <span class="c-optional">(optional)</span></span>
       <div class="sqft-input-row" style="margin-top:14px;">
         <input type="text" inputmode="numeric" id="c-sqft" class="sqft-input" placeholder="e.g. 45,000" oninput="onConsultSqft()">
         <span class="sqft-suf">sq ft</span>
       </div>
       <div class="c-ded-result" id="c-ded-result"></div>
-      <button class="c-next-btn" onclick="showResult()" style="margin-top:28px;">See your results</button>
-      <button class="c-back-btn" onclick="goStage('s2')">Back</button>
+      <div class="c-nav-row">
+        <button class="c-next-btn c-nav-next" onclick="showResult()">See your results</button>
+        <button class="c-back-vis" onclick="goStage('s2')">Back</button>
+      </div>
     </div>
 
   </div>
@@ -492,7 +534,59 @@ body{font-family:'Barlow',sans-serif;background:var(--paper);color:var(--ink);fo
   </div>
 
 
-  <div class="calc-body" id="calc-body-main">
+<div class="result gated" id="result-block">
+    <div class="result-inner">
+      <div class="result-label">Estimated annual savings range</div>
+      <div class="result-range">
+        <span class="result-num" id="r-floor">$0</span>
+        <span class="result-to">to</span>
+        <span class="result-num" id="r-ceil">$0</span>
+      </div>
+      <div class="result-pcts" id="r-pcts">0% to 0% of your annual bill</div>
+      <div class="result-context">The low end is the conservative floor with retrofits only. The high end reflects full SunCore replacement. <b>Harmonization is included at both ends.</b></div>
+      <div class="cum-row">
+        <div class="cum-cell"><div class="cum-val" id="cum-month">$0</div><div class="cum-lab">Per month at the floor</div></div>
+        <div class="cum-cell"><div class="cum-val" id="cum-5yr">$0</div><div class="cum-lab">5-year cumulative floor</div></div>
+        <div class="cum-cell"><div class="cum-val" id="cum-10yr">$0</div><div class="cum-lab">10-year cumulative floor</div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="txt-cta gated" id="txt-cta-top">
+    <a href="sms:+18647770688?body=Hi%2C%20I%20just%20ran%20the%20Energy%20Plus%20savings%20calculator%20and%20would%20like%20to%20speak%20with%20an%20energy%20strategist%20about%20my%20facility." class="txt-cta-btn" id="sms-link-top">
+      <span class="txt-cta-ico">&#9993;</span>
+      Text to talk to your energy strategist
+    </a>
+    <p class="txt-cta-sub">We respond within one business hour during office hours.</p>
+  </div>
+
+<div class="ledger gated" id="asset-section">
+    <div class="ledger-head"><span class="ledger-tag">The Asset</span> <span class="ledger-title" id="asset-ledger-title"></span></div>
+    <div id="asset-content"></div>
+  </div>
+
+<div class="ledger gated" id="ded-section">
+    <div class="ledger-head"><span class="ledger-tag">The Deduction</span> <span class="ledger-sub">up to $5.94 per sq ft</span></div>
+    <p class="ded-prompt">What is your approximate square footage? Within 500 ft is fine.</p>
+    <div class="sqft-input-row">
+      <input type="text" inputmode="numeric" id="sqft" class="sqft-input" placeholder="e.g. 45,000" oninput="onSqftInput()">
+      <span class="sqft-suf">sq ft</span>
+    </div>
+    <div class="ded-result ded-hidden" id="ded-result">
+      Up to <span class="ded-num" id="ded-amount">$0</span> in deductions. About <span class="ded-num" id="ded-tax">$0</span> in real tax at 21%.
+    </div>
+  </div>
+
+<div class="ledger gated" id="fin-section">
+    <div class="ledger-head"><span class="ledger-tag">The Financing</span> <span class="ledger-sub">$0 out of pocket</span></div>
+    <p class="fin-text">We structure it so the monthly savings cover the payment from day one.</p>
+  </div>
+
+<div class="fac-close gated">
+    <p class="fac-close-text" id="fac-close-text"></p>
+  </div>
+
+<div class="calc-body" id="calc-body-main">
 
     <!-- 01 FACILITY (adjust panel) -->
     <div class="field" id="field-fac-adj">
@@ -611,49 +705,7 @@ body{font-family:'Barlow',sans-serif;background:var(--paper);color:var(--ink);fo
 
   </div>
 
-  <div class="result gated" id="result-block">
-    <div class="result-inner">
-      <div class="result-label">Estimated annual savings range</div>
-      <div class="result-range">
-        <span class="result-num" id="r-floor">$0</span>
-        <span class="result-to">to</span>
-        <span class="result-num" id="r-ceil">$0</span>
-      </div>
-      <div class="result-pcts" id="r-pcts">0% to 0% of your annual bill</div>
-      <div class="result-context">The low end is the conservative floor with retrofits only. The high end reflects full SunCore replacement. <b>Harmonization is included at both ends.</b></div>
-      <div class="cum-row">
-        <div class="cum-cell"><div class="cum-val" id="cum-month">$0</div><div class="cum-lab">Per month at the floor</div></div>
-        <div class="cum-cell"><div class="cum-val" id="cum-5yr">$0</div><div class="cum-lab">5-year cumulative floor</div></div>
-        <div class="cum-cell"><div class="cum-val" id="cum-10yr">$0</div><div class="cum-lab">10-year cumulative floor</div></div>
-      </div>
-    </div>
-  </div>
-
-  <div class="ledger gated" id="asset-section">
-    <div class="ledger-head"><span class="ledger-tag">The Asset</span> <span class="ledger-title" id="asset-ledger-title"></span></div>
-    <div id="asset-content"></div>
-  </div>
-  <div class="ledger gated" id="ded-section">
-    <div class="ledger-head"><span class="ledger-tag">The Deduction</span> <span class="ledger-sub">up to $5.94 per sq ft</span></div>
-    <p class="ded-prompt">What is your approximate square footage? Within 500 ft is fine.</p>
-    <div class="sqft-input-row">
-      <input type="text" inputmode="numeric" id="sqft" class="sqft-input" placeholder="e.g. 45,000" oninput="onSqftInput()">
-      <span class="sqft-suf">sq ft</span>
-    </div>
-    <div class="ded-result ded-hidden" id="ded-result">
-      Up to <span class="ded-num" id="ded-amount">$0</span> in deductions. About <span class="ded-num" id="ded-tax">$0</span> in real tax at 21%.
-    </div>
-  </div>
-  <div class="ledger gated" id="fin-section">
-    <div class="ledger-head"><span class="ledger-tag">The Financing</span> <span class="ledger-sub">$0 out of pocket</span></div>
-    <p class="fin-text">We structure it so the monthly savings cover the payment from day one.</p>
-  </div>
-  <div class="fac-close gated">
-    <p class="fac-close-text" id="fac-close-text"></p>
-  </div>
-
-  <div class="method gated">
-    <p class="method-line">Our methodology understates rather than overstates client benefit by design.</p>
+<div class="method gated">
     <div class="adjust" id="adjust">
       <button class="adjust-toggle" onclick="toggleAdjust()"><span class="chev">&#9656;</span> Adjust the assumptions</button>
       <div class="adjust-panel">
@@ -674,16 +726,20 @@ body{font-family:'Barlow',sans-serif;background:var(--paper);color:var(--ink);fo
     </div>
   </div>
 
-  <div class="cta gated">
-    <a href="#" class="cta-btn" id="cta-link">Request a facility assessment &nbsp;&rarr;</a>
-    <p class="cta-sub">Bring your last twelve months of bills. We will tell you in twenty minutes what your real floor is.</p>
+  <div class="txt-cta gated" id="txt-cta-bot">
+    <a href="sms:+18647770688?body=Hi%2C%20I%20just%20ran%20the%20Energy%20Plus%20savings%20calculator%20and%20would%20like%20to%20speak%20with%20an%20energy%20strategist%20about%20my%20facility." class="txt-cta-btn" id="sms-link-bot">
+      <span class="txt-cta-ico">&#9993;</span>
+      Text to talk to your energy strategist
+    </a>
+    <p class="txt-cta-sub">Bring your last twelve months of bills. We will tell you in twenty minutes what your real floor is.</p>
   </div>
 
-  <div class="calc-foot gated">
+<div class="calc-foot gated">
     <span class="tag">About this estimate</span>
     <p>This estimator returns a conservative range, not a projection of peak performance. Power harmonization delivers whole-facility savings on every site and is always included. Cooling and refrigeration savings come from the HVAC Optimizer and SolarCoil retrofits up to SunCore replacement. Heating savings are reached only by SunCore replacement and reflect a coefficient-of-performance comparison to existing electric heat. Refrigeration-led facilities stay cooling-dominated regardless of climate.</p>
     <p>Actual verified savings depend on a site assessment of equipment, load profile, rate structure, and condition. Energy Plus is an Independent Energy Solutions Partner with no vendor incentive to inflate these figures. Every assumption is editable above.</p>
   </div>
+
 
 </div>
 
@@ -912,19 +968,19 @@ function render(){
   } else {
     document.getElementById("v-dem").textContent = fmtFull(r.demFloor);
   }
-  document.getElementById("dem-choice").classList.toggle("hidden", !state.tDem);
-  document.getElementById("v-lit").textContent  = state.tLit  ? (fmtFull(r.litFloor)+" to "+fmtFull(r.litCeil)) : "off";
-  document.getElementById("lit-choice").classList.toggle("hidden", !state.tLit);
+  var _dch=document.getElementById("dem-choice"); if(_dch) _dch.classList.toggle("hidden", !state.tDem);
+  var _vlit=document.getElementById("v-lit"); if(_vlit) _vlit.textContent = state.tLit ? (fmtFull(r.litFloor)+" to "+fmtFull(r.litCeil)) : "off";
+  var _lch=document.getElementById("lit-choice"); if(_lch) _lch.classList.toggle("hidden", !state.tLit);
   var motEl = document.getElementById("s-mot");
   if(motEl){ motEl.style.display = (state.selected && MOTOR_ELIGIBLE[state.selected] && state.spend>=150000) ? "" : "none"; }
   if(document.getElementById("v-mot")){
     document.getElementById("v-mot").textContent = state.tMot ? (fmtFull(r.motFloor)+" to "+fmtFull(r.motCeil)) : "off";
   }
   ["cool","heat","dem"].forEach(function(k){
-    var on=(k==="cool"?state.tCool:k==="heat"?state.tHeat:k==="dem"?state.tDem:k==="lit"?state.tLit:state.tMot);
-    var el=document.getElementById("s-"+k); el.classList.toggle("on",on); el.classList.toggle("off",!on);
+    var on=(k==="cool"?state.tCool:k==="heat"?state.tHeat:state.tDem);
+    var el=document.getElementById("s-"+k); if(el){ el.classList.toggle("on",on); el.classList.toggle("off",!on); }
   });
-  document.getElementById("heat-choice").classList.toggle("hidden", !state.tHeat);
+  var _hch=document.getElementById("heat-choice"); if(_hch) _hch.classList.toggle("hidden", !state.tHeat);
   if(state.selected&&!state.hasAnimated){state.hasAnimated=true;countUp(document.getElementById("r-floor"),r.floor,800);countUp(document.getElementById("r-ceil"),r.ceil,1050);}else{document.getElementById("r-floor").textContent=fmtFull(r.floor);document.getElementById("r-ceil").textContent=fmtFull(r.ceil);}
   document.getElementById("r-pcts").textContent = pctTxt(state.spend>0?r.floor/state.spend:0) + " to " + pctTxt(state.spend>0?r.ceil/state.spend:0) + " of your annual bill";
   document.getElementById("cum-month").textContent = fmtFull(r.floor/12);
@@ -984,7 +1040,7 @@ function selectFac(el){
   document.querySelectorAll(".fac-opt").forEach(function(o){o.classList.remove("active");});
   el.classList.add("active");
   var key=el.getAttribute("data-key");
-  state.selected=true;
+  state.selected=key;
   state.hvacShare = parseFloat(el.getAttribute("data-share"))/100;
   state.harmoRate  = parseFloat(el.getAttribute("data-harmo"))/100;
   state.coolMin   = parseFloat(el.getAttribute("data-coolmin"));
@@ -1158,21 +1214,72 @@ function c2State(){
   var sp=document.getElementById("c2-split");
   if(sp) sp.textContent=state.stateCool?Math.round(state.stateCool)+"% cooling":"";
 }
+function niceRound(v){
+  if(v<50000) return Math.round(v/5000)*5000;
+  if(v<200000) return Math.round(v/25000)*25000;
+  if(v<1000000) return Math.round(v/100000)*100000;
+  if(v<5000000) return Math.round(v/500000)*500000;
+  return Math.round(v/1000000)*1000000;
+}
+function buildChips(min,max){
+  var lmin=Math.log10(min),lmax=Math.log10(max),arr=[];
+  for(var i=0;i<=5;i++) arr.push(niceRound(Math.pow(10,lmin+i*(lmax-lmin)/5)));
+  return arr.filter(function(v,i,a){return a.indexOf(v)===i;});
+}
+function setSpend(v){
+  state.spend=v;
+  var el=document.getElementById("c2-spend");
+  if(el) el.value=v.toLocaleString("en-US");
+  var mo=document.getElementById("c2-mo");
+  if(mo) mo.textContent="$"+Math.round(v/12).toLocaleString("en-US")+"/mo";
+  syncSpendField(); updateChipActive(); render();
+}
+function updateChipActive(){
+  document.querySelectorAll(".c-chip").forEach(function(b){
+    b.classList.toggle("active",parseInt(b.getAttribute("data-v"))===state.spend);
+  });
+}
+function renderChips(){
+  var fEl=document.querySelector('.fac-opt[data-key="'+state.selected+'"]');
+  if(!fEl) return;
+  var min=parseFloat(fEl.getAttribute("data-min")),max=parseFloat(fEl.getAttribute("data-max"));
+  var chips=buildChips(min,max);
+  var ct=document.getElementById("c2-chips"); if(!ct) return;
+  ct.innerHTML=chips.map(function(v){
+    return '<button class="c-chip'+(state.spend===v?" active":"")+'" data-v="'+v+'" onclick="setSpend('+v+')" type="button">'+fmtK(v)+'</button>';
+  }).join("");
+}
 function updateClaimS2(){
   if(!state.selected||!INSIGHTS[state.selected]) return;
   var ins=INSIGHTS[state.selected];
   var el=document.getElementById("c-claim-s2"); if(!el) return;
   el.innerHTML="<h2 class='c-hed'>"+INSIGHTS[state.selected].label.charAt(0).toUpperCase()+INSIGHTS[state.selected].label.slice(1)+"</h2>"+"<p class='c-copy'>Our data puts energy waste in this category at <strong>"+ins.range+" of the power bill</strong>.</p>"+
     "<p class='c-copy'>"+ins.b1+". The equipment we address typically runs <strong>40% lower on maintenance</strong> and lasts <strong>5 to 15 years longer</strong>.</p>";
+  renderChips();
 }
 
 function updateClaimS3(){
   if(!state.selected) return;
   var r=compute();
+  var ins=INSIGHTS[state.selected];
+  var b=BOTTOM_CONTENT[state.selected];
   var el=document.getElementById("c-claim-s3"); if(!el) return;
-  el.innerHTML="<div class='c-range'>"+fmtFull(r.floor)+" to "+fmtFull(r.ceil)+"</div>"+
-    "<div class='c-range-label'>your estimated annual savings range</div>"+
-    "<p class='c-copy'>You also likely qualify for up to <strong>$5.94 per sq ft</strong> in federal tax deductions. We structure financing so savings cover the payment from day one.</p>";
+  if(!ins||!b){ el.innerHTML="<div class='c-range'>"+fmtFull(r.floor)+" to "+fmtFull(r.ceil)+"</div><div class='c-on-bill'>on your annual energy bill</div>"; return; }
+  // Waste framing
+  var h="<p class='c-waste-intro'>Your <strong>"+ins.label+"</strong> is likely wasting</p>";
+  h+="<div class='c-range'>"+fmtFull(r.floor)+" to "+fmtFull(r.ceil)+"</div>";
+  h+="<div class='c-on-bill'>on your annual energy bill</div>";
+  // Asset beat — top 2 cost bullets
+  var b1=b.bullets[0], b2=b.bullets[1];
+  h+="<div class='c-asset-beat'><p>Beyond the bill, <strong>"+b.assetTitle+"</strong> are your highest-risk assets. "+b1+" "+b2+"</p></div>";
+  // Deduction + financing beat
+  h+="<div class='c-ded-beat'>";
+  h+="<p>Buildings like yours typically qualify for one of the most underused incentives in commercial real estate — a federal tax deduction of up to <strong>$5.94 per square foot</strong> under Section 179D.</p>";
+  h+="<p>When structured properly, most clients see positive cash flow from day one. At a minimum, your savings exceed your payments.</p>";
+  h+="</div>";
+  // Sqft invitation
+  h+="<p class='c-sqft-invite'>If you know your approximate square footage, I can show you what that deduction is worth in real dollars.</p>";
+  el.innerHTML=h;
 }
 
 function onConsultSqft(){
