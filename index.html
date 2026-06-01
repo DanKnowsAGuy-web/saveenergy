@@ -247,7 +247,7 @@ body{font-family:'Barlow',sans-serif;background:var(--paper);color:var(--ink);fo
 .c-ask{font-family:'Barlow',sans-serif;font-size:17px;letter-spacing:0.04em;text-transform:uppercase;color:var(--copper);margin:22px 0 0;display:block;}
 .c-range{font-family:'Barlow',sans-serif;font-size:clamp(30px,6vw,50px);font-weight:500;color:var(--navy);line-height:1.1;margin-bottom:6px;}
 
-.c-ded-result{font-size:14px;color:var(--ink);line-height:1.55;padding:12px 16px;background:var(--paper);border-left:3px solid var(--copper);margin-top:10px;display:none;}
+.c-ded-result{font-size:clamp(17px,2.4vw,19px);color:var(--ink);line-height:1.65;padding:12px 16px;background:var(--paper);border-left:3px solid var(--copper);margin-top:10px;display:none;}
 .c-ded-result strong{font-family:'Barlow',sans-serif;color:var(--copper);}
 .c-next-btn{display:block;width:100%;margin-top:28px;padding:18px 24px;background:var(--navy);color:#fff;border:none;cursor:pointer;font-family:'Barlow',sans-serif;font-size:16px;font-weight:500;letter-spacing:0.05em;text-transform:uppercase;transition:all 0.18s;}
 .c-next-btn:hover{background:var(--copper);}
@@ -277,8 +277,7 @@ body{font-family:'Barlow',sans-serif;background:var(--paper);color:var(--ink);fo
 .c-hed{font-size:clamp(22px,4vw,34px);line-height:1.25;margin-bottom:16px;letter-spacing:-0.01em;}
 .c-doe{font-size:17px;line-height:1.75;margin-bottom:14px;}
 
-/* Stage 2 — subtle copper left accent */
-#c-s2{border-left:3px solid var(--copper);padding-left:22px;margin-left:-22px;}
+/* Stage 2 — no left accent */
 
 /* Stage 3 — payoff card gets warm background and bigger numbers */
 #c-s3{background:linear-gradient(160deg,rgba(184,115,51,0.04) 0%,rgba(255,255,255,0) 60%);}
@@ -344,8 +343,7 @@ body{font-family:'Barlow',sans-serif;background:var(--paper);color:var(--ink);fo
 .calc.c-mode-dark .fac-opt .fac-ico{color:rgba(255,255,255,0.38);}
 .calc.c-mode-dark .fac-opt:hover:not(.active) .fac-ico{color:var(--copper-pale);}
 .calc.c-mode-dark .fac-opt.active .fac-ico{color:rgba(255,255,255,0.9);}
-/* Stage 2 copper accent stays */
-.calc.c-mode-dark #c-s2{border-left-color:var(--copper);}
+/* Stage 2 copper accent removed */
 /* Spend and state field labels in stage 2 */
 .calc.c-mode-dark .field-label{color:rgba(255,255,255,0.72);}
 .calc.c-mode-dark .c-field-lbl{color:rgba(255,255,255,0.88);font-size:14px;}
@@ -722,6 +720,25 @@ body{font-size:17px;}
 }
 
 /* ═══════════════════════════════════════════════════════════════════════ */
+
+/* ── THREE THINGS WORTH KNOWING ─────────────────────────────────────── */
+.s3-known-hd{font-family:'Barlow',sans-serif;font-size:11px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:rgba(255,255,255,0.38);margin:28px 0 20px;border-top:1px solid rgba(255,255,255,0.08);padding-top:22px;}
+.s3-known-wrap{display:flex;flex-direction:column;gap:26px;margin-bottom:8px;}
+.s3-known-item{display:flex;align-items:flex-start;gap:18px;}
+.s3-known-num{font-family:'Barlow',sans-serif;font-size:38px;font-weight:500;color:var(--copper);line-height:1;flex-shrink:0;width:48px;text-align:right;letter-spacing:-0.02em;opacity:0.85;padding-top:2px;}
+.s3-known-body{flex:1;min-width:0;}
+.s3-known-label{font-family:'Barlow',sans-serif;font-size:11px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--copper-light);margin-bottom:8px;}
+.s3-known-text{font-size:clamp(15px,2.2vw,17px);color:rgba(255,255,255,0.75);line-height:1.75;}
+.s3-known-text strong{color:#fff;font-weight:500;}
+@media(max-width:560px){.s3-known-num{font-size:30px;width:38px;}.s3-known-item{gap:14px;}}
+/* ─────────────────────────────────────────────────────────────────────── */
+
+/* ── ASSUMPTIONS ACCORDION ───────────────────────────────────────────── */
+.assumptions-toggle{display:flex;align-items:center;gap:8px;width:100%;background:none;border:none;cursor:pointer;font-family:'Barlow',sans-serif;font-size:14px;font-weight:500;letter-spacing:0.04em;text-transform:uppercase;color:rgba(255,255,255,0.58);padding:20px 0;transition:color 0.18s;min-height:44px;}
+.assumptions-toggle:hover{color:var(--copper-pale);}
+.assump-chev{transition:transform 0.2s;font-size:13px;display:inline-block;}
+.assumptions-open .assump-chev{transform:rotate(90deg);}
+/* ─────────────────────────────────────────────────────────────────────── */
 </style>
 </head>
 <body>
@@ -972,9 +989,9 @@ body{font-size:17px;}
       <div class="field-hint">Your state sets the annual cooling and heating split. We size off the annual average, not the summer peak.</div>
     </div>
 
-    <!-- RESULT INTRO (shown in result view only) -->
-    <div id="c-result-intro" style="display:none">
-      <p class="c-intro-text">Toggle the programs below to match your operation — the range updates as you adjust.</p>
+    <!-- ASSUMPTIONS ACCORDION TOGGLE -->
+    <div id="assumptions-accordion" style="display:none">
+      <button class="assumptions-toggle" onclick="toggleAssumptions()"><span class="assump-chev">&#9656;</span> Adjust our assumptions</button>
     </div>
 
     <!-- 04 PROGRAMS -->
@@ -1091,26 +1108,7 @@ body{font-size:17px;}
     </div>
   </div>
 
-  <div class="txt-cta gated" id="txt-cta-bot">
-    <a href="#" class="txt-cta-btn" id="sms-link-bot">
-      <span class="txt-cta-ico">&#128241;</span>
-          Text Your Energy Strategist
-    </a>
-    <button class="partner-btn" onclick="togglePartnerPanel('bot')">&#128172; Text a Partner for Feedback</button>
-    <div class="partner-panel" id="partner-panel-bot">
-      <div class="partner-mode-toggle">
-        <button class="partner-mode-btn active" id="partner-mode-group-bot" onclick="selectPartnerMode('bot','group')">Text Partner + Strategist</button>
-        <button class="partner-mode-btn" id="partner-mode-solo-bot" onclick="selectPartnerMode('bot','solo')">Text Partner Only</button>
-      </div>
-      <div class="partner-preview-lbl">MESSAGE PREVIEW</div>
-      <div class="partner-preview" id="partner-preview-bot"></div>
-      <label class="partner-lbl">PARTNER'S PHONE NUMBER</label>
-      <div class="partner-send-row">
-        <input class="partner-input" id="partner-num-bot" type="tel" placeholder="(555) 555-5555" oninput="onPartnerInput('bot')" maxlength="14"/>
-        <button class="partner-send-btn" id="partner-send-bot" onclick="sendPartnerText('bot')" disabled>Send &#8593;</button>
-      </div>
-    </div>
-  </div>
+  
 
 
 
@@ -1123,7 +1121,7 @@ body{font-size:17px;}
 
 <div class="calc-foot gated">
     <span class="tag">About this estimate</span>
-    <p>This estimator returns a conservative range, not a projection of peak performance. Power harmonization delivers whole-facility savings on every site and is always included. Cooling and refrigeration savings come from the HVAC Optimizer and SolarCoil retrofits up to SunCore replacement. Heating savings are reached only by SunCore replacement and reflect a coefficient-of-performance comparison to existing electric heat. Refrigeration-led facilities stay cooling-dominated regardless of climate.</p>
+    <p>This estimator returns a conservative range, not a projection of peak performance. Savings across each program are achieved through a combination of retrofits and replacements — whatever delivers the best return on investment for your specific facility. The approach is performance-based, not vendor-driven.</p>
     <p>Actual verified savings depend on a site assessment of equipment, load profile, rate structure, and condition. Energy Plus is an Independent Energy Solutions Partner with no vendor incentive to inflate these figures. Every assumption is editable above.</p>
   </div>
 
@@ -1646,6 +1644,14 @@ function onAdjust(){
   render();
 }
 function toggleAdjust(){ document.getElementById("adjust").classList.toggle("open"); }
+function toggleAssumptions(){
+  var aa=document.getElementById("assumptions-accordion");
+  var open=aa.classList.toggle("assumptions-open");
+  var str=document.querySelector(".streams.gated");
+  var meth=document.querySelector(".method.gated");
+  if(str) str.style.display=open?"block":"none";
+  if(meth) meth.style.display=open?"block":"none";
+}
 
 
 /* ── CONSULT STAGE MACHINE ───────────────────────────────────────────── */
@@ -1681,13 +1687,13 @@ function goStage(v){
   gated.forEach(function(id){var el=document.getElementById(id);if(el)el.style.display=isR?"block":"none";});
   ["asset-section","ded-section","fin-section"].forEach(function(id){var el=document.getElementById(id);if(el)el.style.display="none";});
   var fc=document.querySelector(".fac-close.gated"); if(fc) fc.style.display="none";
-  var str=document.querySelector(".streams.gated"); if(str) str.style.display=isR?"block":"none";
-  var meth=document.querySelector(".method.gated"); if(meth) meth.style.display=isR?"block":"none";
+  var str=document.querySelector(".streams.gated"); if(str) str.style.display="none";
+  var meth=document.querySelector(".method.gated"); if(meth) meth.style.display="none";
   var cta=document.querySelector(".cta.gated"); if(cta) cta.style.display=isR?"":"none";
   var foot=document.querySelector(".calc-foot.gated"); if(foot) foot.style.display=isR?"block":"none";
   var tcT=document.getElementById("txt-cta-top"); if(tcT) tcT.style.display="none";
   var _optS=document.getElementById("option-section"); if(_optS) _optS.style.display=isR?"block":"none";
-  var tcB=document.getElementById("txt-cta-bot"); if(tcB) tcB.style.display=isR?"block":"none";
+  var aa=document.getElementById("assumptions-accordion"); if(aa){ aa.style.display=isR?"block":"none"; aa.classList.remove("assumptions-open"); }
   var ins=document.querySelector(".insight.gated"); if(ins) ins.style.cssText="display:none!important";
   // breadcrumbs
   var crumbs=document.getElementById("c-crumbs");
@@ -1943,17 +1949,19 @@ function updateClaimS3(){
   h+="<div class='s3-cum-cell'><div class='s3-cum-val'>"+fmtBoxRange(r.floor*_s3e5,r.ceil*_s3e5)+"</div><div class='s3-cum-lab'>5-year range</div></div>";
   h+="<div class='s3-cum-cell'><div class='s3-cum-val'>"+fmtBoxRange(r.floor*_s3e10,r.ceil*_s3e10)+"</div><div class='s3-cum-lab'>10-year range</div></div>";
   h+="</div>";
-  if(_s3sn) h+="<div class='s3-cum-escal'>In <strong>"+_s3sn+"</strong>, commercial electricity has risen roughly <strong>"+_s3ed.range+"</strong> per year historically. "+_s3ed.note+"</div>";
-
-  // Asset beat — top 2 cost bullets
+  // Three Things Worth Knowing
+  var billText=_s3sn
+    ?"In <strong>"+_s3sn+"</strong>, commercial electricity has risen roughly <strong>"+_s3ed.range+"</strong> per year historically. "+_s3ed.note
+    :"Commercial electricity costs have risen roughly 2 to 3% per year nationally. Many analysts expect this pace to hold or accelerate as grid infrastructure investment grows.";
   var b1=b.bullets[0], b2=b.bullets[1];
-  h+="<div class='c-asset-beat'><p>Beyond the bill, <strong>"+b.assetTitle+"</strong> are your highest-risk assets. "+b1+" "+b2+" Left unaddressed, those same inefficiencies shorten equipment useful life by a decade or more.</p></div>";
-  // Deduction + financing beat
-  h+="<div class='c-ded-beat'>";
-  h+="<p>Buildings like yours typically qualify for one of the most underused incentives in commercial real estate — a federal tax deduction of up to <strong>$5.94 per square foot</strong> under Section 179D.</p>";
-  h+="<p>When structured properly, most clients see positive cash flow from day one. At a minimum, your savings exceed your payments.</p>";
+  var equipText="Beyond the bill, <strong>"+b.assetTitle+"</strong> are your highest-risk assets. "+b1+" "+b2+" Left unaddressed, those same inefficiencies shorten equipment useful life by a decade or more.";
+  var dedText="Buildings like yours typically qualify for one of the most underused incentives in commercial real estate — a federal tax deduction of up to <strong>$5.94 per square foot</strong> under Section 179D. When structured properly, most clients see positive cash flow from day one.";
+  h+="<div class='s3-known-hd'>Three Things Worth Knowing</div>";
+  h+="<div class='s3-known-wrap'>";
+  h+="<div class='s3-known-item'><div class='s3-known-num'>01</div><div class='s3-known-body'><div class='s3-known-label'>Your Future Bill</div><div class='s3-known-text'>"+billText+"</div></div></div>";
+  h+="<div class='s3-known-item'><div class='s3-known-num'>02</div><div class='s3-known-body'><div class='s3-known-label'>Your Equipment</div><div class='s3-known-text'>"+equipText+"</div></div></div>";
+  h+="<div class='s3-known-item'><div class='s3-known-num'>03</div><div class='s3-known-body'><div class='s3-known-label'>Your Deductions</div><div class='s3-known-text'>"+dedText+"</div></div></div>";
   h+="</div>";
-  // Sqft invitation
   el.innerHTML=h;
   buildSmsLinks();
 
@@ -2094,7 +2102,7 @@ function buildSmsLinks(){
     " and just ran the Energy Plus savings calculator. "+
     "What's the fastest way to know if these numbers hold for my operation?";
   var href="sms:+18647770688?body="+encodeURIComponent(baseMsg);
-  ["sms-link-top","sms-link-bot","sms-link-s3"].forEach(function(id){
+  ["sms-link-top","sms-link-s3"].forEach(function(id){
     var el=document.getElementById(id); if(el) el.href=href;
   });
 }
