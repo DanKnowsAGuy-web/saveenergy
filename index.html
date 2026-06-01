@@ -422,15 +422,45 @@ body{font-family:'Barlow',sans-serif;background:var(--paper);color:var(--ink);fo
 .txt-cta{padding:28px 0 6px;}
 .partner-btn{display:block;width:100%;padding:14px 18px;margin-top:10px;background:transparent;border:1.5px solid var(--copper);color:var(--copper);font-family:'Barlow',sans-serif;font-size:15px;font-weight:600;text-align:center;border-radius:8px;cursor:pointer;letter-spacing:0.02em;text-decoration:none;transition:background 0.18s,color 0.18s;}
 .partner-btn:hover,.txt-cta-btn:hover{background:rgba(184,115,51,0.12);}
+.partner-mode-toggle{display:flex;gap:6px;margin-bottom:12px;}
+.partner-mode-btn{flex:1;padding:9px 8px;border-radius:6px;font-family:'Barlow',sans-serif;font-size:12px;font-weight:600;cursor:pointer;text-align:center;border:1.5px solid rgba(255,255,255,0.18);background:transparent;color:rgba(255,255,255,0.45);transition:all 0.15s;letter-spacing:0.02em;}
+.partner-mode-btn.active{border-color:var(--copper);color:var(--copper-pale);background:rgba(184,115,51,0.12);}
+.partner-preview-lbl{font-size:10px;font-weight:700;letter-spacing:0.1em;color:rgba(255,255,255,0.32);margin-bottom:6px;font-family:'Barlow',sans-serif;}
+.partner-preview{font-size:13px;line-height:1.65;color:rgba(255,255,255,0.7);background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:10px;padding:12px 14px;margin-bottom:14px;font-family:'Barlow',sans-serif;white-space:pre-wrap;}
+.partner-send-row{display:flex;gap:8px;}
+.partner-send-btn{flex-shrink:0;padding:11px 18px;border-radius:7px;background:var(--copper);color:#fff;font-family:'Barlow',sans-serif;font-size:14px;font-weight:700;cursor:pointer;border:none;transition:opacity 0.15s;letter-spacing:0.02em;}
+.partner-send-btn:disabled{opacity:0.32;cursor:default;}
+.partner-lbl{display:block;font-size:11px;font-weight:600;color:rgba(255,255,255,0.4);letter-spacing:0.07em;margin-bottom:6px;font-family:'Barlow',sans-serif;}
 .txt-cta-btn{display:flex;align-items:center;justify-content:center;gap:10px;background:var(--copper);color:#fff;font-family:'Barlow',sans-serif;font-size:clamp(16px,2.2vw,18px);font-weight:600;letter-spacing:0.01em;padding:17px 28px;text-decoration:none;transition:background 0.18s;cursor:pointer;}
 .txt-cta-btn:hover{background:#b8742a;}
 .txt-cta-ico{font-size:20px;line-height:1;flex-shrink:0;}
 .txt-cta-sub{font-size:14px;color:var(--slate);letter-spacing:0.05em;margin-top:10px;text-align:center;font-family:'Barlow',sans-serif;}
 /* ────────────────────────────────────────────────────────────────────── */
-.cum-escal-note{font-size:17px;color:rgba(255,255,255,0.6);line-height:1.6;margin-top:18px;font-family:'Barlow',sans-serif;}
+.cum-escal-note{font-size:clamp(17px,2.4vw,20px);color:rgba(255,255,255,0.72);line-height:1.6;margin-top:18px;font-family:'Barlow',sans-serif;}
 .cum-escal-note strong{color:#fff;font-weight:500;}
-.s3-cum-escal{font-size:17px;color:rgba(255,255,255,0.6);line-height:1.6;margin-top:18px;font-family:'Barlow',sans-serif;}
+.s3-cum-escal{font-size:clamp(17px,2.4vw,20px);color:rgba(255,255,255,0.72);line-height:1.6;margin-top:18px;font-family:'Barlow',sans-serif;}
 .s3-cum-escal strong{color:#fff;font-weight:500;}
+
+/* ── OPTION CARDS ──────────────────────────────────────────────────────────── */
+.option-section{padding:16px 0 8px;}
+.opt-strat-btn{display:flex;align-items:center;justify-content:center;gap:10px;width:100%;padding:14px 18px;background:linear-gradient(135deg,#c8922e,#a96e18);color:#fff;border:none;border-radius:8px;font-family:'Barlow',sans-serif;font-size:15px;font-weight:700;letter-spacing:0.03em;text-align:center;cursor:pointer;text-decoration:none;transition:opacity 0.18s,transform 0.14s;box-sizing:border-box;margin-top:4px;}
+.opt-strat-btn:hover{opacity:0.9;transform:translateY(-2px);}
+
+.option-transition{font-size:clamp(16px,2.2vw,18px);color:rgba(255,255,255,0.75);line-height:1.75;margin-bottom:28px;font-family:'Barlow',sans-serif;padding:0 18px;}
+.option-cards{display:flex;flex-direction:column;gap:16px;}
+@media(min-width:580px){.option-cards{flex-direction:row;}}
+.option-card{flex:1;border:1px solid rgba(255,255,255,0.18);border-radius:12px;padding:24px 22px;display:flex;flex-direction:column;gap:12px;background:rgba(255,255,255,0.03);}
+.option-tag{font-family:'Barlow',sans-serif;font-size:11px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--copper-pale);}
+.option-title{font-family:'Playfair Display',serif;font-size:clamp(17px,2.6vw,20px);color:#fff;font-weight:700;line-height:1.3;margin:0;}
+.option-body{font-size:14px;color:rgba(255,255,255,0.58);line-height:1.6;font-family:'Barlow',sans-serif;margin:0;}
+.option-list{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:7px;}
+.option-list li{font-size:14px;color:rgba(255,255,255,0.72);line-height:1.5;padding-left:16px;position:relative;font-family:'Barlow',sans-serif;}
+.option-list li::before{content:'→';position:absolute;left:0;color:var(--copper);font-size:12px;top:1px;}
+.option-qualify{background:rgba(184,115,51,0.1);border:1px solid rgba(184,115,51,0.3);border-radius:8px;padding:12px 14px;font-size:13px;color:rgba(255,255,255,0.82);line-height:1.6;font-family:'Barlow',sans-serif;display:none;}
+.option-qualify strong{color:var(--copper-pale);}
+.option-cta{display:block;width:100%;padding:13px 16px;background:transparent;border:1.5px solid rgba(255,255,255,0.22);color:rgba(255,255,255,0.82);font-family:'Barlow',sans-serif;font-size:14px;font-weight:600;text-align:center;border-radius:8px;cursor:pointer;letter-spacing:0.04em;text-decoration:none;margin-top:auto;transition:border-color 0.2s,color 0.2s;box-sizing:border-box;}
+.option-cta:hover{border-color:var(--copper);color:var(--copper-pale);}
+/* ─────────────────────────────────────────────────────────────────────────── */
 .s3-cum-row{display:flex;gap:1px;background:rgba(255,255,255,0.1);margin:18px 0 26px;border:1px solid rgba(255,255,255,0.1);}
 .s3-cum-cell{flex:1;background:rgba(14,31,51,0.55);padding:16px 18px;}
 .s3-cum-val{font-family:'Barlow',sans-serif;font-size:clamp(16px,2.8vw,21px);color:#fff;line-height:1;margin-bottom:6px;font-weight:600;font-variant-numeric:tabular-nums;}
@@ -530,10 +560,7 @@ body{font-family:'Barlow',sans-serif;background:var(--paper);color:var(--ink);fo
 .partner-input{width:100%;padding:11px 14px;background:rgba(255,255,255,0.07);border:1.5px solid rgba(255,255,255,0.18);border-radius:7px;color:rgba(255,255,255,0.92);font-family:'Barlow',sans-serif;font-size:16px;letter-spacing:0.06em;box-sizing:border-box;outline:none;}
 .partner-input:focus{border-color:var(--copper);}
 .partner-actions{display:flex;gap:8px;margin-top:10px;}
-.partner-action-btn{flex:1;padding:11px 8px;border-radius:7px;font-family:'Barlow',sans-serif;font-size:13px;font-weight:700;cursor:pointer;text-align:center;transition:opacity 0.15s;border:none;}
-.partner-action-btn.solo{background:rgba(255,255,255,0.12);color:rgba(255,255,255,0.88);}
-.partner-action-btn.group{background:var(--copper);color:#fff;}
-.partner-action-btn:disabled{opacity:0.35;cursor:default;}
+
 /* ─────────────────────────────────────────────────────────────────────────── */
 /* ── STAGE 2 EQUIPMENT STRIP + PIPE ILLUSTRATION ─────────────────────────── */
 .s2-equip-strip{display:flex;gap:10px;margin:18px 0 20px;justify-content:center;}
@@ -754,6 +781,7 @@ body{font-size:17px;}
         </div>
       </div>
 
+      <div id="c2-escal-note" style="display:none;font-size:13px;color:rgba(255,255,255,0.62);margin-top:8px;line-height:1.6;font-family:'Barlow',sans-serif;padding:0 2px;"></div>
       <div class="c-nav-row">
         <button class="c-back-vis" onclick="goStage('s1')">Back</button>
         <button class="c-next-btn c-nav-next" onclick="goStage('s3')">Next</button>
@@ -764,18 +792,12 @@ body{font-size:17px;}
     <div id="c-s3" style="display:none">
       <div class="c-progress"><span class="c-progress-step done"></span><span class="c-progress-step done"></span><span class="c-progress-step active"></span><span class="c-progress-label">3 / 3</span></div>
       <div id="c-claim-s3" class="c-card"></div>
-      <span class="c-ask">Adjust your square footage</span>
+      <span class="c-ask">Adjust your square footage for real tax savings</span>
       <div class="sqft-input-row" style="margin-top:14px;">
         <input type="text" inputmode="numeric" id="c-sqft" class="sqft-input" placeholder="e.g. 45,000" oninput="onConsultSqft()">
         <span class="sqft-suf">sq ft</span>
       </div>
       <div class="c-ded-result" id="c-ded-result"></div>
-      <div class="c-s3-sms">
-        <a href="#" class="txt-cta-btn" id="sms-link-s3">
-          <span class="txt-cta-ico">&#128241;</span>
-          Text Your Energy Strategist
-        </a>
-      </div>
       <div class="c-nav-row">
         <button class="c-back-vis" onclick="goStage('s2')">Back</button>
         <button class="c-next-btn c-nav-next" onclick="showResult()">See your full picture</button>
@@ -797,9 +819,75 @@ body{font-size:17px;}
       <div class="cum-cell"><div class="cum-val" id="cum-5yr">$0</div><div class="cum-lab">5-year range</div></div>
       <div class="cum-cell"><div class="cum-val" id="cum-10yr">$0</div><div class="cum-lab">10-year range</div></div>
     </div>
-    <div class="cum-escal-note" id="cum-escal-note"></div>
   </div>
 </div>
+<div class="option-section gated" id="option-section">
+  <p class="option-transition">Most of what you see above is already happening in your building — the distortion is real, the meter inflation is real, and the equipment wear is real. You have been running a tight operation while your electrical system steadily took a cut of everything. That ends when someone decides to look at it. Below are the two ways we work with operators who are ready to find out exactly what their number is.</p>
+  <div class="option-cards">
+
+    <div class="option-card" id="option-dwy">
+      <div class="option-tag">Option One</div>
+      <h3 class="option-title">You Lead, We Guide</h3>
+      <p class="option-body">You coordinate your team and installer. We bring the engineering expertise and design everything for you.</p>
+      <ul class="option-list">
+        <li>Send us your bills and equipment inventory</li>
+        <li>EP engineers design your custom solution — DOE-credentialed, Sandia National Laboratory level expertise</li>
+        <li>We identify every applicable incentive including the full 179D deduction</li>
+        <li>You source and coordinate your own installer — we tell you exactly what to look for</li>
+        <li>Full technical guidance from EP throughout the process</li>
+      </ul>
+      <a class="opt-strat-btn" id="sms-link-dwy" href="#"><span>&#128241;</span> Text Your Energy Strategist to Start</a>
+      <button class="partner-btn" onclick="togglePartnerPanel('dwy')">&#128172; Text a Partner for Feedback</button>
+      <div class="partner-panel" id="partner-panel-dwy">
+        <div class="partner-mode-toggle">
+          <button class="partner-mode-btn active" id="partner-mode-group-dwy" onclick="selectPartnerMode('dwy','group')">Text Partner + Strategist</button>
+          <button class="partner-mode-btn" id="partner-mode-solo-dwy" onclick="selectPartnerMode('dwy','solo')">Text Partner Only</button>
+        </div>
+        <div class="partner-preview-lbl">MESSAGE PREVIEW</div>
+        <div class="partner-preview" id="partner-preview-dwy"></div>
+        <label class="partner-lbl">PARTNER'S PHONE NUMBER</label>
+        <div class="partner-send-row">
+          <input class="partner-input" id="partner-num-dwy" type="tel" placeholder="(555) 555-5555" oninput="onPartnerInput('dwy')" maxlength="14"/>
+          <button class="partner-send-btn" id="partner-send-dwy" onclick="sendPartnerText('dwy')" disabled>Send &#8593;</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="option-card" id="option-dfy">
+      <div class="option-tag">Option Two</div>
+      <h3 class="option-title">We Handle Everything</h3>
+      <p class="option-body">We send a technician, design the solution, manage installation, and file your incentives. Zero coordination required on your end.</p>
+      <ul class="option-list">
+        <li>EP technician visits your site to gather all information</li>
+        <li>Gold-standard engineers design your custom solution</li>
+        <li>We source and manage your installer from our vetted network</li>
+        <li>We file all incentive applications including 179D at no additional cost</li>
+        <li>Maximum warranty coverage on all equipment</li>
+        <li>Performance-only basis — no out-of-pocket cost</li>
+      </ul>
+      <div class="option-qualify" id="option-qualify">
+        <strong>Based on your numbers, you likely qualify for a day-one positive cash flow structure</strong> — your savings cover the program cost from month one.
+      </div>
+      <a class="opt-strat-btn" id="sms-link-dfy" href="#"><span>&#128241;</span> Text Your Energy Strategist to Start</a>
+      <button class="partner-btn" onclick="togglePartnerPanel('dfy')">&#128172; Text a Partner for Feedback</button>
+      <div class="partner-panel" id="partner-panel-dfy">
+        <div class="partner-mode-toggle">
+          <button class="partner-mode-btn active" id="partner-mode-group-dfy" onclick="selectPartnerMode('dfy','group')">Text Partner + Strategist</button>
+          <button class="partner-mode-btn" id="partner-mode-solo-dfy" onclick="selectPartnerMode('dfy','solo')">Text Partner Only</button>
+        </div>
+        <div class="partner-preview-lbl">MESSAGE PREVIEW</div>
+        <div class="partner-preview" id="partner-preview-dfy"></div>
+        <label class="partner-lbl">PARTNER'S PHONE NUMBER</label>
+        <div class="partner-send-row">
+          <input class="partner-input" id="partner-num-dfy" type="tel" placeholder="(555) 555-5555" oninput="onPartnerInput('dfy')" maxlength="14"/>
+          <button class="partner-send-btn" id="partner-send-dfy" onclick="sendPartnerText('dfy')" disabled>Send &#8593;</button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
 
   <div class="txt-cta gated" id="txt-cta-top">
     <a href="#" class="txt-cta-btn" id="sms-link-top">
@@ -808,20 +896,20 @@ body{font-size:17px;}
     </a>
     <button class="partner-btn" onclick="togglePartnerPanel('top')">&#128172; Text a Partner for Feedback</button>
     <div class="partner-panel" id="partner-panel-top">
-      <label>PARTNER'S PHONE NUMBER</label>
-      <input class="partner-input" id="partner-num-top" type="tel" placeholder="(555) 555-5555" oninput="onPartnerInput('top')" maxlength="14"/>
-      <div class="partner-actions">
-        <button class="partner-action-btn solo" id="partner-solo-top" onclick="textPartner('top')" disabled>Text Partner Only</button>
-        <button class="partner-action-btn group" id="partner-group-top" onclick="startGroupChat('top')" disabled>Start a Group Chat</button>
+      <div class="partner-mode-toggle">
+        <button class="partner-mode-btn active" id="partner-mode-group-top" onclick="selectPartnerMode('top','group')">Text Partner + Strategist</button>
+        <button class="partner-mode-btn" id="partner-mode-solo-top" onclick="selectPartnerMode('top','solo')">Text Partner Only</button>
+      </div>
+      <div class="partner-preview-lbl">MESSAGE PREVIEW</div>
+      <div class="partner-preview" id="partner-preview-top"></div>
+      <label class="partner-lbl">PARTNER'S PHONE NUMBER</label>
+      <div class="partner-send-row">
+        <input class="partner-input" id="partner-num-top" type="tel" placeholder="(555) 555-5555" oninput="onPartnerInput('top')" maxlength="14"/>
+        <button class="partner-send-btn" id="partner-send-top" onclick="sendPartnerText('top')" disabled>Send &#8593;</button>
       </div>
     </div>
   </div>
 
-  <!-- ── SUMMARY BAR / EDIT — below CTA ───────────────────── -->
-  <div id="c-summary" class="c-summary" style="display:none">
-    <div class="c-sum-text" id="c-sum-text"></div>
-    <button class="c-edit-btn" onclick="goStage('s1')">Edit</button>
-  </div>
 
 <div class="ledger gated" id="asset-section">
     <div class="ledger-head"><span class="ledger-tag">The Asset</span> <span class="ledger-title" id="asset-ledger-title"></span></div>
@@ -1010,14 +1098,28 @@ body{font-size:17px;}
     </a>
     <button class="partner-btn" onclick="togglePartnerPanel('bot')">&#128172; Text a Partner for Feedback</button>
     <div class="partner-panel" id="partner-panel-bot">
-      <label>PARTNER'S PHONE NUMBER</label>
-      <input class="partner-input" id="partner-num-bot" type="tel" placeholder="(555) 555-5555" oninput="onPartnerInput('bot')" maxlength="14"/>
-      <div class="partner-actions">
-        <button class="partner-action-btn solo" id="partner-solo-bot" onclick="textPartner('bot')" disabled>Text Partner Only</button>
-        <button class="partner-action-btn group" id="partner-group-bot" onclick="startGroupChat('bot')" disabled>Start a Group Chat</button>
+      <div class="partner-mode-toggle">
+        <button class="partner-mode-btn active" id="partner-mode-group-bot" onclick="selectPartnerMode('bot','group')">Text Partner + Strategist</button>
+        <button class="partner-mode-btn" id="partner-mode-solo-bot" onclick="selectPartnerMode('bot','solo')">Text Partner Only</button>
+      </div>
+      <div class="partner-preview-lbl">MESSAGE PREVIEW</div>
+      <div class="partner-preview" id="partner-preview-bot"></div>
+      <label class="partner-lbl">PARTNER'S PHONE NUMBER</label>
+      <div class="partner-send-row">
+        <input class="partner-input" id="partner-num-bot" type="tel" placeholder="(555) 555-5555" oninput="onPartnerInput('bot')" maxlength="14"/>
+        <button class="partner-send-btn" id="partner-send-bot" onclick="sendPartnerText('bot')" disabled>Send &#8593;</button>
       </div>
     </div>
   </div>
+
+
+
+  <!-- ── SUMMARY BAR / EDIT — below CTA ───────────────────── -->
+  <div id="c-summary" class="c-summary" style="display:none">
+    <div class="c-sum-text" id="c-sum-text"></div>
+    <button class="c-edit-btn" onclick="goStage('s1')">Edit</button>
+  </div>
+
 
 <div class="calc-foot gated">
     <span class="tag">About this estimate</span>
@@ -1235,10 +1337,10 @@ var ESC_TIER = {
   "Nebraska":4,"Wyoming":4
 };
 var ESC_DATA = {
-  1:{range:"4–6%",rate:0.045,note:"Several analysts expect this pace to accelerate further as grid modernization costs continue rising — which would make these figures conservative."},
-  2:{range:"3–4%",rate:0.035,note:"Most analysts expect this pace to hold or increase over the next decade as infrastructure investment grows."},
-  3:{range:"2–3%",rate:0.025,note:"Many analysts project this pace will hold or climb as national grid investment increases."},
-  4:{range:"1–2%",rate:0.018,note:"Some analysts project above-average increases nationally over the next decade, which could affect even stable markets."}
+  1:{range:"4–6%",rate:0.045,note:"Many analysts expect this pace to accelerate further as grid modernization costs continue rising — which would make these figures conservative."},
+  2:{range:"3–4%",rate:0.035,note:"Many analysts expect this pace to accelerate further as grid modernization costs continue rising — which would make these figures conservative."},
+  3:{range:"2–3%",rate:0.025,note:"Many analysts expect this pace to accelerate further as grid modernization costs continue rising — which would make these figures conservative."},
+  4:{range:"1–2%",rate:0.018,note:"Many analysts expect this pace to accelerate further as grid modernization costs continue rising — which would make these figures conservative."}
 };
 function escalFactor(rate,years){
   if(!rate) return years;
@@ -1288,6 +1390,10 @@ var state = {
 };
 
 function fmtFull(n){ return "$" + Math.round(n).toLocaleString("en-US"); }
+function fmtBoxRange(lo,hi){
+  if(hi>=100000)return "$"+Math.round(lo/1000)+"k – $"+Math.round(hi/1000)+"k";
+  return "$"+Math.round(lo).toLocaleString("en-US")+" – $"+Math.round(hi).toLocaleString("en-US");
+}
 function fmtM(n){ n=Math.round(n); if(n>=1000000) return "$"+(Math.round(n/100000)/10).toFixed(1).replace(/\.0$/,"")+"M"; return "$"+n.toLocaleString("en-US"); }
 function fmtK(n){ if(n>=1000000) return "$"+(Math.round(n/100000)/10).toFixed(1).replace(/\.0$/,"")+"M"; return "$"+Math.round(n/1000)+"K"; }
 function pctTxt(x){ var v=x*100; return (Math.abs(v-Math.round(v))<0.05?Math.round(v):v.toFixed(1))+"%"; }
@@ -1373,17 +1479,21 @@ function render(){
   var _tier=(_sName&&ESC_TIER[_sName])||3;
   var _ed=ESC_DATA[_tier];
   var _e5=escalFactor(_ed.rate,5);
-  document.getElementById("cum-month").textContent=fmtFull(r.floor/12)+" – "+fmtFull(r.ceil/12);
+  document.getElementById("cum-month").textContent=fmtBoxRange(r.floor/12,r.ceil/12);
   var _e10=escalFactor(_ed.rate,10);
-  document.getElementById("cum-5yr").textContent=fmtM(r.floor*_e5)+" – "+fmtM(r.ceil*_e5);
-  document.getElementById("cum-10yr").textContent=fmtM(r.floor*_e10)+" – "+fmtM(r.ceil*_e10);
-  var _enEl=document.getElementById("cum-escal-note");
-  if(_enEl){
-    var _msg=_sName
-      ?"In <strong>"+_sName+"</strong>, commercial electricity has risen roughly <strong>"+_ed.range+"</strong> per year historically. The five and ten-year figures above reflect that rate. "+_ed.note
-      :"The five and ten-year figures above reflect a 2.5% average annual energy cost escalation. Many analysts project this pace will hold or climb as national grid investment increases.";
-    _enEl.innerHTML=_msg; _enEl.style.display="";
-  }
+  document.getElementById("cum-5yr").textContent=fmtBoxRange(r.floor*_e5,r.ceil*_e5);
+  document.getElementById("cum-10yr").textContent=fmtBoxRange(r.floor*_e10,r.ceil*_e10);
+  // Option card qualifying trigger
+  var _oq=document.getElementById("option-qualify");
+  if(_oq) _oq.style.display=r.floor>=25000?"block":"none";
+  // Option card CTA sms links
+  var _dwyMsg="Hi — I went through the Energy Plus savings calculator and I’m interested in the guided path where my team coordinates. What are the next steps?";
+  var _dfyMsg="Hi — I went through the Energy Plus savings calculator and want your team to handle everything."+(r.floor>=25000?" My numbers suggest I may qualify for the day-one cash flow option.":"")+" What are the next steps?";
+  var _dwyCta=document.getElementById("sms-link-dwy");
+  var _dfyCta=document.getElementById("sms-link-dfy");
+  if(_dwyCta) _dwyCta.href="sms:"+EP_NUMBER+"?body="+encodeURIComponent(_dwyMsg);
+  if(_dfyCta) _dfyCta.href="sms:"+EP_NUMBER+"?body="+encodeURIComponent(_dfyMsg);
+
   var impliedKW = state.demRate>0 ? (state.demPortion*state.spend)/(12*state.demRate) : 0;
   document.getElementById("demand-implied").textContent = "Implied billing demand at this rate: about " + Math.round(impliedKW).toLocaleString("en-US") + " kW.";
 }
@@ -1575,7 +1685,8 @@ function goStage(v){
   var meth=document.querySelector(".method.gated"); if(meth) meth.style.display=isR?"block":"none";
   var cta=document.querySelector(".cta.gated"); if(cta) cta.style.display=isR?"":"none";
   var foot=document.querySelector(".calc-foot.gated"); if(foot) foot.style.display=isR?"block":"none";
-  var tcT=document.getElementById("txt-cta-top"); if(tcT) tcT.style.display=isR?"block":"none";
+  var tcT=document.getElementById("txt-cta-top"); if(tcT) tcT.style.display="none";
+  var _optS=document.getElementById("option-section"); if(_optS) _optS.style.display=isR?"block":"none";
   var tcB=document.getElementById("txt-cta-bot"); if(tcB) tcB.style.display=isR?"block":"none";
   var ins=document.querySelector(".insight.gated"); if(ins) ins.style.cssText="display:none!important";
   // breadcrumbs
@@ -1587,6 +1698,7 @@ function goStage(v){
   if(v==="s3"){ state.sqft=0; var _sq=document.getElementById("c-sqft"); if(_sq) _sq.value=""; updateClaimS3(); }
   if(isR){
     document.getElementById("calc").classList.add("revealed");
+    window.scrollTo({top:0,behavior:"smooth"});
     // Hide inputs already captured in consult — user edits via Edit button
     ["field-spend","field-state","field-fac-adj"].forEach(function(id){
       var el=document.getElementById(id); if(el) el.style.display="none";
@@ -1631,6 +1743,13 @@ function c2State(){
   if(sel&&main){ main.value=sel.value; onStateChange(); }
   var sp=document.getElementById("c2-split");
   if(sp) sp.textContent=state.stateCool?Math.round(state.stateCool)+"% cooling":"";
+  var _t=(sel&&sel.value&&ESC_TIER[sel.value])||3;
+  var _ed=ESC_DATA[_t];
+  var _n=document.getElementById("c2-escal-note");
+  if(_n&&sel&&sel.value){
+    _n.textContent="In "+sel.value+", commercial electricity rates have risen roughly "+_ed.range+" per year historically.";
+    _n.style.display="";
+  }
 }
 function niceRound(v){
   if(v<50000) return Math.round(v/5000)*5000;
@@ -1815,18 +1934,17 @@ function updateClaimS3(){
   // Cumulative impact boxes
   var _flMo=Math.round(r.floor/12),_ceMo=Math.round(r.ceil/12);
   h+="<div class='s3-cum-row'>";
-  h+="<div class='s3-cum-cell'><div class='s3-cum-val'>$"+_flMo.toLocaleString('en-US')+" – $"+_ceMo.toLocaleString('en-US')+"</div><div class='s3-cum-lab'>per month</div></div>";
   var _s3sn=(document.getElementById("state-select")||{}).value||"";
   var _s3tier=(_s3sn&&ESC_TIER[_s3sn])||3;
   var _s3ed=ESC_DATA[_s3tier];
   var _s3e5=escalFactor(_s3ed.rate,5);
   var _s3e10=escalFactor(_s3ed.rate,10);
-  h+="<div class='s3-cum-cell'><div class='s3-cum-val'>"+fmtM(r.floor*_s3e5)+" – "+fmtM(r.ceil*_s3e5)+"</div><div class='s3-cum-lab'>5-year range</div></div>";
-  h+="<div class='s3-cum-cell'><div class='s3-cum-val'>"+fmtM(r.floor*_s3e10)+" – "+fmtM(r.ceil*_s3e10)+"</div><div class='s3-cum-lab'>10-year range</div></div>";
+  h+="<div class='s3-cum-cell'><div class='s3-cum-val'>"+fmtBoxRange(_flMo,_ceMo)+"</div><div class='s3-cum-lab'>per month</div></div>";
+  h+="<div class='s3-cum-cell'><div class='s3-cum-val'>"+fmtBoxRange(r.floor*_s3e5,r.ceil*_s3e5)+"</div><div class='s3-cum-lab'>5-year range</div></div>";
+  h+="<div class='s3-cum-cell'><div class='s3-cum-val'>"+fmtBoxRange(r.floor*_s3e10,r.ceil*_s3e10)+"</div><div class='s3-cum-lab'>10-year range</div></div>";
   h+="</div>";
-  h+=_s3sn
-    ?"<div class='s3-cum-escal'>In <strong>"+_s3sn+"</strong>, commercial electricity has risen roughly <strong>"+_s3ed.range+"</strong> per year historically. The five and ten-year figures above reflect that rate. "+_s3ed.note+"</div>"
-    :"";
+  if(_s3sn) h+="<div class='s3-cum-escal'>In <strong>"+_s3sn+"</strong>, commercial electricity has risen roughly <strong>"+_s3ed.range+"</strong> per year historically. "+_s3ed.note+"</div>";
+
   // Asset beat — top 2 cost bullets
   var b1=b.bullets[0], b2=b.bullets[1];
   h+="<div class='c-asset-beat'><p>Beyond the bill, <strong>"+b.assetTitle+"</strong> are your highest-risk assets. "+b1+" "+b2+" Left unaddressed, those same inefficiencies shorten equipment useful life by a decade or more.</p></div>";
@@ -1836,7 +1954,6 @@ function updateClaimS3(){
   h+="<p>When structured properly, most clients see positive cash flow from day one. At a minimum, your savings exceed your payments.</p>";
   h+="</div>";
   // Sqft invitation
-  h+="<p class='c-sqft-invite'>If you know your approximate square footage, I can show you what that deduction is worth in real dollars.</p>";
   el.innerHTML=h;
   buildSmsLinks();
 
@@ -1891,32 +2008,56 @@ function togglePartnerPanel(slot){
   if(!p) return;
   p.classList.toggle("open");
   if(p.classList.contains("open")){
-    var inp=document.getElementById("partner-num-"+slot);
-    if(inp) setTimeout(function(){inp.focus();},80);
+    selectPartnerMode(slot,"group");
   }
+}
+
+function selectPartnerMode(slot,mode){
+  var p=document.getElementById("partner-panel-"+slot);
+  if(p) p.dataset.mode=mode;
+  ["group","solo"].forEach(function(m){
+    var b=document.getElementById("partner-mode-"+m+"-"+slot);
+    if(b) b.classList.toggle("active",m===mode);
+  });
+  updatePartnerPreview(slot);
+}
+
+function updatePartnerPreview(slot){
+  var p=document.getElementById("partner-panel-"+slot);
+  var mode=p&&p.dataset.mode?p.dataset.mode:"group";
+  var msg=mode==="group"?buildGroupMsg():buildPartnerMsg();
+  var prev=document.getElementById("partner-preview-"+slot);
+  if(prev) prev.textContent=msg;
 }
 
 function onPartnerInput(slot){
   var inp=document.getElementById("partner-num-"+slot);
   if(!inp) return;
-  // Format as (XXX) XXX-XXXX
   var raw=inp.value.replace(/\D/g,"").slice(0,10);
   var fmt="";
   if(raw.length>0) fmt="("+raw.slice(0,3);
   if(raw.length>=4) fmt+=") "+raw.slice(3,6);
   if(raw.length>=7) fmt+="-"+raw.slice(6,10);
   inp.value=fmt;
-  var ok=raw.length===10;
-  var sb=document.getElementById("partner-solo-"+slot);
-  var gb=document.getElementById("partner-group-"+slot);
-  if(sb) sb.disabled=!ok;
-  if(gb) gb.disabled=!ok;
+  var sb=document.getElementById("partner-send-"+slot);
+  if(sb) sb.disabled=raw.length!==10;
 }
 
 function getPartnerNumber(slot){
   var inp=document.getElementById("partner-num-"+slot);
   if(!inp) return "";
   return "+1"+inp.value.replace(/\D/g,"");
+}
+
+function sendPartnerText(slot){
+  var p=document.getElementById("partner-panel-"+slot);
+  var mode=p&&p.dataset.mode?p.dataset.mode:"group";
+  var num=getPartnerNumber(slot); if(!num||num.length<12) return;
+  if(mode==="group"){
+    window.open("sms:"+EP_NUMBER+","+num+"?body="+encodeURIComponent(buildGroupMsg()),"_self");
+  } else {
+    window.open("sms:"+num+"?body="+encodeURIComponent(buildPartnerMsg()),"_self");
+  }
 }
 
 function buildPartnerMsg(){
