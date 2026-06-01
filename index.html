@@ -721,6 +721,16 @@ body{font-size:17px;}
 
 /* ═══════════════════════════════════════════════════════════════════════ */
 
+/* ── RESULT NARRATIVE ────────────────────────────────────────────────── */
+.result-narrative{background:var(--navy);}
+.rn-inner{padding:28px 38px 32px;border-bottom:1px solid rgba(255,255,255,0.08);}
+.rn-cred{font-size:14px;color:rgba(255,255,255,0.48);line-height:1.75;margin-bottom:26px;font-style:italic;border-left:2px solid rgba(184,115,51,0.4);padding-left:14px;}
+.rn-trans-hd{font-family:'Barlow',sans-serif;font-size:11px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:var(--copper-light);margin-bottom:12px;}
+.rn-trans{font-size:clamp(17px,2.4vw,19px);color:rgba(255,255,255,0.82);line-height:1.75;margin-bottom:24px;}
+.rn-video-intro{font-size:clamp(15px,2.2vw,17px);color:rgba(255,255,255,0.62);line-height:1.7;margin-bottom:16px;}
+@media(max-width:560px){.rn-inner{padding:22px 22px 26px;}}
+/* ─────────────────────────────────────────────────────────────────────── */
+
 /* ── THREE THINGS WORTH KNOWING ─────────────────────────────────────── */
 .s3-known-hd{font-family:'Barlow',sans-serif;font-size:11px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:rgba(255,255,255,0.38);margin:28px 0 20px;border-top:1px solid rgba(255,255,255,0.08);padding-top:22px;}
 .s3-known-wrap{display:flex;flex-direction:column;gap:26px;margin-bottom:8px;}
@@ -836,6 +846,18 @@ body{font-size:17px;}
       <div class="cum-cell"><div class="cum-val" id="cum-5yr">$0</div><div class="cum-lab">5-year range</div></div>
       <div class="cum-cell"><div class="cum-val" id="cum-10yr">$0</div><div class="cum-lab">10-year range</div></div>
     </div>
+  </div>
+</div>
+<div class="result-narrative" id="result-narrative" style="display:none">
+  <div class="rn-inner">
+    <p class="rn-cred">These ranges are built from DOE consumption data, independently verified results, and the spend and facility information you provided. A no-cost strategy session can dial them in exactly for your operation &#8212; or open the assumptions panel below to do it yourself right now.</p>
+    <div class="rn-trans-hd">Every Month You Wait, This Gets More Expensive</div>
+    <p class="rn-trans">The distortion is real. The meter inflation is real. The equipment wear is real. You have been running a tight operation while your electrical system quietly took a cut of everything. That ends when someone decides to look at it.</p>
+    <p class="rn-video-intro">Based on what you shared, we put together a custom video walkthrough of how we would approach your facility. Text below to receive it.</p>
+    <a href="#" class="txt-cta-btn" id="sms-link-video">
+      <span class="txt-cta-ico">&#128241;</span>
+      Text Me My Custom Video Walkthrough
+    </a>
   </div>
 </div>
 <div class="option-section gated" id="option-section">
@@ -1678,8 +1700,10 @@ function goStage(v){
   });
   // summary + title
   var cs=document.getElementById("c-summary"); if(cs) cs.style.display=isR?"":"none";
-  var ctt=document.getElementById("calc-title"); if(ctt) ctt.style.display=isR?"":"none";
-  var cst=document.getElementById("calc-sub"); if(cst) cst.style.display="none";
+  var ctt=document.getElementById("calc-title");
+  if(ctt){ if(isR){ ctt.innerHTML="Your Bill Has a Leak. <em>Now You Know How Big It Is.</em>"; ctt.style.display=""; } else { ctt.style.display="none"; } }
+  var cst=document.getElementById("calc-sub");
+  if(cst){ if(isR){ cst.textContent="Most operators never see this. You just did. Here is what to do next."; cst.style.display=""; } else { cst.style.display="none"; } }
   // calc-body: only in result
   var cb=document.getElementById("calc-body-main"); if(cb) cb.style.display=isR?"block":"none";
   // gated sections: only in result
@@ -1693,6 +1717,7 @@ function goStage(v){
   var foot=document.querySelector(".calc-foot.gated"); if(foot) foot.style.display=isR?"block":"none";
   var tcT=document.getElementById("txt-cta-top"); if(tcT) tcT.style.display="none";
   var _optS=document.getElementById("option-section"); if(_optS) _optS.style.display=isR?"block":"none";
+  var rn=document.getElementById("result-narrative"); if(rn) rn.style.display=isR?"block":"none";
   var aa=document.getElementById("assumptions-accordion"); if(aa){ aa.style.display=isR?"block":"none"; aa.classList.remove("assumptions-open"); }
   var ins=document.querySelector(".insight.gated"); if(ins) ins.style.cssText="display:none!important";
   // breadcrumbs
@@ -1709,10 +1734,9 @@ function goStage(v){
     ["field-spend","field-state","field-fac-adj"].forEach(function(id){
       var el=document.getElementById(id); if(el) el.style.display="none";
     });
-    // Show result intro above streams
-    var ri=document.getElementById("c-result-intro"); if(ri) ri.style.display="";
     // Check deregulated state
     var _sn=document.getElementById("state-select"); if(_sn) updateNegoStream(_sn.value);
+    buildVideoLink();
     render(); updateSummaryBar();
   }
   // animate
@@ -2105,6 +2129,16 @@ function buildSmsLinks(){
   ["sms-link-top","sms-link-s3"].forEach(function(id){
     var el=document.getElementById(id); if(el) el.href=href;
   });
+}
+function buildVideoLink(){
+  if(!state.selected||!INSIGHTS[state.selected]) return;
+  var ins=INSIGHTS[state.selected];
+  var spendAmt=state.spend>0?(" spending about "+fmtK(state.spend)+" per year"):"";
+  var stateName=(document.getElementById("state-select")||{}).value||"";
+  var stateStr=stateName?" in "+stateName:"";
+  var msg="Hi \u2014 I just ran the Energy Plus savings calculator. I have a "+ins.label+spendAmt+stateStr+". I\u2019d like to see the custom video walkthrough for my facility.";
+  var el=document.getElementById("sms-link-video");
+  if(el) el.href="sms:+18647770688?body="+encodeURIComponent(msg);
 }
 function updateSummaryBar(){
   var el=document.getElementById("c-sum-text"); if(!el) return;
