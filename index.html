@@ -25,6 +25,8 @@ body{font-family:'Barlow',sans-serif;background:var(--paper);color:var(--ink);fo
 .calc-head::before{content:'';position:absolute;inset:0;background:repeating-linear-gradient(-48deg,transparent,transparent 38px,rgba(255,255,255,0.012) 38px,rgba(255,255,255,0.012) 39px);}
 .calc-head::after{content:'';position:absolute;right:-40px;top:-40px;width:180px;height:180px;background:radial-gradient(circle,rgba(207,147,86,0.10),transparent 70%);}
 .calc-eyebrow{position:relative;font-family:'Barlow',sans-serif;font-size:14px;font-weight:600;letter-spacing:0.05em;text-transform:uppercase;color:var(--copper-light);margin-bottom:14px;display:flex;align-items:center;gap:10px;}
+/* Hide eyebrow in result view */
+.calc.revealed .calc-eyebrow{display:none;}
 .calc-eyebrow::before{content:'';display:block;width:22px;height:1px;background:var(--copper);}
 .calc-title{position:relative;font-family:'Playfair Display',serif;font-weight:800;font-size:clamp(25px,5vw,33px);line-height:1.1;letter-spacing:-0.02em;color:#fff;margin-bottom:10px;}
 .calc-title em{font-style:italic;color:var(--copper-pale);}
@@ -134,6 +136,7 @@ body{font-family:'Barlow',sans-serif;background:var(--paper);color:var(--ink);fo
 .result-inner{position:relative;padding:30px 34px 26px;}
 .result-label{font-family:'Barlow',sans-serif;font-size:14px;font-weight:600;letter-spacing:0.04em;text-transform:uppercase;color:var(--copper-light);margin-bottom:8px;display:flex;align-items:center;gap:9px;}
 .result-label::before{content:'';display:block;width:6px;height:6px;border-radius:50%;background:var(--verified-light);box-shadow:0 0 0 3px rgba(90,155,138,0.2);}
+.result-preamble{font-family:'Barlow',sans-serif;font-size:clamp(14px,2vw,16px);color:rgba(255,255,255,0.62);line-height:1.5;margin-bottom:14px;letter-spacing:0.01em;}
 .result-range{display:flex;align-items:baseline;gap:14px;flex-wrap:wrap;margin-bottom:8px;}
 .result-num{font-family:'Barlow',sans-serif;font-weight:500;font-size:clamp(28px,6vw,44px);line-height:1;color:#fff;letter-spacing:-0.01em;}
 .result-to{font-family:'Barlow',sans-serif;font-size:14px;color:rgba(255,255,255,0.55);font-weight:500;letter-spacing:0.03em;text-transform:uppercase;}
@@ -146,7 +149,7 @@ body{font-family:'Barlow',sans-serif;background:var(--paper);color:var(--ink);fo
 .cum-btn:hover:not(.active){border-color:var(--copper-light);color:#fff;}
 .cum-row{display:flex;gap:1px;background:var(--navy-line);margin-top:14px;border:1px solid var(--navy-line);min-width:0;}
 .cum-cell{flex:1;background:var(--navy);padding:17px 12px;min-width:0;overflow:hidden;}
-.cum-cell .cum-val{font-family:'Barlow',sans-serif;font-size:clamp(18px,3.6vw,24px);color:#fff;line-height:1;margin-bottom:6px;}
+.cum-cell .cum-val{font-family:'Barlow',sans-serif;font-size:clamp(16px,4.2vw,28px);font-weight:700;color:#fff;line-height:1;margin-bottom:6px;font-variant-numeric:tabular-nums;}
 .cum-cell .cum-lab{font-size:14px;color:rgba(255,255,255,0.65);line-height:1.5;}
 
 .method{margin:0 38px;padding:22px 0 4px;border-bottom:1px solid var(--paper-line);}
@@ -836,6 +839,7 @@ body{font-size:17px;}
 
 <div class="result gated" id="result-block">
   <div class="result-inner">
+    <div class="result-preamble" id="result-preamble"></div>
     <div class="result-range">
       <span class="result-num" id="r-floor">$0</span>
       <span class="result-to">to</span>
@@ -1463,6 +1467,8 @@ function countUp(el,target,dur){
 }
 function render(){
   var r = compute();
+  var _rp=document.getElementById("result-preamble");
+  if(_rp) _rp.textContent=state.selected&&INSIGHTS[state.selected]?"Your "+INSIGHTS[state.selected].noun+" is likely losing this every year to electrical waste":"";
   var _fr=document.getElementById("fac-readout"); if(_fr) _fr.textContent = "";
   document.getElementById("spend-monthly").textContent = fmtFull(state.spend/12) + " / month";
   if(state.heatComp==="gas"){ document.getElementById("split-readout").textContent = "Heating on gas, electric load is all cooling"; }
@@ -1701,9 +1707,9 @@ function goStage(v){
   // summary + title
   var cs=document.getElementById("c-summary"); if(cs) cs.style.display=isR?"":"none";
   var ctt=document.getElementById("calc-title");
-  if(ctt){ if(isR){ ctt.innerHTML="Your Bill Has a Leak. <em>Now You Know How Big It Is.</em>"; ctt.style.display=""; } else { ctt.style.display="none"; } }
+  if(ctt){ if(isR){ ctt.innerHTML="Your Bill Has a Leak.<br><em>Now You Know How Big It Is.</em>"; ctt.style.display=""; } else { ctt.style.display="none"; } }
   var cst=document.getElementById("calc-sub");
-  if(cst){ if(isR){ cst.textContent="Most operators never see this. You just did. Here is what to do next."; cst.style.display=""; } else { cst.style.display="none"; } }
+  if(cst){ if(isR){ cst.textContent="Most operators never see this. You just did. Here is what to do next."; cst.style.display=""; cst.style.color="#fff"; cst.style.opacity="0.92"; } else { cst.style.display="none"; cst.style.color=""; cst.style.opacity=""; } }
   // calc-body: only in result
   var cb=document.getElementById("calc-body-main"); if(cb) cb.style.display=isR?"block":"none";
   // gated sections: only in result
