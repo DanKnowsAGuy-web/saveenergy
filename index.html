@@ -125,9 +125,13 @@ body{font-family:'Barlow',sans-serif;background:var(--paper);color:var(--ink);fo
 /* === MOTION === */
 @keyframes insightSlide{from{opacity:0;transform:translateY(-14px);}to{opacity:1;transform:translateY(0);}}
 @keyframes ledgerIn{from{opacity:0;transform:translateY(10px);}to{opacity:1;transform:translateY(0);}}
-@keyframes tileIn{from{opacity:0;}to{opacity:1;}}
-.fac-opt{animation:tileIn 0.38s ease-out both;}
-.fac-opt:nth-child(1){animation-delay:0ms}.fac-opt:nth-child(2){animation-delay:35ms}.fac-opt:nth-child(3){animation-delay:70ms}.fac-opt:nth-child(4){animation-delay:105ms}.fac-opt:nth-child(5){animation-delay:140ms}.fac-opt:nth-child(6){animation-delay:175ms}.fac-opt:nth-child(7){animation-delay:210ms}.fac-opt:nth-child(8){animation-delay:245ms}.fac-opt:nth-child(9){animation-delay:280ms}.fac-opt:nth-child(10){animation-delay:315ms}.fac-opt:nth-child(11){animation-delay:350ms}.fac-opt:nth-child(12){animation-delay:385ms}.fac-opt:nth-child(13){animation-delay:420ms}.fac-opt:nth-child(14){animation-delay:455ms}
+/* ── TILE CINEMATIC ENTRANCE ── */
+@keyframes tileIn{
+  from{opacity:0;transform:translateY(18px) scale(0.94);}
+  to{opacity:1;transform:translateY(0) scale(1);}
+}
+.fac-opt{animation:tileIn 0.82s cubic-bezier(0.22,1,0.36,1) both;}
+.fac-opt:nth-child(1){animation-delay:80ms}.fac-opt:nth-child(2){animation-delay:160ms}.fac-opt:nth-child(3){animation-delay:240ms}.fac-opt:nth-child(4){animation-delay:320ms}.fac-opt:nth-child(5){animation-delay:400ms}.fac-opt:nth-child(6){animation-delay:480ms}.fac-opt:nth-child(7){animation-delay:560ms}.fac-opt:nth-child(8){animation-delay:640ms}.fac-opt:nth-child(9){animation-delay:720ms}.fac-opt:nth-child(10){animation-delay:800ms}.fac-opt:nth-child(11){animation-delay:880ms}.fac-opt:nth-child(12){animation-delay:960ms}.fac-opt:nth-child(13){animation-delay:1040ms}.fac-opt:nth-child(14){animation-delay:1120ms}
 .fac-opt:hover:not(.active){transform:translateY(-2px);box-shadow:0 4px 14px rgba(14,31,51,0.12);}
 
 
@@ -195,7 +199,7 @@ body{font-family:'Barlow',sans-serif;background:var(--paper);color:var(--ink);fo
 .result-inner{padding:30px 38px 26px;}
 
 /* Bigger, more dramatic savings numbers */
-.result-num{font-size:clamp(44px,9vw,68px);}
+.result-num{font-size:clamp(52px,11vw,88px);font-variant-numeric:tabular-nums;text-shadow:0 0 40px rgba(207,147,86,0.35),0 0 80px rgba(207,147,86,0.12);}
 
 /* "to" becomes a whisper between two giants */
 .result-to{font-size:14px;letter-spacing:0.05em;color:rgba(255,255,255,0.55);align-self:center;margin-bottom:3px;text-transform:uppercase;font-weight:500;}
@@ -264,10 +268,10 @@ body{font-family:'Barlow',sans-serif;background:var(--paper);color:var(--ink);fo
 
 /* ── CONSULT SKILL PASS ───────────────────────────────────────────────── */
 
-/* Refined animations — exit slides left, entrance slides right */
-@keyframes slideIn{from{opacity:0;transform:translateX(22px);}to{opacity:1;transform:translateX(0);}}
-@keyframes slideInLeft{from{opacity:0;transform:translateX(-22px);}to{opacity:1;transform:translateX(0);}}
-@keyframes slideOut{from{opacity:1;transform:translateX(0);}to{opacity:0;transform:translateX(-16px);}}
+/* Refined animations — depth-aware 3D transitions */
+@keyframes slideIn{from{opacity:0;transform:perspective(600px) translateX(28px) rotateY(-4deg);}to{opacity:1;transform:perspective(600px) translateX(0) rotateY(0deg);}}
+@keyframes slideInLeft{from{opacity:0;transform:perspective(600px) translateX(-28px) rotateY(4deg);}to{opacity:1;transform:perspective(600px) translateX(0) rotateY(0deg);}}
+@keyframes slideOut{from{opacity:1;transform:perspective(600px) translateX(0) rotateY(0deg);}to{opacity:0;transform:perspective(600px) translateX(-20px) rotateY(3deg);}}
 
 /* Step bar — architectural, not textual */
 .c-progress{gap:5px;margin-bottom:26px;}
@@ -518,7 +522,82 @@ body{font-family:'Barlow',sans-serif;background:var(--paper);color:var(--ink);fo
 .calc.c-mode-dark .txt-cta-sub{color:rgba(255,255,255,0.52);}
 /* ─────────────────────────────────────────────────────────────────────────── */
 
-/* ── STREAM VIDEO LINKS ───────────────────────────────────────────────────── */
+/* ── COPPER LUSTER SHEEN on CTA buttons ── */
+.cta-btn,.c-next-btn,.txt-cta-btn,.opt-strat-btn{
+  position:relative;overflow:hidden;
+}
+.cta-btn::after,.c-next-btn::after,.txt-cta-btn::after,.opt-strat-btn::after{
+  content:'';position:absolute;top:0;left:-120%;width:60%;height:100%;
+  background:linear-gradient(105deg,transparent 20%,rgba(255,255,255,0.28) 50%,transparent 80%);
+  transform:skewX(-18deg);
+  transition:left 0.55s ease;
+  pointer-events:none;
+}
+/* Override the arrow pseudo-element on c-next-btn — sheen uses ::before instead */
+.c-next-btn::after{content:'→';font-size:14px;transition:transform 0.18s,left 0.55s ease;left:auto;width:auto;height:auto;background:none;transform:none;top:auto;position:static;display:inline;}
+.cta-btn:hover::after,.txt-cta-btn:hover::after,.opt-strat-btn:hover::after{left:140%;}
+.cta-btn,.txt-cta-btn,.opt-strat-btn{overflow:hidden;}
+
+/* Separate sheen for c-next-btn using ::before */
+.c-next-btn::before{
+  content:'';position:absolute;top:0;left:-120%;width:60%;height:100%;
+  background:linear-gradient(105deg,transparent 20%,rgba(255,255,255,0.22) 50%,transparent 80%);
+  transform:skewX(-18deg);
+  transition:left 0.55s ease;
+  pointer-events:none;
+  z-index:0;
+}
+.c-next-btn:hover::before{left:140%;}
+.c-next-btn span,.c-next-btn::after{position:relative;z-index:1;}
+
+/* ── AMBIENT PARTICLE CANVAS ── */
+#ambient-canvas{
+  position:absolute;inset:0;width:100%;height:100%;
+  pointer-events:none;z-index:0;opacity:0.72;
+}
+.calc-head{position:relative;}
+#c-s1{position:relative;}
+
+/* ── COST-OF-WAITING INLINE RANGE ── */
+.rn-waiting-body{
+  font-size:clamp(14px,2vw,16px);
+  color:rgba(255,255,255,0.72);
+  line-height:1.6;
+}
+.rn-inline-range{
+  font-family:'Barlow',sans-serif;
+  font-size:clamp(17px,2.4vw,20px);
+  font-weight:700;
+  color:var(--copper-pale);
+  font-variant-numeric:tabular-nums;
+}
+
+/* ── RESULT NUMBER COUNT-UP GLOW BURST ── */
+@keyframes numGlowBurst{
+  0%{text-shadow:0 0 0px rgba(207,147,86,0);}
+  30%{text-shadow:0 0 60px rgba(207,147,86,0.9),0 0 120px rgba(207,147,86,0.4);}
+  100%{text-shadow:0 0 40px rgba(207,147,86,0.35),0 0 80px rgba(207,147,86,0.12);}
+}
+.result-num.counting{animation:numGlowBurst 1.4s ease-out both;}
+
+/* ── AMBIENT GRID PULSE on dark background ── */
+@keyframes gridPulse{
+  0%,100%{opacity:0.04;}
+  50%{opacity:0.09;}
+}
+.c-mode-dark .c-wrap{position:relative;}
+#grid-overlay{
+  position:absolute;inset:0;
+  background-image:
+    linear-gradient(rgba(184,115,51,0.18) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(184,115,51,0.18) 1px,transparent 1px);
+  background-size:44px 44px;
+  pointer-events:none;z-index:0;
+  animation:gridPulse 4s ease-in-out infinite;
+  opacity:0.06;
+}
+#c-s1,#c-s2,#c-s3{position:relative;z-index:1;}
+
 .stream-vid-link{display:inline-flex;align-items:center;gap:5px;margin-top:10px;font-family:'Barlow',sans-serif;font-size:14px;letter-spacing:0.03em;text-transform:uppercase;color:var(--copper);background:none;border:none;padding:6px 0;cursor:pointer;transition:color 0.18s;min-height:36px;}
 .stream-vid-link::before{content:'▶';font-size:10px;flex-shrink:0;}
 .stream-vid-link:hover{color:var(--copper-light);}
@@ -752,7 +831,7 @@ body{font-size:17px;}
 
 /* ── BRIDGE PARAGRAPH ────────────────────────────────────────────────── */
 .rn-bridge{margin:24px 0;padding:22px 0;border-top:1px solid rgba(255,255,255,0.08);border-bottom:1px solid rgba(255,255,255,0.08);}
-.rn-bridge-p{font-size:clamp(15px,2.2vw,17px);color:rgba(255,255,255,0.82);line-height:1.75;margin-bottom:16px;}
+.rn-bridge-p{font-size:clamp(17px,2.4vw,19px);color:rgba(255,255,255,0.88);line-height:1.75;margin-bottom:16px;}
 .rn-bridge-p:last-child{margin-bottom:0;}
 /* ─────────────────────────────────────────────────────────────────────── */
 
@@ -763,7 +842,7 @@ body{font-size:17px;}
 .rn-tax-item{display:block;margin-bottom:26px;}
 .rn-tax-num{font-family:'Barlow',sans-serif;font-size:32px;font-weight:500;color:var(--copper);line-height:1;opacity:0.85;display:inline;margin-right:10px;}
 .rn-tax-hd-row{display:block;margin-bottom:8px;}
-.rn-tax-label{font-family:'Barlow',sans-serif;font-size:11px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--copper-light);margin-bottom:6px;}
+.rn-tax-label{font-family:'Barlow',sans-serif;font-size:clamp(17px,2.4vw,19px);font-weight:700;letter-spacing:0.01em;text-transform:uppercase;color:var(--copper-light);margin-bottom:8px;display:block;line-height:1.3;}
 .rn-tax-text{font-size:clamp(17px,2.4vw,19px);color:rgba(255,255,255,0.82);line-height:1.75;margin:0;}
 .rn-waiting{font-size:clamp(15px,2.2vw,17px);color:rgba(255,255,255,0.82);line-height:1.65;margin-bottom:16px;padding:14px 18px;background:rgba(184,115,51,0.09);border-left:2px solid rgba(184,115,51,0.55);}
 .rn-guarantee{font-size:clamp(17px,2.4vw,19px);color:rgba(255,255,255,0.88);line-height:1.75;margin-bottom:18px;}
@@ -806,6 +885,7 @@ body{font-size:17px;}
 
   <!-- ── CONSULT STAGES ─────────────────────────────────── -->
   <div id="c-wrap" class="c-wrap">
+    <div id="grid-overlay"></div>
 
     <div id="c-crumbs" class="c-crumbs" style="display:none"></div>
 
@@ -917,7 +997,7 @@ body{font-size:17px;}
       <p class="rn-bridge-p">Our process is designed to ISO standards and is fully third-party auditable. We are required to recommend the highest ROI solution for your facility. That is not a marketing claim. It is a structural commitment.</p>
       <p class="rn-bridge-p">We do not have customers. We have clients: people under our protection and care. The 22-Minute Facility Review is where that relationship starts.</p>
     </div>
-    <p class="rn-waiting" id="rn-waiting"></p>
+    <p class="rn-waiting" id="rn-waiting"><span class="rn-waiting-body" id="rn-waiting-body"></span></p>
     <p class="rn-guarantee">The session is free. No card required. If we do not find at least one of these three taxes running in your building, we cover the engineer's $150 consultation fee ourselves. You pay nothing unless you decide to move forward.</p>
     <a href="#" class="txt-cta-btn" id="sms-link-primary">
       <span class="txt-cta-ico">&#128241;</span>
@@ -1717,16 +1797,27 @@ function createSparks(){
   cont.id='sparks-cont';
   cont.style.cssText='position:absolute;inset:0;overflow:hidden;pointer-events:none;z-index:0;';
   inner.insertBefore(cont,inner.firstChild);
-  for(var i=0;i<18;i++){
+  // ambient background sparks
+  for(var i=0;i<28;i++){
     var s=document.createElement('div');
-    var x=(8+Math.random()*84).toFixed(1);
-    var dur=(2.8+Math.random()*3.4).toFixed(2);
-    var delay=(-Math.random()*7).toFixed(2);
-    var sz=(1+Math.random()*2.4).toFixed(1);
-    var sy=(30+Math.random()*50).toFixed(1);
-    var op=(0.22+Math.random()*0.45).toFixed(2);
+    var x=(4+Math.random()*92).toFixed(1);
+    var dur=(3.2+Math.random()*4.2).toFixed(2);
+    var delay=(-Math.random()*8).toFixed(2);
+    var sz=(1+Math.random()*3.2).toFixed(1);
+    var sy=(20+Math.random()*65).toFixed(1);
+    var op=(0.18+Math.random()*0.5).toFixed(2);
     s.style.cssText='position:absolute;width:'+sz+'px;height:'+sz+'px;border-radius:50%;background:rgba(207,147,86,'+op+');left:'+x+'%;top:'+sy+'%;animation:sparkRise '+dur+'s '+delay+'s linear infinite;';
     cont.appendChild(s);
+  }
+  // burst sparks — short-lived dramatic flash at reveal
+  for(var j=0;j<14;j++){
+    var b=document.createElement('div');
+    var bx=(10+Math.random()*80).toFixed(1);
+    var bsz=(2+Math.random()*5).toFixed(1);
+    var bdur=(0.7+Math.random()*0.8).toFixed(2);
+    var bdelay=(Math.random()*0.4).toFixed(2);
+    b.style.cssText='position:absolute;width:'+bsz+'px;height:'+bsz+'px;border-radius:50%;background:rgba(230,192,137,0.9);left:'+bx+'%;top:55%;animation:sparkRise '+bdur+'s '+bdelay+'s cubic-bezier(0.22,1,0.36,1) both;box-shadow:0 0 6px 2px rgba(207,147,86,0.6);';
+    cont.appendChild(b);
   }
 }
 /* ─────────────────────────────────────────────────────────────────────── */
@@ -1755,6 +1846,7 @@ function goStage(v){
     }
   }
   state.view=v;
+  if(v!=='result') stopWaitingTicker();
   var isR=(v==="result");
   document.getElementById("calc").classList.add("c-mode-dark");
   // consult wrap
@@ -1822,6 +1914,8 @@ function showResult(){
     var rp=document.getElementById("result-preamble");
     if(rp){rp.style.animation="none";void rp.offsetHeight;rp.style.animation="preamblePulse 1.6s ease-out 0.35s both";}
     createSparks();
+    // count-up on savings numbers
+    setTimeout(function(){ animateCountUp(); }, 180);
   },40);
 }
 
@@ -2220,13 +2314,13 @@ function buildPrimaryCta(){
 }
 function updateCostOfWaiting(){
   var el=document.getElementById("rn-waiting");
+  var body=document.getElementById("rn-waiting-body");
   if(!el||!state.selected||!state.spend) return;
   var r=compute();
-  var stateName=(document.getElementById("state-select")||{}).value||"";
   var monthlyFloor=Math.round(r.floor/12);
   var monthlyCeil=Math.round(r.ceil/12);
-  var stateStr=stateName?" In "+stateName+", rising":"Rising";
-  el.textContent="Every 30 days you wait, "+fmtFull(monthlyFloor)+" to "+fmtFull(monthlyCeil)+" walks out of your building. "+stateStr+" electricity rates mean that number grows automatically — even if nothing else in your operation changes.";
+  var rangeHtml="<span class='rn-inline-range'>"+fmtFull(monthlyFloor)+" to "+fmtFull(monthlyCeil)+"</span>";
+  if(body) body.innerHTML="Based on your inputs, that is "+rangeHtml+" leaving your building this month alone.";
 }
 function updateSummaryBar(){
   var el=document.getElementById("c-sum-text"); if(!el) return;
@@ -2239,6 +2333,84 @@ function updateSummaryBar(){
   buildPrimaryCta(); updateCostOfWaiting();
 }
 /* ─────────────────────────────────────────────────────────────────────── */
+
+/* ── COUNT-UP GLOW BURST (piggybacks existing countUp) ───────────── */
+function animateCountUp(){
+  var nums=document.querySelectorAll('#result-block .result-num');
+  nums.forEach(function(el,i){
+    el.classList.remove('counting');
+    void el.offsetHeight;
+    setTimeout(function(){ el.classList.add('counting'); }, i*120);
+  });
+}
+
+/* ── LIVE COST-OF-WAITING TICKER ───────────────────────────────────── */
+var _tickerInterval=null;
+function startWaitingTicker(){
+  if(_tickerInterval) clearInterval(_tickerInterval);
+  var r=compute();
+  if(!r||!r.floor) return;
+  var perSecFloor=r.floor/31536000; // per second
+  var perSecCeil=r.ceil/31536000;
+  var elapsed=0;
+  var ticker=document.getElementById('rn-ticker');
+  if(!ticker) return;
+  _tickerInterval=setInterval(function(){
+    elapsed+=0.1;
+    var lo=perSecFloor*elapsed, hi=perSecCeil*elapsed;
+    var fmt=function(v){ return v>=1000?'$'+Math.round(v/1000)+'K':'$'+Math.round(v); };
+    if(ticker) ticker.textContent=fmt(lo)+' to '+fmt(hi);
+  },100);
+}
+function stopWaitingTicker(){
+  if(_tickerInterval){ clearInterval(_tickerInterval); _tickerInterval=null; }
+}
+
+/* ── AMBIENT PARTICLE CANVAS ─────────────────────────────────────── */
+function initAmbientCanvas(){
+  var wrap=document.getElementById('c-wrap');
+  if(!wrap||document.getElementById('ambient-canvas')) return;
+  var canvas=document.createElement('canvas');
+  canvas.id='ambient-canvas';
+  canvas.style.cssText='position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:0;opacity:0;transition:opacity 1.2s ease;';
+  wrap.insertBefore(canvas,wrap.firstChild);
+  var ctx=canvas.getContext('2d');
+  var particles=[];
+  var W,H;
+  function resize(){
+    W=wrap.offsetWidth; H=wrap.offsetHeight;
+    canvas.width=W; canvas.height=H;
+  }
+  resize();
+  window.addEventListener('resize',resize);
+  for(var i=0;i<55;i++){
+    particles.push({
+      x:Math.random()*W, y:Math.random()*H,
+      r:0.6+Math.random()*1.8,
+      vx:(Math.random()-0.5)*0.18,
+      vy:-(0.12+Math.random()*0.22),
+      op:0.08+Math.random()*0.28,
+      life:Math.random()
+    });
+  }
+  function draw(){
+    if(!canvas.parentNode){ cancelAnimationFrame(_rafId); return; }
+    ctx.clearRect(0,0,W,H);
+    particles.forEach(function(p){
+      p.x+=p.vx; p.y+=p.vy; p.life+=0.003;
+      if(p.y<0||p.life>1){ p.y=H; p.x=Math.random()*W; p.life=0; p.op=0.08+Math.random()*0.28; }
+      var pulse=0.5+0.5*Math.sin(p.life*Math.PI);
+      ctx.beginPath();
+      ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+      ctx.fillStyle='rgba(184,115,51,'+(p.op*pulse).toFixed(3)+')';
+      ctx.fill();
+    });
+    _rafId=requestAnimationFrame(draw);
+  }
+  var _rafId=requestAnimationFrame(draw);
+  // fade in after a beat
+  setTimeout(function(){ canvas.style.opacity='1'; },300);
+}
 
 (function init(){
   // Init view: hide everything except fac-grid
@@ -2261,6 +2433,7 @@ function updateSummaryBar(){
   if(c2s){ c2s.innerHTML=document.getElementById("state-select").innerHTML; c2s.value="South Carolina"; }
   document.querySelectorAll(".fac-opt").forEach(function(el){ el.addEventListener("click",function(){ selectFac(el); }); });
   render();
+  initAmbientCanvas();
 })();
 
 // ── VIDEO LINKS ─────────────────────────────────────────────────────────────
