@@ -627,6 +627,49 @@ body{font-family:'Barlow',sans-serif;background:var(--paper);color:var(--ink);fo
 .vid-embed iframe{position:absolute;inset:0;width:100%;height:100%;}
 /* ─────────────────────────────────────────────────────────────────────────── */
 
+.s3-cost-list{margin:12px 0 0 0;padding:0;list-style:none;display:flex;flex-direction:column;gap:8px;}
+.s3-cost-item{font-size:clamp(16px,2.2vw,18px);color:rgba(255,255,255,0.65);line-height:1.65;padding-left:16px;position:relative;}
+.s3-cost-item::before{content:'';position:absolute;left:0;top:10px;width:5px;height:5px;border-radius:50%;background:var(--copper);flex-shrink:0;}
+.s3-cost-item strong{color:var(--copper-pale);}
+/* ── TWO-STEP BAND SELECTOR ── */
+.band-grid{display:flex;flex-direction:column;gap:8px;}
+.band-btn{display:flex;align-items:center;justify-content:space-between;padding:14px 18px;border:1px solid rgba(255,255,255,0.14);background:rgba(255,255,255,0.05);color:#fff;font-family:'Barlow',sans-serif;font-size:clamp(15px,2.2vw,17px);font-weight:500;cursor:pointer;transition:all 0.16s;text-align:left;line-height:1.3;}
+.band-btn:hover{border-color:var(--copper);background:rgba(184,115,51,0.12);}
+.band-btn.active{border-color:var(--copper);background:rgba(184,115,51,0.18);color:var(--copper-pale);}
+.band-btn-range{font-weight:700;color:var(--copper-pale);}
+.band-btn.active .band-btn-range{color:#fff;}
+.band-btn-arrow{font-size:14px;color:rgba(255,255,255,0.3);flex-shrink:0;margin-left:10px;}
+.band-btn.active .band-btn-arrow{color:var(--copper-pale);}
+/* Step 1 grayed out after selection */
+.band-step1-done .band-btn{opacity:0.38;pointer-events:none;}
+.band-step1-done .band-btn.active{opacity:0.75;}
+.band-refine-label{font-family:'Barlow',sans-serif;font-size:clamp(15px,2.2vw,17px);font-weight:700;color:#fff;margin:16px 0 10px;display:flex;align-items:center;gap:8px;flex-wrap:wrap;}
+.band-refine-range{color:var(--copper-pale);font-weight:400;font-size:clamp(13px,1.8vw,15px);}
+.band-reset-btn{margin-top:10px;background:none;border:none;color:rgba(255,255,255,0.35);font-family:'Barlow',sans-serif;font-size:13px;cursor:pointer;padding:4px 0;text-decoration:underline;text-underline-offset:3px;}
+.band-reset-btn:hover{color:rgba(255,255,255,0.65);}
+/* ── SOCIAL PROOF STRIP ── */
+.rn-proof{margin:28px 0 24px;padding:22px 0;border-top:1px solid rgba(255,255,255,0.08);}
+.rn-proof-label{font-family:'Barlow',sans-serif;font-size:11px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:rgba(255,255,255,0.35);margin-bottom:16px;}
+.rn-proof-items{display:flex;flex-direction:column;gap:10px;margin-bottom:14px;}
+.rn-proof-item{display:flex;align-items:baseline;gap:12px;}
+.rn-proof-result{font-family:'Barlow',sans-serif;font-size:clamp(22px,3.5vw,28px);font-weight:700;color:var(--copper-pale);flex-shrink:0;font-variant-numeric:tabular-nums;line-height:1;}
+.rn-proof-desc{font-size:clamp(14px,1.8vw,15px);color:rgba(255,255,255,0.6);line-height:1.4;}
+.rn-proof-name{font-weight:700;color:rgba(255,255,255,0.88);font-size:clamp(15px,2vw,16px);}
+.rn-proof-cred{font-size:13px;color:rgba(255,255,255,0.32);font-style:italic;letter-spacing:0.01em;}
+/* ── CALENDAR PRIMARY BUTTON ── */
+.rn-cal-btn{display:flex;align-items:center;justify-content:center;gap:12px;background:var(--copper);color:#fff;font-family:'Barlow',sans-serif;font-size:clamp(16px,2.2vw,18px);font-weight:700;letter-spacing:0.02em;padding:20px 28px;text-decoration:none;transition:background 0.18s;cursor:pointer;width:100%;margin-bottom:0;}
+.rn-cal-btn:hover{background:#a36120;}
+.cta-btn-ico{font-size:20px;line-height:1;flex-shrink:0;}
+/* ── SMS PREVIEW CARD ── */
+.rn-sms-wrap{margin-top:16px;padding-top:18px;border-top:1px solid rgba(255,255,255,0.06);}
+.rn-sms-label{font-size:13px;color:rgba(255,255,255,0.35);letter-spacing:0.04em;text-transform:uppercase;font-family:'Barlow',sans-serif;margin-bottom:12px;text-align:center;}
+.rn-sms-preview{background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.10);border-radius:4px;padding:14px 16px;margin-bottom:12px;}
+.rn-sms-preview-to{font-size:12px;color:rgba(255,255,255,0.35);font-family:'Barlow',sans-serif;letter-spacing:0.04em;text-transform:uppercase;margin-bottom:8px;}
+.rn-sms-num{color:var(--copper-pale);font-weight:600;}
+.rn-sms-preview-msg{font-size:clamp(14px,1.8vw,15px);color:rgba(255,255,255,0.78);line-height:1.6;font-style:italic;}
+.rn-sms-btn{width:100%;background:rgba(184,115,51,0.15);color:var(--copper-pale);border:1px solid rgba(184,115,51,0.35);}
+.rn-sms-btn:hover{background:rgba(184,115,51,0.25);color:#fff;}
+
 /* ── STREAM SECTIONS (new hierarchy) ─────────────────────────────────────── */
 .stream-section{padding:22px 0;border-bottom:1px solid rgba(255,255,255,0.08);}
 .stream-section:last-child{border-bottom:none;}
@@ -909,8 +952,8 @@ body{font-size:17px;}
 
   <div class="calc-head">
     <div class="calc-eyebrow">Energy savings estimator</div>
-    <h1 class="calc-title" id="calc-title">What is your facility <em>quietly</em> overpaying?</h1>
-    <p class="calc-sub" id="calc-sub">Start with your facility type. We will show you something about your own building that most operators never see, then estimate what it is costing you.</p>
+    <h1 class="calc-title" id="calc-title">Most commercial operators are paying three electricity bills. <em>They only know about one.</em></h1>
+    <p class="calc-sub" id="calc-sub">Select your facility type. We will show you exactly where your building is losing money and why it does not show up on your bill.</p>
   </div>
 
   <!-- ── CONSULT STAGES ─────────────────────────────────── -->
@@ -951,12 +994,15 @@ body{font-size:17px;}
         <div class="c-field-lbl">Primary state <span id="c2-split" class="c-field-aside"></span></div>
         <div class="sel-wrap"><select id="c2-state" onchange="c2State()"></select></div>
       </div>
-      <div style="margin-top:22px;">
-        <div class="c-field-lbl">Annual electricity spend <span class="c-field-hint">(best guess is fine)</span> <span id="c2-mo" class="c-field-aside"></span></div>
-        <div class="spend-input-row">
-          <span class="spend-currency">$</span>
-          <input type="text" inputmode="numeric" id="c2-spend" class="spend-input" placeholder="" oninput="c2Spend()">
-          <span class="spend-suffix">/ year</span>
+      <div style="margin-top:24px;">
+        <div class="c-field-lbl">Monthly electricity spend <span id="c2-mo" class="c-field-aside"></span></div>
+        <!-- Step 1: broad bands -->
+        <div id="band-step1" class="band-grid"></div>
+        <!-- Step 2: narrow bands (hidden until step 1 chosen) -->
+        <div id="band-step2-wrap" style="display:none">
+          <div class="band-refine-label">Narrow it down <span id="band-refine-range" class="band-refine-range"></span></div>
+          <div id="band-step2" class="band-grid"></div>
+          <button class="band-reset-btn" onclick="bandReset()">Change range</button>
         </div>
       </div>
 
@@ -1023,6 +1069,17 @@ body{font-size:17px;}
       </div>
     </div>
 
+    <!-- Social proof strip — after taxes, before bridge -->
+    <div class="rn-proof">
+      <div class="rn-proof-label">Verified client results</div>
+      <div class="rn-proof-items">
+        <div class="rn-proof-item"><span class="rn-proof-result">49%</span><span class="rn-proof-desc">energy savings — <strong class="rn-proof-name">Arizona Four Dealership</strong></span></div>
+        <div class="rn-proof-item"><span class="rn-proof-result">24%</span><span class="rn-proof-desc">energy savings — <strong class="rn-proof-name">Edward Hospital, Illinois</strong></span></div>
+        <div class="rn-proof-item"><span class="rn-proof-result">33%</span><span class="rn-proof-desc">energy savings — <strong class="rn-proof-name">Midwest Bottling Facility</strong></span></div>
+      </div>
+      <div class="rn-proof-cred">Results independently documented across 11 countries and 6 continents.</div>
+    </div>
+
     <div class="rn-bridge">
       <p class="rn-bridge-p">We address this in two steps: cleaning the power at the source and retrofitting your equipment so it runs the way it was designed to. We almost never recommend replacement. Every other energy company leads with new equipment because that is how they make money. We lead with retrofits because the ROI is almost always better and your existing equipment is usually worth saving.</p>
       <p class="rn-bridge-p rn-bridge-bold">If you find a better solution, we will pay you a finder's fee for the introduction.</p>
@@ -1030,10 +1087,25 @@ body{font-size:17px;}
       <p class="rn-bridge-p">We do not have customers. We have clients: people under our protection and care. The 22-Minute Facility Review is where that relationship starts.</p>
     </div>
     <p class="rn-guarantee">Your session with an energy strategist is on us. If our engineer cannot find at least one of these three taxes running in your building, we cover their $150 diagnostic fee as well. You pay nothing unless you decide to move forward. No card required.</p>
-    <a href="#" class="txt-cta-btn" id="sms-link-primary">
-      <span class="txt-cta-ico">&#128241;</span>
-      Text to Confirm Your Number in 22 Minutes
+
+    <!-- Primary CTA: calendar booking -->
+    <a href="https://zcal.co/danielg/saveenergy" target="_blank" class="cta-btn rn-cal-btn" id="cal-btn-primary">
+      <span class="cta-btn-ico">&#128197;</span>
+      Book Your 22-Minute Facility Review
     </a>
+
+    <!-- Secondary CTA: SMS with preview -->
+    <div class="rn-sms-wrap">
+      <div class="rn-sms-label">Or send a text to get started now</div>
+      <div class="rn-sms-preview" id="sms-preview-card">
+        <div class="rn-sms-preview-to">To: Energy Plus <span class="rn-sms-num">(864) 777-0688</span></div>
+        <div class="rn-sms-preview-msg" id="sms-preview-msg">Loading your message...</div>
+      </div>
+      <a href="#" class="txt-cta-btn rn-sms-btn" id="sms-link-primary">
+        <span class="txt-cta-ico">&#128241;</span>
+        Send This Text
+      </a>
+    </div>
   </div>
 </div>
 
@@ -1315,6 +1387,23 @@ var ICONS = {
   laundry: '<svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="4" width="28" height="32" rx="3"/><circle cx="20" cy="24" r="10"/><circle cx="20" cy="24" r="5" stroke-width="1.25"/><line x1="10" y1="10" x2="30" y2="10"/><circle cx="14" cy="7" r="1.5" fill="currentColor" stroke="none"/></svg>',
   nego: '<svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="13" cy="13" r="4"/><circle cx="27" cy="27" r="4"/><line x1="10" y1="30" x2="30" y2="10"/><line x1="32" y1="20" x2="32" y2="30"/><polyline points="28,27 32,31 36,27"/></svg>',
   cncmachine: '<svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="24" width="32" height="12" rx="2"/><rect x="14" y="8" width="12" height="18" rx="1"/><line x1="20" y1="26" x2="20" y2="32"/><circle cx="20" cy="33" r="2.5"/><line x1="4" y1="18" x2="36" y2="18" stroke-width="1.25"/></svg>',
+};
+
+var COSTS = {
+  cold:   ["Emergency compressor repair: <strong>$25K to $75K</strong>. Catastrophic failure with product loss: <strong>$200K+</strong>.","Replace a rack refrigeration system: <strong>$15K to $40K</strong>. Condenser fan arrays: <strong>$3K to $8K each</strong>.","Product loss from a single overnight failure: <strong>$10K to $100K</strong>. After-hours repair: 2 to 3x the scheduled cost."],
+  super:  ["Replace a walk-in compressor: <strong>$10K to $15K</strong>. A rooftop unit: <strong>$10K to $45K</strong>, and most stores run several.","One refrigeration failure: <strong>$10K to $100K</strong> in lost product. After-hours repair: 2 to 3x the cost.","Full rack refrigeration system replacement: <strong>$30K to $80K</strong> per system."],
+  cstore: ["Replace a walk-in cooler condensing unit: <strong>$10K to $15K</strong>.","A single power-surge event can take out fuel pump readers, compressor motors, security cameras, and doors simultaneously. Documented loss: <strong>$33K+</strong> in one incident.","Reach-in cooler compressor replacement: <strong>$2K to $6K per unit</strong>. Multiply across a multi-site chain."],
+  hotel:  ["PTAC replacement: <strong>$1,750 to $3,200 per unit installed</strong>. At 150 rooms that is <strong>$260K to $480K</strong> for a full-property replacement.","Elevator modernization: <strong>$50K to $150K per cab</strong>. Hard starts at 6 to 8x running current are the primary cause of early motor failure.","Commercial laundry drive replacement: <strong>$8K to $20K per unit</strong>. Properties typically run 4 to 8 machines."],
+  health: ["MRI or CT offline: <strong>$10K to $15K per day</strong> in direct revenue loss. A 6 to 8-hour incident runs <strong>$50K to $75K</strong> in combined impact.","Chiller replacement: <strong>$100K to $500K</strong> depending on tonnage. Emergency repair runs 3 to 5x planned maintenance cost.","40% of hospital maintenance budgets are consumed by reactive work that clean power could have prevented."],
+  fitness:["Rooftop unit replacement: <strong>$10K to $45K per unit</strong>. Most facilities run 4 to 10 units.","Cardio equipment motor replacement: <strong>$500 to $1,500 per unit</strong>. Across 50 to 100 machines on a floor that compounds fast.","Hard starts create inrush current at 6 to 8x running current. Every start takes measurable life off every motor in the building."],
+  edu:    ["Rooftop unit replacement: <strong>$10K to $45K per unit</strong>. A campus with 20 buildings can carry 80 to 200 units.","Central chiller replacement: <strong>$50K to $300K</strong>. Most schools defer this until failure, which costs 3x a planned replacement.","Kitchen ventilation motor replacement: <strong>$2K to $6K per hood</strong>. Hard starts from dirty power are the leading cause of early failure."],
+  multi:  ["Elevator modernization: <strong>$50K to $150K per cab</strong>. A mid-rise with 3 elevators is a <strong>$150K to $450K</strong> capital event.","Booster pump replacement: <strong>$8K to $25K per pump</strong>. Failure means no water pressure above the third floor.","Corridor fan and ventilation motor replacement: <strong>$1,500 to $4,000 per unit</strong>. Properties run dozens of these continuously."],
+  qsr:    ["Walk-in condensing unit replacement: <strong>$4K to $12K</strong>. Failure during a service window means lost product and a closed unit.","Makeup air handler replacement: <strong>$8K to $25K per unit</strong>. Kitchen ventilation code compliance depends on it running.","Commercial exhaust hood motor replacement: <strong>$1,500 to $4,000</strong>. A hood shutdown triggers a health code closure in most jurisdictions."],
+  office: ["Elevator VFD and motor replacement: <strong>$15K to $60K per cab</strong>. A mid-rise with 4 elevators is a <strong>$60K to $240K</strong> capital event.","VAV air handler replacement: <strong>$15K to $50K per unit</strong>. Most office buildings run 10 to 30 of these.","Server room UPS replacement: <strong>$5K to $40K per unit</strong>. Failure means unprotected downtime for every tenant on that circuit."],
+  retail: ["Rooftop packaged HVAC replacement: <strong>$10K to $45K per unit</strong>. Big-box properties run 10 to 40 units across the roof.","Escalator drive motor overhaul or replacement: <strong>$20K to $60K per unit</strong>. Hard starts are the primary cause of early failure.","LED driver array replacement across a large retail floor: <strong>$30K to $120K</strong>. Harmonic distortion from the drivers themselves shortens their rated life."],
+  mixed:  ["Multi-tenant elevator modernization: <strong>$50K to $150K per cab</strong>. Mixed-use buildings typically carry 2 to 6 elevators.","Chiller or central HVAC plant replacement: <strong>$100K to $400K</strong>. Tenant load diversity creates harmonic interaction that standard audits miss.","Tenant-side UPS and power supply replacement: <strong>$5K to $40K per incident</strong>. Multiply across a full commercial floor."],
+  whse:   ["Conveyor belt VFD replacement: <strong>$5K to $20K per drive</strong>. A distribution center running 20 to 50 drives faces <strong>$100K to $1M</strong> in replacement exposure.","Forklift charging bank replacement: <strong>$3K to $10K per station</strong>. Dirty power accelerates battery wear and charger failure simultaneously.","Dock door drive motor replacement: <strong>$1,500 to $4,000 per door</strong>. A facility with 30 dock doors runs these continuously under hard-start stress."],
+  ind:    ["Production VFD and drive replacement: <strong>$5K to $50K per unit</strong>. A line with 10 to 20 drives faces <strong>$50K to $1M</strong> in unplanned replacement exposure.","Air compressor drive replacement: <strong>$8K to $30K per unit</strong>. Compressed air is the fourth utility in most plants, and drive failure stops production.","CNC machine power supply replacement: <strong>$3K to $15K per machine</strong>. Harmonic distortion is the leading cause of premature power supply failure in precision manufacturing."]
 };
 
 var PIPE_SVG = '<div class="s2-pipe-wrap"><svg viewBox="0 0 300 156" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:300px;display:block;margin:0 auto;">' +
@@ -1697,6 +1786,8 @@ function selectFac(el){
   el.classList.add("active");
   var key=el.getAttribute("data-key");
   state.selected=key;
+  state.spend=0;
+  _bandState={step:1,broadBand:null};
   state.hvacShare = parseFloat(el.getAttribute("data-share"))/100;
   state.harmoRate  = parseFloat(el.getAttribute("data-harmo"))/100;
   state.coolMin   = parseFloat(el.getAttribute("data-coolmin"));
@@ -1921,7 +2012,7 @@ function goStage(v){
   if(crumbs) crumbs.style.display="none";
   updateCrumbs();
   // stage content
-  if(v==="s2"){ updateClaimS2(); checkS2Ready(); }
+  if(v==="s2"){ updateClaimS2(); bandReset(); renderBands(); checkS2Ready(); }
   if(v==="s3"){ state.sqft=0; var _sq=document.getElementById("c-sqft"); if(_sq) _sq.value=""; updateClaimS3(); }
   if(isR){
     document.getElementById("calc").classList.add("revealed");
@@ -1990,6 +2081,141 @@ function showResult(){
   }, twDuration);
 }
 
+// ── TWO-STEP BAND SELECTOR ────────────────────────────────────────────────
+function fmtBand(n){
+  if(n>=1000000) return '$'+(n/1000000).toFixed(1).replace(/\.0$/,'')+'M';
+  if(n>=1000) return '$'+Math.round(n/1000)+'K';
+  return '$'+n;
+}
+function snapClean(n){
+  if(n>=1000000) return Math.round(n/100000)*100000;
+  if(n>=100000)  return Math.round(n/10000)*10000;
+  if(n>=10000)   return Math.round(n/1000)*1000;
+  if(n>=2000)    return Math.round(n/500)*500;
+  return Math.round(n/100)*100;
+}
+function makeBands(min,max,maxCount){
+  var spread=max-min;
+  // For tight ranges, use linear $1K steps instead of logarithmic
+  if(spread<=maxCount*1000){
+    var step=1000;
+    var bands=[];
+    for(var lo=min;lo<max;lo+=step){
+      var hi=Math.min(lo+step,max);
+      if(hi-lo>=1000) bands.push({lo:lo,hi:hi,mid:Math.round((lo+hi)/2)});
+    }
+    return bands.length?bands:[{lo:min,hi:max,mid:Math.round((min+max)/2)}];
+  }
+  // Logarithmic spacing for wider ranges
+  var logMin=Math.log10(Math.max(min,1)), logMax=Math.log10(Math.max(max,1));
+  var raw=[];
+  for(var i=0;i<=maxCount;i++){
+    raw.push(snapClean(Math.round(Math.pow(10, logMin + i*(logMax-logMin)/maxCount))));
+  }
+  // Remove duplicates and bands narrower than $1K
+  var bands=[];
+  for(var j=0;j<raw.length-1;j++){
+    if(raw[j+1]-raw[j]>=1000){
+      bands.push({lo:raw[j], hi:raw[j+1], mid:Math.round((raw[j]+raw[j+1])/2)});
+    }
+  }
+  if(!bands.length) bands.push({lo:min,hi:max,mid:Math.round((min+max)/2)});
+  bands[bands.length-1].hi=max;
+  bands[bands.length-1].mid=Math.round((bands[bands.length-1].lo+max)/2);
+  return bands;
+}
+var _bandState={step:1, broadBand:null};
+function renderBands(){
+  var fEl=document.querySelector('.fac-opt[data-key="'+state.selected+'"]');
+  if(!fEl) return;
+  var annMin=parseFloat(fEl.getAttribute('data-min')), annMax=parseFloat(fEl.getAttribute('data-max'));
+  var moMin=Math.round(annMin/12), moMax=Math.round(annMax/12);
+  var broad=makeBands(moMin, moMax, 5);
+  var g1=document.getElementById('band-step1'); if(!g1) return;
+  g1.innerHTML='';
+  broad.forEach(function(b,i){
+    var btn=document.createElement('button');
+    btn.className='band-btn';
+    btn.type='button';
+    var isFirst=(i===0), isLast=(i===broad.length-1);
+    var label=isFirst?'Under '+fmtBand(b.hi)+'/mo':
+              isLast?'Over '+fmtBand(b.lo)+'/mo':
+              fmtBand(b.lo)+' to '+fmtBand(b.hi)+'/mo';
+    btn.innerHTML='<span class="band-btn-range">'+label+'</span><span class="band-btn-arrow">›</span>';
+    btn.addEventListener('click',function(){ bandStep1Select(b, label, btn); });
+    g1.appendChild(btn);
+  });
+  // Reset step 2
+  var wrap=document.getElementById('band-step2-wrap');
+  if(wrap) wrap.style.display='none';
+  g1.classList.remove('band-step1-done');
+}
+function bandStep1Select(b, label, selectedBtn){
+  _bandState.step=2; _bandState.broadBand=b;
+  // Mark step 1 as done — grays out, shrinks
+  var g1=document.getElementById('band-step1');
+  if(g1) g1.classList.add('band-step1-done');
+  // Highlight selected broad band
+  document.querySelectorAll('#band-step1 .band-btn').forEach(function(btn){
+    btn.classList.toggle('active', btn===selectedBtn);
+  });
+  // Build narrow bands — makeBands handles deduplication and min $1K width
+  var narrow=makeBands(b.lo, b.hi, 5);
+  var g2=document.getElementById('band-step2'); if(!g2) return;
+  g2.innerHTML='';
+  narrow.forEach(function(nb, ni){
+    var btn=document.createElement('button');
+    btn.className='band-btn';
+    btn.type='button';
+    var nlabel=fmtBand(nb.lo)+' to '+fmtBand(nb.hi)+'/mo';
+    btn.innerHTML='<span class="band-btn-range">'+nlabel+'</span><span class="band-btn-arrow">✓</span>';
+    btn.addEventListener('click',function(){ bandStep2Select(nb, nlabel, btn); });
+    g2.appendChild(btn);
+  });
+  var wrap=document.getElementById('band-step2-wrap');
+  if(wrap){
+    wrap.style.display='';
+    var rr=document.getElementById('band-refine-range');
+    if(rr) rr.textContent='within '+label;
+  }
+}
+function bandStep2Select(nb, label, selectedBtn){
+  var annualMid=nb.mid*12;
+  state.spend=annualMid;
+  document.querySelectorAll('#band-step2 .band-btn').forEach(function(btn){
+    btn.classList.toggle('active', btn===selectedBtn);
+  });
+  var mo=document.getElementById('c2-mo');
+  if(mo) mo.textContent=fmtBand(nb.lo)+' to '+fmtBand(nb.hi)+'/mo';
+  syncSpendField();
+  render();
+  checkS2Ready();
+}
+function bandReset(){
+  _bandState.step=1; _bandState.broadBand=null; state.spend=0;
+  var g1=document.getElementById('band-step1');
+  if(g1) g1.classList.remove('band-step1-done');
+  document.getElementById('band-step2-wrap').style.display='none';
+  document.querySelectorAll('#band-step1 .band-btn').forEach(function(b){ b.classList.remove('active'); });
+  var mo=document.getElementById('c2-mo'); if(mo) mo.textContent='';
+  syncSpendField(); checkS2Ready();
+}
+function c2Spend(){ /* bands own spend now */ }
+function c2Rng(){ /* bands own spend now */ }
+function c2State(){
+  var sel=document.getElementById("c2-state");
+  var main=document.getElementById("state-select");
+  if(sel&&main){ main.value=sel.value; onStateChange(); }
+  var sp=document.getElementById("c2-split");
+  if(sp) sp.textContent=state.stateCool?Math.round(state.stateCool)+"% cooling":"";
+  checkS2Ready();
+}
+function renderChips(){ /* replaced by band selector */ }
+function buildChips(){ return []; }
+function niceRound(v){ return v; }
+function setSpend(v){ state.spend=v; syncSpendField(); render(); checkS2Ready(); }
+function updateChipActive(){ /* no-op */ }
+// ─────────────────────────────────────────────────────────────────────────
 function checkS2Ready(){
   var stateVal=(document.getElementById("c2-state")||{}).value||"";
   var hasState=stateVal.length>0;
@@ -2003,67 +2229,6 @@ function checkS2Ready(){
     btn.style.cursor=ready?"pointer":"not-allowed";
     btn.style.pointerEvents=ready?"":"none";
   }
-}
-function c2Spend(){
-  var el=document.getElementById("c2-spend");
-  var v=parseInt(el.value.replace(/[^0-9]/g,""))||0;
-  state.spend=v; el.value=v?v.toLocaleString("en-US"):"";
-  var rng=document.getElementById("c2-rng"); if(rng)rng.value=v;
-  var mo=document.getElementById("c2-mo"); if(mo)mo.textContent=v?"$"+Math.round(v/12).toLocaleString("en-US")+"/mo":"";
-  syncSpendField();
-  checkS2Ready();
-}
-function c2Rng(){
-  var v=parseFloat(document.getElementById("c2-rng").value)||0;
-  state.spend=v;
-  var el=document.getElementById("c2-spend"); if(el)el.value=v.toLocaleString("en-US");
-  var mo=document.getElementById("c2-mo"); if(mo)mo.textContent="$"+Math.round(v/12).toLocaleString("en-US")+"/mo";
-  syncSpendField();
-  checkS2Ready();
-}
-function c2State(){
-  var sel=document.getElementById("c2-state");
-  var main=document.getElementById("state-select");
-  if(sel&&main){ main.value=sel.value; onStateChange(); }
-  var sp=document.getElementById("c2-split");
-  if(sp) sp.textContent=state.stateCool?Math.round(state.stateCool)+"% cooling":"";
-  checkS2Ready();
-}
-function niceRound(v){
-  if(v<50000) return Math.round(v/5000)*5000;
-  if(v<200000) return Math.round(v/25000)*25000;
-  if(v<1000000) return Math.round(v/100000)*100000;
-  if(v<5000000) return Math.round(v/500000)*500000;
-  return Math.round(v/1000000)*1000000;
-}
-function buildChips(min,max){
-  var lmin=Math.log10(min),lmax=Math.log10(max),arr=[];
-  for(var i=0;i<=5;i++) arr.push(niceRound(Math.pow(10,lmin+i*(lmax-lmin)/5)));
-  return arr.filter(function(v,i,a){return a.indexOf(v)===i;});
-}
-function setSpend(v){
-  state.spend=v;
-  var el=document.getElementById("c2-spend");
-  if(el) el.value=v.toLocaleString("en-US");
-  var mo=document.getElementById("c2-mo");
-  if(mo) mo.textContent="$"+Math.round(v/12).toLocaleString("en-US")+"/mo";
-  syncSpendField(); updateChipActive(); render();
-  checkS2Ready();
-}
-function updateChipActive(){
-  document.querySelectorAll(".c-chip").forEach(function(b){
-    b.classList.toggle("active",parseInt(b.getAttribute("data-v"))===state.spend);
-  });
-}
-function renderChips(){
-  var fEl=document.querySelector('.fac-opt[data-key="'+state.selected+'"]');
-  if(!fEl) return;
-  var min=parseFloat(fEl.getAttribute("data-min")),max=parseFloat(fEl.getAttribute("data-max"));
-  var chips=buildChips(min,max);
-  var ct=document.getElementById("c2-chips"); if(!ct) return;
-  ct.innerHTML=chips.map(function(v){
-    return '<button class="c-chip'+(state.spend===v?" active":"")+'" data-v="'+v+'" onclick="setSpend('+v+')" type="button">'+fmtK(v)+'</button>';
-  }).join("");
 }
 function setElecHeat(v){
   state.hasElecHeat=v;
@@ -2187,9 +2352,9 @@ function updateClaimS2(){
   var names=eq.map(function(e){return e.name.toLowerCase();}).join(", ");
   var b1="<p class='c-copy'>What the DOE number does not explain is where the waste comes from. <strong>In "+ins.cat+", 80% of electrical distortion is generated inside the building</strong>, generated by the equipment already running in it.</p>";
   var namesBold=eq.map(function(e){return "<strong>"+e.name.toLowerCase()+"</strong>";}).join(", ");
-  var b2a="<p class='c-copy'>Your "+namesBold+" all generate harmonic distortion as a byproduct of how they operate. The more updated your facility, the more distortion it produces. Nobody disclosed that when you upgraded.</p><p class='c-copy'>That distortion feeds back into your building\u2019s wiring and does two things your utility company does not explain on your bill.</p>";
-  var b2c="<p class='c-copy'>Think of clean power as water flowing smoothly through a pipe. When air bubbles get in, the pipe still runs, but the meter counts the bubbles as flow. You pay for water that never came out the other end. Electrical distortion works the same way. Your meter reads it as real consumption. You are billed for kilowatt hours that never powered a single device.</p>";
-  var b3="<p class='c-copy'>The distorted current that does reach your equipment runs hotter than it was designed to handle. Every cycle does more damage than it should. Equipment that should last fifteen years starts failing in eight.</p>";
+  var b2a="<p class='c-copy'>Your "+namesBold+" generate harmonic distortion as a normal byproduct of operation. The more modern your facility, the more distortion it produces. Nobody disclosed that when you upgraded. That distortion feeds back into your building\u2019s wiring and does two things your utility company does not explain on your bill.</p>";
+  var b2c="<p class='c-copy'>Think of clean power as water in a pipe. When air bubbles get in, the pipe still runs, but the meter counts the bubbles as flow. You pay for water that never did any work. The current reaches your equipment, but instead of performing useful work it becomes heat, vibration, and stress on every motor and circuit it touches. Your meter bills you for all of it.</p>";
+  var b3="<p class='c-copy'>The distorted current that does reach your equipment runs hotter than designed. Equipment that should last fifteen years starts failing in eight.</p>";
   var floorPct=parseFloat(ins.range)||15;
   var inflated=Math.round(100*(1+floorPct/100));
   var illus=buildIllustration(eq,inflated);
@@ -2229,9 +2394,17 @@ function updateClaimS3(){
     ?"Commercial electricity in <strong>"+_s3sn+"</strong> has risen roughly <strong>"+_s3ed.range+"</strong> per year. Experts believe rates will rise much faster this decade due to the cost of modernizing the grid — which would make these figures conservative. The number you're about to see is based on today's rates."
     :"Commercial electricity costs have risen roughly 2 to 3% per year nationally. Experts believe rates will rise much faster this decade due to the cost of modernizing the grid — which would make these figures conservative. The number you're about to see is based on today's rates.";
 
-  // Equipment risk copy — pull first two bullets, strip dollar figures for teaser
+  // Equipment risk copy
   var assetTitle=b?b.assetTitle:"your critical equipment";
   var equipText="<strong>"+assetTitle.charAt(0).toUpperCase()+assetTitle.slice(1)+"</strong> are your highest-risk assets. Electrical distortion runs them hotter than they were designed to handle. Equipment that should last fifteen years starts failing in eight, and those replacement costs never appear on your energy bill.";
+  // Cost facts
+  var costFacts=COSTS[state.selected]||[];
+  var costsHtml="";
+  if(costFacts.length){
+    costsHtml="<ul class='s3-cost-list'>";
+    costFacts.forEach(function(f){ costsHtml+="<li class='s3-cost-item'>"+f+"</li>"; });
+    costsHtml+="</ul>";
+  }
 
   // Deduction teaser — no dollar figure yet, sqft input reveals it below
   var dedText="Most commercial operators have never heard of Section 179D. It is one of the largest and most underused incentives in commercial real estate, specifically a federal tax deduction tied directly to energy efficiency. Enter your square footage below to see what your building likely qualifies for.";
@@ -2240,7 +2413,7 @@ function updateClaimS3(){
   h+="<div class='s3-known-hd-main'>Three things worth knowing about your "+noun+"</div>";
   h+="<div class='s3-known-wrap'>";
   h+="<div class='s3-known-item'><div class='s3-known-num'>01</div><div class='s3-known-body'><div class='s3-known-label'>Your Future Bill</div><div class='s3-known-text'>"+billText+"</div></div></div>";
-  h+="<div class='s3-known-item'><div class='s3-known-num'>02</div><div class='s3-known-body'><div class='s3-known-label'>Your Equipment</div><div class='s3-known-text'>"+equipText+"</div></div></div>";
+  h+="<div class='s3-known-item'><div class='s3-known-num'>02</div><div class='s3-known-body'><div class='s3-known-label'>Your Equipment</div><div class='s3-known-text'>"+equipText+"</div>"+costsHtml+"</div></div>";
   h+="<div class='s3-known-item'><div class='s3-known-num'>03</div><div class='s3-known-body'><div class='s3-known-label'>Your Deductions</div><div class='s3-known-text'>"+dedText+"</div></div></div>";
   h+="</div>";
 
@@ -2391,12 +2564,15 @@ function buildSmsLinks(){
 function buildPrimaryCta(){
   if(!state.selected||!INSIGHTS[state.selected]) return;
   var ins=INSIGHTS[state.selected];
-  var spendAmt=state.spend>0?(" spending about "+fmtK(state.spend)+" per year"):"";
+  var noun=ins.noun; // "grocery store", "school", "hospitality property" etc
+  var spendAmt=state.spend>0?(", spending about "+fmtK(state.spend)+" per year on electricity,"):"";
   var stateName=(document.getElementById("state-select")||{}).value||"";
   var stateStr=stateName?" in "+stateName:"";
-  var msg="Hi \u2014 I just ran the Energy Plus calculator for my "+ins.label+spendAmt+stateStr+". I\u2019d like to confirm my number in 22 minutes.";
+  var msg="Hi, I just ran the Energy Plus calculator for my "+noun+stateStr+spendAmt+" and want to know how to verify these numbers for my facility.";
   var el=document.getElementById("sms-link-primary");
   if(el) el.href="sms:+18647770688?body="+encodeURIComponent(msg);
+  var preview=document.getElementById("sms-preview-msg");
+  if(preview) preview.textContent=msg;
 }
 function updateCostOfWaiting(){
   var el=document.getElementById("rn-trans-hd");
