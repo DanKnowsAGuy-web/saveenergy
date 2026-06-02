@@ -649,12 +649,20 @@ body{font-family:'Barlow',sans-serif;background:var(--paper);color:var(--ink);fo
 .band-reset-btn:hover{color:rgba(255,255,255,0.65);}
 /* ── SOCIAL PROOF STRIP ── */
 .rn-proof{margin:28px 0 24px;padding:22px 0;border-top:1px solid rgba(255,255,255,0.08);}
-.rn-proof-label{font-family:'Barlow',sans-serif;font-size:11px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:rgba(255,255,255,0.35);margin-bottom:16px;}
+.rn-proof-label{font-family:'Barlow',sans-serif;font-size:13px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:rgba(255,255,255,0.55);margin-bottom:16px;}
 .rn-proof-items{display:flex;flex-direction:column;gap:10px;margin-bottom:14px;}
 .rn-proof-item{display:flex;align-items:baseline;gap:12px;}
 .rn-proof-result{font-family:'Barlow',sans-serif;font-size:clamp(22px,3.5vw,28px);font-weight:700;color:var(--copper-pale);flex-shrink:0;font-variant-numeric:tabular-nums;line-height:1;}
 .rn-proof-desc{font-size:clamp(14px,1.8vw,15px);color:rgba(255,255,255,0.6);line-height:1.4;}
 .rn-proof-name{font-weight:700;color:rgba(255,255,255,0.88);font-size:clamp(15px,2vw,16px);}
+.rn-proof-item-featured{flex-direction:column;align-items:stretch;}
+.rn-proof-featured{background:rgba(184,115,51,0.08);border:1px solid rgba(184,115,51,0.2);padding:14px 16px;}
+.rn-proof-featured-header{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;margin-bottom:8px;}
+.rn-proof-attr{font-size:12px;color:rgba(255,255,255,0.35);font-style:italic;}
+.rn-proof-featured-stat{font-size:clamp(14px,2vw,15px);color:rgba(255,255,255,0.72);line-height:1.6;margin-bottom:6px;}
+.rn-proof-featured-dollars{color:rgba(255,255,255,0.55);}
+.rn-proof-featured-now{font-weight:700;color:var(--copper-pale);}
+.rn-proof-featured-close{font-size:13px;font-weight:700;letter-spacing:0.04em;text-transform:uppercase;color:var(--copper);}
 .rn-proof-cred{font-size:13px;color:rgba(255,255,255,0.32);font-style:italic;letter-spacing:0.01em;}
 /* ── CALENDAR PRIMARY BUTTON ── */
 .rn-cal-btn{display:flex;align-items:center;justify-content:center;gap:12px;background:var(--copper);color:#fff;font-family:'Barlow',sans-serif;font-size:clamp(16px,2.2vw,18px);font-weight:700;letter-spacing:0.02em;padding:20px 28px;text-decoration:none;transition:background 0.18s;cursor:pointer;width:100%;margin-bottom:0;}
@@ -1056,28 +1064,33 @@ body{font-size:17px;}
       <div class="rn-tax-list">
         <div class="rn-tax-item">
           <div><span class="rn-tax-num">01</span><span class="rn-tax-label">You Are Paying for Power You Never Used</span></div>
-          <p class="rn-tax-text">Electrical distortion registers on your meter as real kilowatt hours. Every billing cycle you pay for power that never reached a single device in your building.</p>
+          <p class="rn-tax-text">Electrical distortion registers on your meter as real kilowatt hours. Every billing cycle you pay for power that never reached a single device in your building. Every month you get a bill for electricity that entered your building and did nothing.</p>
         </div>
         <div class="rn-tax-item">
           <div><span class="rn-tax-num">02</span><span class="rn-tax-label">You Are Paying Twice for Every Piece of Equipment</span></div>
-          <p class="rn-tax-text">The distorted current that does reach your equipment runs hotter and cycles harder than it should. You bought the equipment once. Dirty power makes you pay for it again in maintenance, and again when it fails early.</p>
+          <p class="rn-tax-text">The distorted current that does reach your equipment runs hotter and cycles harder than it should. You bought the equipment once. Dirty power makes you pay for it again in maintenance, and again when it fails early. Every service call that feels like bad luck is, in most cases, a predictable outcome of power quality nobody measured.</p>
         </div>
         <div class="rn-tax-item">
           <div><span class="rn-tax-num">03</span><span class="rn-tax-label">You Are Replacing Equipment Years Before You Should</span></div>
-          <p class="rn-tax-text">Equipment that should run fifteen years fails in eight. That cost does not show up on your energy bill. It shows up as a capital expense that nobody in your organization connects back to power quality. Until now.</p>
+          <p class="rn-tax-text">Equipment that should run fifteen years fails in eight. That cost does not show up on your energy bill. It shows up as a capital expense that nobody in your organization connects back to power quality. Until now. Somewhere in your capital budget is a replacement that was supposed to be 5 to 10 years away. It is not.</p>
         </div>
       </div>
     </div>
 
     <!-- Social proof strip — after taxes, before bridge -->
     <div class="rn-proof">
-      <div class="rn-proof-label">Verified client results</div>
+      <div class="rn-proof-label">Verified Client Results</div>
       <div class="rn-proof-items">
-        <div class="rn-proof-item"><span class="rn-proof-result">49%</span><span class="rn-proof-desc">energy savings — <strong class="rn-proof-name">Arizona Four Dealership</strong></span></div>
-        <div class="rn-proof-item"><span class="rn-proof-result">24%</span><span class="rn-proof-desc">energy savings — <strong class="rn-proof-name">Edward Hospital, Illinois</strong></span></div>
+        <div class="rn-proof-item"><span class="rn-proof-result">49%</span><span class="rn-proof-desc">energy savings — <strong class="rn-proof-name">Arizona Ford Dealership</strong></span></div>
         <div class="rn-proof-item"><span class="rn-proof-result">33%</span><span class="rn-proof-desc">energy savings — <strong class="rn-proof-name">Midwest Bottling Facility</strong></span></div>
+        <div class="rn-proof-item rn-proof-item-featured">
+          <div class="rn-proof-featured">
+            <div class="rn-proof-featured-header"><strong class="rn-proof-name">Edward Hospital, Illinois</strong> <span class="rn-proof-attr">360 Energy Solutions documented</span></div>
+            <div class="rn-proof-featured-stat">1,387,172 kWh of verified annual savings. <span class="rn-proof-featured-dollars">$112,360 in annual energy savings when installed in 2012.</span> Today saving approximately <span class="rn-proof-featured-now">$180,000 per year.</span></div>
+            <div class="rn-proof-featured-close">Same work. Compounding returns.</div>
+          </div>
+        </div>
       </div>
-      <div class="rn-proof-cred">Results independently documented across 11 countries and 6 continents.</div>
     </div>
 
     <div class="rn-bridge">
@@ -1103,7 +1116,7 @@ body{font-size:17px;}
       </div>
       <a href="#" class="txt-cta-btn rn-sms-btn" id="sms-link-primary">
         <span class="txt-cta-ico">&#128241;</span>
-        Send This Text
+        Request Your Video Walkthrough
       </a>
     </div>
   </div>
@@ -2564,11 +2577,11 @@ function buildSmsLinks(){
 function buildPrimaryCta(){
   if(!state.selected||!INSIGHTS[state.selected]) return;
   var ins=INSIGHTS[state.selected];
-  var noun=ins.noun; // "grocery store", "school", "hospitality property" etc
+  var noun=ins.noun;
   var spendAmt=state.spend>0?(", spending about "+fmtK(state.spend)+" per year on electricity,"):"";
   var stateName=(document.getElementById("state-select")||{}).value||"";
   var stateStr=stateName?" in "+stateName:"";
-  var msg="Hi, I just ran the Energy Plus calculator for my "+noun+stateStr+spendAmt+" and want to know how to verify these numbers for my facility.";
+  var msg="Hi, I have a "+noun+stateStr+spendAmt+" and I'd like to request a video walkthrough showing how you can help a facility like mine dial in its real numbers.";
   var el=document.getElementById("sms-link-primary");
   if(el) el.href="sms:+18647770688?body="+encodeURIComponent(msg);
   var preview=document.getElementById("sms-preview-msg");
