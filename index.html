@@ -354,6 +354,7 @@ body{font-family:'Barlow',sans-serif;background:var(--paper);color:var(--ink);fo
 /* Spend and state field labels in stage 2 */
 .calc.c-mode-dark .field-label{color:rgba(255,255,255,0.72);}
 .calc.c-mode-dark .c-field-lbl{color:rgba(255,255,255,0.88);font-size:14px;}
+.c-field-hint{font-size:12px;font-weight:400;color:rgba(255,255,255,0.38);letter-spacing:0;text-transform:none;font-style:italic;}
 .calc.c-mode-dark .c-field-aside{color:#fff;font-size:15px;font-family:'Barlow',sans-serif;font-weight:500;letter-spacing:0;text-transform:none;}
 .calc.c-mode-dark .field-label .step{color:var(--copper);}
 .calc.c-mode-dark .spend-input,.calc.c-mode-dark .sel-wrap select{background:rgba(255,255,255,0.06);color:#fff;border-color:rgba(255,255,255,0.15);}
@@ -558,7 +559,19 @@ body{font-family:'Barlow',sans-serif;background:var(--paper);color:var(--ink);fo
 .calc-head{position:relative;}
 #c-s1{position:relative;}
 
-/* ── COST-OF-WAITING INLINE RANGE ── */
+/* ── RESULT BOX — tinted container holding preamble + numbers ── */
+.result-box{
+  background:rgba(184,115,51,0.07);
+  border:1px solid rgba(184,115,51,0.18);
+  border-radius:4px;
+  padding:22px 28px 24px;
+  margin-bottom:0;
+}
+.result-box .result-preamble{margin-bottom:10px;}
+/* rn-cred restyled as regular body copy — same size and weight as bridge paragraphs */
+.rn-cred{font-size:clamp(16px,2.2vw,18px);color:rgba(255,255,255,0.72);line-height:1.75;margin-bottom:22px;font-style:normal;font-weight:400;}
+/* finder's fee line — bold standalone paragraph */
+.rn-bridge-bold{font-weight:700;color:#fff;font-size:clamp(17px,2.4vw,19px);}
 .rn-waiting-body{
   font-size:clamp(14px,2vw,16px);
   color:rgba(255,255,255,0.72);
@@ -939,7 +952,7 @@ body{font-size:17px;}
         <div class="sel-wrap"><select id="c2-state" onchange="c2State()"></select></div>
       </div>
       <div style="margin-top:22px;">
-        <div class="c-field-lbl">Annual electricity spend <span id="c2-mo" class="c-field-aside"></span></div>
+        <div class="c-field-lbl">Annual electricity spend <span class="c-field-hint">(best guess is fine)</span> <span id="c2-mo" class="c-field-aside"></span></div>
         <div class="spend-input-row">
           <span class="spend-currency">$</span>
           <input type="text" inputmode="numeric" id="c2-spend" class="spend-input" placeholder="" oninput="c2Spend()">
@@ -949,7 +962,7 @@ body{font-size:17px;}
 
       <div class="c-nav-row">
         <button class="c-back-vis" onclick="goStage('s1')">Back</button>
-        <button class="c-next-btn c-nav-next" onclick="goStage('s3')">Next</button>
+        <button class="c-next-btn c-nav-next" id="s2-next-btn" disabled onclick="goStage('s3')" style="opacity:0.38;cursor:not-allowed;pointer-events:none;">Next</button>
       </div>
     </div>
 
@@ -972,26 +985,28 @@ body{font-size:17px;}
   </div>
 
 <div class="result gated" id="result-block">
-  <div class="result-inner">
+  <div class="result-box">
     <div class="result-preamble" id="result-preamble"></div>
-    <div class="result-range">
-      <span class="result-num" id="r-floor">$0</span>
-      <span class="result-to">to</span>
-      <span class="result-num" id="r-ceil">$0</span>
-    </div>
-    <div class="result-pcts" id="r-pcts">0% to 0% of your annual bill</div>
-    <div class="cum-row">
-      <div class="cum-cell"><div class="cum-val" id="cum-5yr">$0</div><div class="cum-lab">5-year range</div></div>
-      <div class="cum-cell"><div class="cum-val" id="cum-10yr">$0</div><div class="cum-lab">10-year range</div></div>
+    <div class="result-inner">
+      <div class="result-range">
+        <span class="result-num" id="r-floor">$0</span>
+        <span class="result-to">to</span>
+        <span class="result-num" id="r-ceil">$0</span>
+      </div>
+      <div class="result-pcts" id="r-pcts">0% to 0% of your annual bill</div>
+      <div class="cum-row">
+        <div class="cum-cell"><div class="cum-val" id="cum-5yr">$0</div><div class="cum-lab">5-year range</div></div>
+        <div class="cum-cell"><div class="cum-val" id="cum-10yr">$0</div><div class="cum-lab">10-year range</div></div>
+      </div>
     </div>
   </div>
 </div>
 <div class="result-narrative" id="result-narrative" style="display:none">
   <div class="rn-inner">
-    <p class="rn-cred">Independently verified. Built from DOE consumption data and the information you just provided. A 22-Minute Facility Review can confirm your exact number &#8212; or open the assumptions panel below and adjust the inputs yourself right now.</p>
+    <p class="rn-cred">Independently verified. Built from DOE consumption data and the information you just provided. A 22-Minute Facility Review can confirm your exact number, or open the assumptions panel below and adjust the inputs yourself right now.</p>
     <div class="rn-trans-hd" id="rn-trans-hd">Based on your inputs, that is leaving your building this month alone.</div>
     <div class="rn-taxes">
-      <div class="rn-tax-hd">You Are Not Paying One Electricity Bill. You Are Paying Three — and Only One of Them Shows Up on Your Statement.</div>
+      <div class="rn-tax-hd">You Are Not Paying One Electricity Bill. You Are Paying Three. Only One of Them Shows Up on Your Statement.</div>
       <div class="rn-tax-list">
         <div class="rn-tax-item">
           <div><span class="rn-tax-num">01</span><span class="rn-tax-label">You Are Paying for Power You Never Used</span></div>
@@ -999,21 +1014,22 @@ body{font-size:17px;}
         </div>
         <div class="rn-tax-item">
           <div><span class="rn-tax-num">02</span><span class="rn-tax-label">You Are Paying Twice for Every Piece of Equipment</span></div>
-          <p class="rn-tax-text">The distorted current that does reach your equipment runs hotter and cycles harder than it should. You bought the equipment once. Dirty power makes you pay for it again in maintenance — and again when it fails early.</p>
+          <p class="rn-tax-text">The distorted current that does reach your equipment runs hotter and cycles harder than it should. You bought the equipment once. Dirty power makes you pay for it again in maintenance, and again when it fails early.</p>
         </div>
         <div class="rn-tax-item">
           <div><span class="rn-tax-num">03</span><span class="rn-tax-label">You Are Replacing Equipment Years Before You Should</span></div>
-          <p class="rn-tax-text">Equipment that should run fifteen years fails in eight. That cost does not show up on your energy bill — it shows up as a capital expense that nobody in your organization connects back to power quality. Until now.</p>
+          <p class="rn-tax-text">Equipment that should run fifteen years fails in eight. That cost does not show up on your energy bill. It shows up as a capital expense that nobody in your organization connects back to power quality. Until now.</p>
         </div>
       </div>
     </div>
 
     <div class="rn-bridge">
-      <p class="rn-bridge-p">We address this in two steps: cleaning the power at the source and retrofitting your equipment so it runs the way it was designed to. We almost never recommend replacement. Every other energy company leads with new equipment because that is how they make money. We lead with retrofits because the ROI is almost always better and your existing equipment is usually worth saving. If you find a better solution, we will pay you a finder's fee for the introduction.</p>
-      <p class="rn-bridge-p">Our process is designed to ISO standards and is fully third-party auditable. We are required to recommend the highest ROI solution for your facility. That is not a marketing claim. It is a structural commitment.</p>
+      <p class="rn-bridge-p">We address this in two steps: cleaning the power at the source and retrofitting your equipment so it runs the way it was designed to. We almost never recommend replacement. Every other energy company leads with new equipment because that is how they make money. We lead with retrofits because the ROI is almost always better and your existing equipment is usually worth saving.</p>
+      <p class="rn-bridge-p rn-bridge-bold">If you find a better solution, we will pay you a finder's fee for the introduction.</p>
+      <p class="rn-bridge-p">Our process is designed to ISO standards and is fully third-party auditable. We are required by our own process to recommend the highest ROI solution on our platform for your facility. Not because it sounds good. Because our process does not allow anything else.</p>
       <p class="rn-bridge-p">We do not have customers. We have clients: people under our protection and care. The 22-Minute Facility Review is where that relationship starts.</p>
     </div>
-    <p class="rn-guarantee">The session is free. No card required. If we do not find at least one of these three taxes running in your building, we cover the engineer's $150 consultation fee ourselves. You pay nothing unless you decide to move forward.</p>
+    <p class="rn-guarantee">Your session with an energy strategist is on us. If our engineer cannot find at least one of these three taxes running in your building, we cover their $150 diagnostic fee as well. You pay nothing unless you decide to move forward. No card required.</p>
     <a href="#" class="txt-cta-btn" id="sms-link-primary">
       <span class="txt-cta-ico">&#128241;</span>
       Text to Confirm Your Number in 22 Minutes
@@ -1094,7 +1110,7 @@ body{font-size:17px;}
         <input type="text" inputmode="numeric" id="spend" class="spend-input" value="250,000" oninput="onSpendInput()">
         <span class="spend-suffix">per year</span>
       </div>
-      <input type="range" id="spend-slider" class="rng" min="24000" max="4000000" step="5000" value="250000" oninput="onSliderInput()">
+      <input type="range" id="spend-slider" class="rng" min="24000" max="4000000" step="5000" value="0" oninput="onSliderInput()">
       <div class="slider-ends"><span id="slider-lo">$24K</span><span id="slider-hi">$4M</span></div>
       <div class="field-hint">Typical range shown for this facility type. You can type any number above the slider for an outlier site.</div>
     </div>
@@ -1119,7 +1135,7 @@ body{font-size:17px;}
       <div class="stream-section" id="ss-nego" style="display:none">
         <div class="ss-hd">
           <h3 class="ss-name">Energy Rate Negotiation <span class="lock-tag">Deregulated market</span></h3>
-          <p class="ss-desc">Your state has a deregulated electricity market — meaning you can shop your supply rate. We negotiate directly with generators on your behalf to lower the supply portion of your bill without changing your utility relationship.</p>
+          <p class="ss-desc">Your state has a deregulated electricity market, meaning you can shop your supply rate. We negotiate directly with generators on your behalf to lower the supply portion of your bill without changing your utility relationship.</p>
           <button class="stream-vid-link" onclick="openVideo('nego')">See how we address this</button>
         </div>
         <div class="ss-row">
@@ -1131,7 +1147,7 @@ body{font-size:17px;}
       <div class="stream-section" id="ss-harmo">
         <div class="ss-hd">
           <h3 class="ss-name">Power Harmonization <span class="lock-tag">Always included</span></h3>
-          <p class="ss-desc">Cleans the electrical noise that quietly inflates your bill on every circuit, every hour &#8212; while also damaging your equipment. Independently verified across facility types.</p>
+          <p class="ss-desc">Cleans the electrical noise that quietly inflates your bill on every circuit, every hour, while also damaging your equipment. Independently verified across facility types.</p>
           <button class="stream-vid-link" onclick="openVideo('harmo')">See how we address this</button>
         </div>
         <div class="ss-row">
@@ -1143,7 +1159,7 @@ body{font-size:17px;}
       <div class="stream-section" id="ss-cool">
         <div class="ss-hd">
           <h3 class="ss-name">Cooling &amp; Refrigeration</h3>
-          <p class="ss-desc">Your single largest energy load. We optimize the equipment you have and, where it makes sense, upgrade it &#8212; targeting inefficiency before it shortens equipment life.</p>
+          <p class="ss-desc">Your single largest energy load. We optimize the equipment you have and, where it makes sense, upgrade it, targeting inefficiency before it shortens equipment life.</p>
           <button class="stream-vid-link" onclick="openVideo('cool')">See how we address this</button>
         </div>
         <div class="ss-row">
@@ -1238,7 +1254,7 @@ body{font-size:17px;}
 
 <div class="calc-foot gated">
     <span class="tag">About this estimate</span>
-    <p>This estimator returns a conservative range, not a projection of peak performance. Savings across each program are achieved through a combination of retrofits and replacements — whatever delivers the best return on investment for your specific facility. The approach is performance-based, not vendor-driven.</p>
+    <p>This estimator returns a conservative range, not a projection of peak performance. Savings across each program are achieved through a combination of retrofits and replacements, whichever delivers the best return on investment for your specific facility. The approach is performance-based, not vendor-driven.</p>
     <p>Actual verified savings depend on a site assessment of equipment, load profile, rate structure, and condition. Energy Plus is an Independent Energy Solutions Partner with no vendor incentive to inflate these figures. Every assumption is editable above.</p>
   </div>
 
@@ -1497,8 +1513,8 @@ var HEAT = { heatpump:0.50, resistance:0.80 };
 
 var state = {
   selected:false, hasElecHeat:false, sqft:0, hasAnimated:false,
-  spend:250000, hvacShare:0.40, harmoRate:0.09,
-  stateCool:65, coolMin:0, coolShare:0.65,
+  spend:0, hvacShare:0.40, harmoRate:0.09,
+  stateCool:50, coolMin:0, coolShare:0.50,
   view:"s1", tCool:true, tHeat:false, tDem:true, tLit:true, litMode:"offgrid", tMot:false, tNego:false,
   heatComp:"heatpump",
   demRate:12, demPortion:0.40, demRed:0.05, demBattery:false
@@ -1685,13 +1701,12 @@ function selectFac(el){
   state.harmoRate  = parseFloat(el.getAttribute("data-harmo"))/100;
   state.coolMin   = parseFloat(el.getAttribute("data-coolmin"));
   recomputeCool();
-  var mn=parseFloat(el.getAttribute("data-min")), mx=parseFloat(el.getAttribute("data-max")), st=parseFloat(el.getAttribute("data-step")), df=parseFloat(el.getAttribute("data-def"));
+  var mn=parseFloat(el.getAttribute("data-min")), mx=parseFloat(el.getAttribute("data-max")), st=parseFloat(el.getAttribute("data-step"));
   var sl=document.getElementById("spend-slider");
   sl.min=mn; sl.max=mx; sl.step=st;
   document.getElementById("slider-lo").textContent=fmtK(mn);
   document.getElementById("slider-hi").textContent=fmtK(mx);
-  if(state.spend < mn) state.spend = df;
-  sl.value=Math.min(Math.max(state.spend,mn),mx);
+  if(state.spend>0) sl.value=Math.min(Math.max(state.spend,mn),mx);
   syncSpendField();
   document.getElementById("r-hvac").value = Math.round(state.hvacShare*100);
   document.getElementById("r-harmo").value = state.harmoRate*100;
@@ -1906,7 +1921,7 @@ function goStage(v){
   if(crumbs) crumbs.style.display="none";
   updateCrumbs();
   // stage content
-  if(v==="s2") updateClaimS2();
+  if(v==="s2"){ updateClaimS2(); checkS2Ready(); }
   if(v==="s3"){ state.sqft=0; var _sq=document.getElementById("c-sqft"); if(_sq) _sq.value=""; updateClaimS3(); }
   if(isR){
     document.getElementById("calc").classList.add("revealed");
@@ -1975,6 +1990,20 @@ function showResult(){
   }, twDuration);
 }
 
+function checkS2Ready(){
+  var stateVal=(document.getElementById("c2-state")||{}).value||"";
+  var hasState=stateVal.length>0;
+  var hasSpend=state.spend>0;
+  var ready=hasState&&hasSpend;
+  var btn=document.getElementById("s2-next-btn");
+  if(btn){
+    if(ready){ btn.removeAttribute("disabled"); }
+    else { btn.setAttribute("disabled","disabled"); }
+    btn.style.opacity=ready?"1":"0.38";
+    btn.style.cursor=ready?"pointer":"not-allowed";
+    btn.style.pointerEvents=ready?"":"none";
+  }
+}
 function c2Spend(){
   var el=document.getElementById("c2-spend");
   var v=parseInt(el.value.replace(/[^0-9]/g,""))||0;
@@ -1982,6 +2011,7 @@ function c2Spend(){
   var rng=document.getElementById("c2-rng"); if(rng)rng.value=v;
   var mo=document.getElementById("c2-mo"); if(mo)mo.textContent=v?"$"+Math.round(v/12).toLocaleString("en-US")+"/mo":"";
   syncSpendField();
+  checkS2Ready();
 }
 function c2Rng(){
   var v=parseFloat(document.getElementById("c2-rng").value)||0;
@@ -1989,6 +2019,7 @@ function c2Rng(){
   var el=document.getElementById("c2-spend"); if(el)el.value=v.toLocaleString("en-US");
   var mo=document.getElementById("c2-mo"); if(mo)mo.textContent="$"+Math.round(v/12).toLocaleString("en-US")+"/mo";
   syncSpendField();
+  checkS2Ready();
 }
 function c2State(){
   var sel=document.getElementById("c2-state");
@@ -1996,6 +2027,7 @@ function c2State(){
   if(sel&&main){ main.value=sel.value; onStateChange(); }
   var sp=document.getElementById("c2-split");
   if(sp) sp.textContent=state.stateCool?Math.round(state.stateCool)+"% cooling":"";
+  checkS2Ready();
 }
 function niceRound(v){
   if(v<50000) return Math.round(v/5000)*5000;
@@ -2016,6 +2048,7 @@ function setSpend(v){
   var mo=document.getElementById("c2-mo");
   if(mo) mo.textContent="$"+Math.round(v/12).toLocaleString("en-US")+"/mo";
   syncSpendField(); updateChipActive(); render();
+  checkS2Ready();
 }
 function updateChipActive(){
   document.querySelectorAll(".c-chip").forEach(function(b){
@@ -2152,9 +2185,10 @@ function updateClaimS2(){
   });
   eqHtml+="</div>";
   var names=eq.map(function(e){return e.name.toLowerCase();}).join(", ");
-  var b1="<p class='c-copy'>What the DOE number does not explain is where the waste comes from. In most modern facilities, <strong>80% of electrical distortion is generated inside the building</strong> — by the equipment already running in it.</p>";
-  var b2a="<p class='c-copy'>Your "+names+" all generate harmonic distortion as a byproduct of how they operate. The more updated your facility, the more distortion it produces. Nobody disclosed that when you upgraded.</p><p class='c-copy'>That distortion feeds back into your building\u2019s wiring and does two things your utility company does not explain on your bill.</p>";
-  var b2c="<p class='c-copy'>Think of clean power as water flowing smoothly through a pipe. When air bubbles get in, the pipe still runs — but the meter counts the bubbles as flow. You pay for water that never came out the other end. Electrical distortion works the same way. Your meter reads it as real consumption. You are billed for kilowatt hours that never powered a single device.</p>";
+  var b1="<p class='c-copy'>What the DOE number does not explain is where the waste comes from. <strong>In "+ins.cat+", 80% of electrical distortion is generated inside the building</strong>, generated by the equipment already running in it.</p>";
+  var namesBold=eq.map(function(e){return "<strong>"+e.name.toLowerCase()+"</strong>";}).join(", ");
+  var b2a="<p class='c-copy'>Your "+namesBold+" all generate harmonic distortion as a byproduct of how they operate. The more updated your facility, the more distortion it produces. Nobody disclosed that when you upgraded.</p><p class='c-copy'>That distortion feeds back into your building\u2019s wiring and does two things your utility company does not explain on your bill.</p>";
+  var b2c="<p class='c-copy'>Think of clean power as water flowing smoothly through a pipe. When air bubbles get in, the pipe still runs, but the meter counts the bubbles as flow. You pay for water that never came out the other end. Electrical distortion works the same way. Your meter reads it as real consumption. You are billed for kilowatt hours that never powered a single device.</p>";
   var b3="<p class='c-copy'>The distorted current that does reach your equipment runs hotter than it was designed to handle. Every cycle does more damage than it should. Equipment that should last fifteen years starts failing in eight.</p>";
   var floorPct=parseFloat(ins.range)||15;
   var inflated=Math.round(100*(1+floorPct/100));
@@ -2197,10 +2231,10 @@ function updateClaimS3(){
 
   // Equipment risk copy — pull first two bullets, strip dollar figures for teaser
   var assetTitle=b?b.assetTitle:"your critical equipment";
-  var equipText="<strong>"+assetTitle.charAt(0).toUpperCase()+assetTitle.slice(1)+"</strong> are your highest-risk assets. Electrical distortion runs them hotter than they were designed to handle. Equipment that should last fifteen years starts failing in eight — and those replacement costs never appear on your energy bill.";
+  var equipText="<strong>"+assetTitle.charAt(0).toUpperCase()+assetTitle.slice(1)+"</strong> are your highest-risk assets. Electrical distortion runs them hotter than they were designed to handle. Equipment that should last fifteen years starts failing in eight, and those replacement costs never appear on your energy bill.";
 
   // Deduction teaser — no dollar figure yet, sqft input reveals it below
-  var dedText="Most commercial operators have never heard of Section 179D. It is one of the largest and most underused incentives in commercial real estate — a federal tax deduction tied directly to energy efficiency. Enter your square footage below to see what your building likely qualifies for.";
+  var dedText="Most commercial operators have never heard of Section 179D. It is one of the largest and most underused incentives in commercial real estate, specifically a federal tax deduction tied directly to energy efficiency. Enter your square footage below to see what your building likely qualifies for.";
 
   var h="";
   h+="<div class='s3-known-hd-main'>Three things worth knowing about your "+noun+"</div>";
@@ -2346,7 +2380,7 @@ function buildSmsLinks(){
   var ins=INSIGHTS[state.selected];
   var facLabel=ins?ins.label:"facility";
   var spendAmt=state.spend>0?("about $"+fmtK(state.spend).replace("$","")+" per year"):"";
-  var baseMsg="Hi — I have a "+facLabel+(spendAmt?" spending "+spendAmt:"")+
+  var baseMsg="Hi, I have a "+facLabel+(spendAmt?" spending "+spendAmt:"")+
     " and just ran the Energy Plus savings calculator. "+
     "What's the fastest way to know if these numbers hold for my operation?";
   var href="sms:+18647770688?body="+encodeURIComponent(baseMsg);
@@ -2371,7 +2405,7 @@ function updateCostOfWaiting(){
   var monthlyFloor=Math.round(r.floor/12);
   var monthlyCeil=Math.round(r.ceil/12);
   var rangeHtml="<span class='rn-inline-range'>"+fmtFull(monthlyFloor)+" to "+fmtFull(monthlyCeil)+"</span>";
-  el.innerHTML="Based on your inputs, "+rangeHtml+" is leaving your building every single month — and that number grows automatically as electricity rates rise.";
+  el.innerHTML="Based on your inputs, "+rangeHtml+" is leaving your building every single month, and that number grows automatically as electricity rates rise.";
 }
 function updateSummaryBar(){
   var el=document.getElementById("c-sum-text"); if(!el) return;
@@ -2493,17 +2527,19 @@ function initAmbientCanvas(){
   [".streams.gated",".insight.gated",".method.gated",".cta.gated",".calc-foot.gated",".fac-close.gated"].forEach(function(q){var el=document.querySelector(q);if(el)el.style.display="none";});
   var pp=document.getElementById("pick-prompt"); if(pp) pp.style.display="none";
   var sel=document.getElementById("state-select");
+  var ph=document.createElement("option"); ph.value=""; ph.textContent="Choose your primary state"; ph.disabled=true; ph.selected=true; sel.appendChild(ph);
   Object.keys(STATE_COOL).forEach(function(name){
     var o=document.createElement("option"); o.value=name; o.textContent=name;
-    if(name==="South Carolina") o.selected=true; sel.appendChild(o);
+    sel.appendChild(o);
   });
-  state.stateCool=65; recomputeCool();
+  state.stateCool=50; recomputeCool();
   // Populate consult state select from main select
   var c2s=document.getElementById("c2-state");
-  if(c2s){ c2s.innerHTML=document.getElementById("state-select").innerHTML; c2s.value="South Carolina"; }
+  if(c2s){ c2s.innerHTML=document.getElementById("state-select").innerHTML; c2s.value=""; }
   document.querySelectorAll(".fac-opt").forEach(function(el){ el.addEventListener("click",function(){ selectFac(el); }); });
   render();
   initAmbientCanvas();
+  checkS2Ready();
 })();
 
 // ── VIDEO LINKS ─────────────────────────────────────────────────────────────
