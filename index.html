@@ -832,6 +832,7 @@ body{font-size:17px;}
 
 /* ── THREE THINGS WORTH KNOWING ─────────────────────────────────────── */
 .s3-known-hd{font-family:'Barlow',sans-serif;font-size:11px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:rgba(255,255,255,0.38);margin:28px 0 20px;border-top:1px solid rgba(255,255,255,0.08);padding-top:22px;}
+.s3-known-hd-main{font-family:'Barlow',sans-serif;font-size:clamp(18px,2.8vw,22px);font-weight:700;color:#fff;line-height:1.3;margin-bottom:24px;letter-spacing:-0.01em;}
 .s3-known-wrap{display:flex;flex-direction:column;gap:26px;margin-bottom:8px;}
 .s3-known-item{display:block;margin-bottom:32px;}
 .s3-known-num{font-family:'Barlow',sans-serif;font-size:38px;font-weight:500;color:var(--copper);line-height:1;letter-spacing:-0.02em;opacity:0.85;display:block;margin-bottom:4px;}
@@ -956,7 +957,7 @@ body{font-size:17px;}
     <div id="c-s3" style="display:none">
       <div class="c-progress"><span class="c-progress-step done"></span><span class="c-progress-step done"></span><span class="c-progress-step active"></span><span class="c-progress-label">3 / 3</span></div>
       <div id="c-claim-s3" class="c-card"></div>
-      <span class="c-ask">Adjust your square footage for real tax savings</span>
+      <span class="c-ask">Enter your square footage to calculate your Section 179D deduction</span>
       <div class="sqft-input-row" style="margin-top:14px;">
         <input type="text" inputmode="numeric" id="c-sqft" class="sqft-input" placeholder="e.g. 45,000" oninput="onConsultSqft()">
         <span class="sqft-suf">sq ft</span>
@@ -964,7 +965,7 @@ body{font-size:17px;}
       <div class="c-ded-result" id="c-ded-result"></div>
       <div class="c-nav-row">
         <button class="c-back-vis" onclick="goStage('s2')">Back</button>
-        <button class="c-next-btn c-nav-next" onclick="showResult()">See your full picture</button>
+        <button class="c-next-btn c-nav-next" onclick="showResult()">Calculate my savings now</button>
       </div>
     </div>
 
@@ -2179,40 +2180,36 @@ function updateClaimS2(){
 
 function updateClaimS3(){
   if(!state.selected) return;
-  var r=compute();
   var ins=INSIGHTS[state.selected];
   var b=BOTTOM_CONTENT[state.selected];
   var el=document.getElementById("c-claim-s3"); if(!el) return;
-  if(!ins||!b){ el.innerHTML="<div class='c-range'>"+fmtFull(r.floor)+" to "+fmtFull(r.ceil)+"</div><div class='c-on-bill'>on your annual energy bill</div>"; return; }
-  // Waste framing
-  var h="<p class='c-waste-intro'>Your <strong>"+ins.noun+"</strong> is likely wasting</p>";
-  h+="<div class='c-range'>"+fmtFull(r.floor)+" to "+fmtFull(r.ceil)+"</div>";
-  h+="<div class='c-on-bill'>on your annual energy bill</div>";
-  // Cumulative impact boxes
-  var _flMo=Math.round(r.floor/12),_ceMo=Math.round(r.ceil/12);
-  h+="<div class='s3-cum-row'>";
+
+  var facLabel=ins?ins.label:"Your facility";
+  var noun=ins?ins.noun:"facility";
   var _s3sn=(document.getElementById("state-select")||{}).value||"";
   var _s3tier=(_s3sn&&ESC_TIER[_s3sn])||3;
   var _s3ed=ESC_DATA[_s3tier];
-  var _s3e5=escalFactor(_s3ed.rate,5);
-  var _s3e10=escalFactor(_s3ed.rate,10);
-  h+="<div class='s3-cum-cell'><div class='s3-cum-val'>"+fmtBoxRange(_flMo,_ceMo)+"</div><div class='s3-cum-lab'>per month</div></div>";
-  h+="<div class='s3-cum-cell'><div class='s3-cum-val'>"+fmtBoxRange(r.floor*_s3e5,r.ceil*_s3e5)+"</div><div class='s3-cum-lab'>5-year range</div></div>";
-  h+="<div class='s3-cum-cell'><div class='s3-cum-val'>"+fmtBoxRange(r.floor*_s3e10,r.ceil*_s3e10)+"</div><div class='s3-cum-lab'>10-year range</div></div>";
-  h+="</div>";
-  // Three Things Worth Knowing
+
+  // Bill trajectory copy — state-specific if available
   var billText=_s3sn
-    ?"In <strong>"+_s3sn+"</strong>, commercial electricity has risen roughly <strong>"+_s3ed.range+"</strong> per year historically. "+_s3ed.note
-    :"Commercial electricity costs have risen roughly 2 to 3% per year nationally. Many analysts expect this pace to hold or accelerate as grid infrastructure investment grows.";
-  var b1=b.bullets[0], b2=b.bullets[1];
-  var equipText="Beyond the bill, <strong>"+b.assetTitle+"</strong> are your highest-risk assets. "+b1+" "+b2+" Left unaddressed, those same inefficiencies shorten equipment useful life by a decade or more.";
-  var dedText="Buildings like yours typically qualify for one of the most underused incentives in commercial real estate — a federal tax deduction of up to <strong>$5.94 per square foot</strong> under Section 179D. When structured properly, most clients see positive cash flow from day one.";
-  h+="<div class='s3-known-hd'>Three Things Worth Knowing</div>";
+    ?"Commercial electricity in <strong>"+_s3sn+"</strong> has risen roughly <strong>"+_s3ed.range+"</strong> per year. Experts believe rates will rise much faster this decade due to the cost of modernizing the grid — which would make these figures conservative. The number you're about to see is based on today's rates."
+    :"Commercial electricity costs have risen roughly 2 to 3% per year nationally. Experts believe rates will rise much faster this decade due to the cost of modernizing the grid — which would make these figures conservative. The number you're about to see is based on today's rates.";
+
+  // Equipment risk copy — pull first two bullets, strip dollar figures for teaser
+  var assetTitle=b?b.assetTitle:"your critical equipment";
+  var equipText="<strong>"+assetTitle.charAt(0).toUpperCase()+assetTitle.slice(1)+"</strong> are your highest-risk assets. Electrical distortion runs them hotter than they were designed to handle. Equipment that should last fifteen years starts failing in eight — and those replacement costs never appear on your energy bill.";
+
+  // Deduction teaser — no dollar figure yet, sqft input reveals it below
+  var dedText="Most commercial operators have never heard of Section 179D. It is one of the largest and most underused incentives in commercial real estate — a federal tax deduction tied directly to energy efficiency. Enter your square footage below to see what your building likely qualifies for.";
+
+  var h="";
+  h+="<div class='s3-known-hd-main'>Three things worth knowing about your "+noun+"</div>";
   h+="<div class='s3-known-wrap'>";
   h+="<div class='s3-known-item'><div class='s3-known-num'>01</div><div class='s3-known-body'><div class='s3-known-label'>Your Future Bill</div><div class='s3-known-text'>"+billText+"</div></div></div>";
   h+="<div class='s3-known-item'><div class='s3-known-num'>02</div><div class='s3-known-body'><div class='s3-known-label'>Your Equipment</div><div class='s3-known-text'>"+equipText+"</div></div></div>";
   h+="<div class='s3-known-item'><div class='s3-known-num'>03</div><div class='s3-known-body'><div class='s3-known-label'>Your Deductions</div><div class='s3-known-text'>"+dedText+"</div></div></div>";
   h+="</div>";
+
   el.innerHTML=h;
   buildSmsLinks();
 
