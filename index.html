@@ -2119,8 +2119,8 @@ function snapClean(n){
   if(n>=1000000) return Math.round(n/100000)*100000;
   if(n>=100000)  return Math.round(n/10000)*10000;
   if(n>=10000)   return Math.round(n/1000)*1000;
-  if(n>=2000)    return Math.round(n/500)*500;
-  return Math.round(n/100)*100;
+  if(n>=5000)    return Math.round(n/1000)*1000;
+  return Math.round(n/1000)*1000;
 }
 function makeBands(min,max,maxCount){
   var spread=max-min;
@@ -2180,18 +2180,29 @@ function renderBands(){
 }
 function bandStep1Select(b, label, selectedBtn){
   _bandState.step=2; _bandState.broadBand=b;
-  // Mark step 1 as done — grays out, shrinks
+  // Build narrow bands first to check count
+  var narrow=makeBands(b.lo, b.hi, 5);
+  // If only one narrow band, treat broad tap as final selection — skip Step 2
+  if(narrow.length===1){
+    document.querySelectorAll('#band-step1 .band-btn').forEach(function(btn){
+      btn.classList.toggle('active', btn===selectedBtn);
+    });
+    var g1=document.getElementById('band-step1');
+    if(g1) g1.classList.add('band-step1-done');
+    var wrap=document.getElementById('band-step2-wrap');
+    if(wrap) wrap.style.display='none';
+    bandStep2Select(narrow[0], label, null);
+    return;
+  }
+  // Mark step 1 as done — grays out
   var g1=document.getElementById('band-step1');
   if(g1) g1.classList.add('band-step1-done');
-  // Highlight selected broad band
   document.querySelectorAll('#band-step1 .band-btn').forEach(function(btn){
     btn.classList.toggle('active', btn===selectedBtn);
   });
-  // Build narrow bands — makeBands handles deduplication and min $1K width
-  var narrow=makeBands(b.lo, b.hi, 5);
   var g2=document.getElementById('band-step2'); if(!g2) return;
   g2.innerHTML='';
-  narrow.forEach(function(nb, ni){
+  narrow.forEach(function(nb){
     var btn=document.createElement('button');
     btn.className='band-btn';
     btn.type='button';
