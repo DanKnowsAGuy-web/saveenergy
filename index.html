@@ -738,15 +738,54 @@ body{font-size:17px;}
 /* ── THREE THINGS WORTH KNOWING ─────────────────────────────────────── */
 .s3-known-hd{font-family:'Barlow',sans-serif;font-size:11px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:rgba(255,255,255,0.38);margin:28px 0 20px;border-top:1px solid rgba(255,255,255,0.08);padding-top:22px;}
 .s3-known-wrap{display:flex;flex-direction:column;gap:26px;margin-bottom:8px;}
-.s3-known-item{display:flex;align-items:flex-start;gap:18px;}
-.s3-known-num{font-family:'Barlow',sans-serif;font-size:38px;font-weight:500;color:var(--copper);line-height:1;flex-shrink:0;width:48px;text-align:right;letter-spacing:-0.02em;opacity:0.85;padding-top:2px;}
-.s3-known-body{flex:1;min-width:0;}
-.s3-known-label{font-family:'Barlow',sans-serif;font-size:11px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--copper-light);margin-bottom:8px;}
-.s3-known-text{font-size:clamp(15px,2.2vw,17px);color:rgba(255,255,255,0.75);line-height:1.75;}
+.s3-known-item{display:block;margin-bottom:32px;}
+.s3-known-num{font-family:'Barlow',sans-serif;font-size:38px;font-weight:500;color:var(--copper);line-height:1;letter-spacing:-0.02em;opacity:0.85;display:block;margin-bottom:4px;}
+.s3-known-body{display:block;}
+.s3-known-label{font-family:'Barlow',sans-serif;font-size:clamp(22px,3.5vw,28px);font-weight:700;color:#fff;margin-bottom:10px;letter-spacing:-0.01em;text-transform:none;line-height:1.2;display:block;}
+.s3-known-text{font-size:clamp(15px,2.2vw,17px);color:rgba(255,255,255,0.78);line-height:1.75;display:block;}
 .s3-known-text strong{color:#fff;font-weight:500;}
-@media(max-width:560px){.s3-known-num{font-size:30px;width:38px;}.s3-known-item{gap:14px;}}
+@media(max-width:560px){.s3-known-num{font-size:30px;}.s3-known-label{font-size:clamp(20px,3vw,24px);}}
 /* ─────────────────────────────────────────────────────────────────────── */
 
+
+
+
+/* ── BRIDGE PARAGRAPH ────────────────────────────────────────────────── */
+.rn-bridge{margin:24px 0;padding:22px 0;border-top:1px solid rgba(255,255,255,0.08);border-bottom:1px solid rgba(255,255,255,0.08);}
+.rn-bridge-p{font-size:clamp(15px,2.2vw,17px);color:rgba(255,255,255,0.82);line-height:1.75;margin-bottom:16px;}
+.rn-bridge-p:last-child{margin-bottom:0;}
+/* ─────────────────────────────────────────────────────────────────────── */
+
+/* ── THREE HIDDEN TAXES ──────────────────────────────────────────────── */
+.rn-taxes{margin:22px 0 26px;}
+.rn-tax-hd{font-family:'Barlow',sans-serif;font-size:clamp(17px,2.4vw,19px);font-weight:600;color:#fff;line-height:1.4;margin-bottom:20px;padding-bottom:16px;border-bottom:1px solid rgba(255,255,255,0.1);}
+.rn-tax-list{display:flex;flex-direction:column;gap:20px;}
+.rn-tax-item{display:block;margin-bottom:26px;}
+.rn-tax-num{font-family:'Barlow',sans-serif;font-size:32px;font-weight:500;color:var(--copper);line-height:1;opacity:0.85;display:inline;margin-right:10px;}
+.rn-tax-hd-row{display:block;margin-bottom:8px;}
+.rn-tax-label{font-family:'Barlow',sans-serif;font-size:11px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--copper-light);margin-bottom:6px;}
+.rn-tax-text{font-size:clamp(17px,2.4vw,19px);color:rgba(255,255,255,0.82);line-height:1.75;margin:0;}
+.rn-waiting{font-size:clamp(15px,2.2vw,17px);color:rgba(255,255,255,0.82);line-height:1.65;margin-bottom:16px;padding:14px 18px;background:rgba(184,115,51,0.09);border-left:2px solid rgba(184,115,51,0.55);}
+.rn-guarantee{font-size:clamp(17px,2.4vw,19px);color:rgba(255,255,255,0.88);line-height:1.75;margin-bottom:18px;}
+@media(max-width:560px){.rn-tax-num{font-size:26px;width:34px;}.rn-tax-item{gap:12px;}}
+/* ─────────────────────────────────────────────────────────────────────── */
+
+/* ── ANIMATION UPGRADES ──────────────────────────────────────────────── */
+/* Tile entrance — slide up stagger instead of plain fade */
+@keyframes tileIn{from{opacity:0;transform:translateY(14px);}to{opacity:1;transform:translateY(0);}}
+/* Result block entrance */
+@keyframes resultReveal{from{opacity:0;transform:translateY(24px) scale(0.98);}to{opacity:1;transform:translateY(0) scale(1);}}
+/* Preamble copper-to-white pulse */
+@keyframes preamblePulse{0%,40%{color:var(--copper-light);}100%{color:rgba(255,255,255,0.62);}}
+/* Ambient sparks behind savings number */
+@keyframes sparkRise{0%{transform:translateY(0) scale(1);opacity:0.85;}80%{opacity:0.4;}100%{transform:translateY(-72px) scale(0.15);opacity:0;}}
+/* Progress bar active breathe */
+@keyframes progressBarPulse{0%,100%{opacity:1;}50%{opacity:0.55;}}
+.c-progress-step.active{animation:progressBarPulse 2.5s ease-in-out infinite;}
+/* Option card hover lift */
+.option-card{transition:transform 0.22s ease,box-shadow 0.22s ease,border-color 0.22s ease;}
+.option-card:hover{transform:translateY(-5px);box-shadow:0 16px 44px rgba(0,0,0,0.55);border-color:rgba(255,255,255,0.32);}
+/* ─────────────────────────────────────────────────────────────────────── */
 /* ── ASSUMPTIONS ACCORDION ───────────────────────────────────────────── */
 .assumptions-toggle{display:flex;align-items:center;gap:8px;width:100%;background:none;border:none;cursor:pointer;font-family:'Barlow',sans-serif;font-size:14px;font-weight:500;letter-spacing:0.04em;text-transform:uppercase;color:rgba(255,255,255,0.58);padding:20px 0;transition:color 0.18s;min-height:44px;}
 .assumptions-toggle:hover{color:var(--copper-pale);}
@@ -772,10 +811,9 @@ body{font-size:17px;}
 
     <!-- Stage 1: DOE claim + facility grid -->
     <div id="c-s1">
-      <h2 class="c-hed">What is your facility quietly overpaying?</h2>
-      <p class="c-doe">The EPA and Department of Energy agree: the average commercial building wastes <strong>30% of its energy</strong>.</p>
+      <p class="c-doe">According to the DOE, the average commercial building wastes <strong>30% of its energy</strong>. Modern facilities may be losing significantly more. Select your facility type to find out what it is costing yours.</p>
       <div class="c-progress"><span class="c-progress-step active"></span><span class="c-progress-step"></span><span class="c-progress-step"></span><span class="c-progress-label">1 / 3</span></div>
-      <span class="c-ask" style="margin-bottom:18px;">Which type is yours?</span>
+      
       <div class="fac-grid" id="fac-grid">
         <div class="fac-opt" data-key="cold"    data-share="70" data-harmo="13" data-coolmin="98" data-min="50000"   data-max="5000000"  data-step="25000" data-def="600000"><svg class="fac-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="2" x2="12" y2="22"/><line x1="2" y1="12" x2="22" y2="12"/><line x1="4.93" y1="4.93" x2="19.07" y2="19.07"/><line x1="19.07" y1="4.93" x2="4.93" y2="19.07"/><polyline points="9,5 12,2 15,5"/><polyline points="9,19 12,22 15,19"/><polyline points="5,9 2,12 5,15"/><polyline points="19,9 22,12 19,15"/></svg>Cold Storage / Refrig. Whse</div>
         <div class="fac-opt" data-key="super"   data-share="55" data-harmo="9"  data-coolmin="95" data-min="60000"   data-max="2500000"  data-step="5000"  data-def="400000"><svg class="fac-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1.5"/><circle cx="20" cy="21" r="1.5"/><path d="M1 1h4l2.68 13.39A2 2 0 009.66 16h8.68a2 2 0 001.97-1.67L22 6H6"/></svg>Supermarket / Grocery</div>
@@ -798,7 +836,7 @@ body{font-size:17px;}
     <div id="c-s2" style="display:none">
       <div class="c-progress"><span class="c-progress-step done"></span><span class="c-progress-step active"></span><span class="c-progress-step"></span><span class="c-progress-label">2 / 3</span></div>
       <div id="c-claim-s2"></div>
-      <span class="c-ask">Let's get specific. Where are you operating, and roughly how large is your bill?</span>
+      <span class="c-ask">Two inputs and we will calculate exactly what this is costing your facility.</span>
       <div style="margin-top:18px;">
         <div class="c-field-lbl">Primary state <span id="c2-split" class="c-field-aside"></span></div>
         <div class="sel-wrap"><select id="c2-state" onchange="c2State()"></select></div>
@@ -812,7 +850,6 @@ body{font-size:17px;}
         </div>
       </div>
 
-      <div id="c2-escal-note" style="display:none;font-size:13px;color:rgba(255,255,255,0.62);margin-top:8px;line-height:1.6;font-family:'Barlow',sans-serif;padding:0 2px;"></div>
       <div class="c-nav-row">
         <button class="c-back-vis" onclick="goStage('s1')">Back</button>
         <button class="c-next-btn c-nav-next" onclick="goStage('s3')">Next</button>
@@ -855,81 +892,40 @@ body{font-size:17px;}
 </div>
 <div class="result-narrative" id="result-narrative" style="display:none">
   <div class="rn-inner">
-    <p class="rn-cred">These ranges are built from DOE consumption data, independently verified results, and the spend and facility information you provided. A no-cost strategy session can dial them in exactly for your operation &#8212; or open the assumptions panel below to do it yourself right now.</p>
-    <div class="rn-trans-hd">Every Month You Wait, This Gets More Expensive</div>
-    <p class="rn-trans">The distortion is real. The meter inflation is real. The equipment wear is real. You have been running a tight operation while your electrical system quietly took a cut of everything. That ends when someone decides to look at it.</p>
-    <p class="rn-video-intro">Based on what you shared, we put together a custom video walkthrough of how we would approach your facility. Text below to receive it.</p>
-    <a href="#" class="txt-cta-btn" id="sms-link-video">
+    <p class="rn-cred">Independently verified. Built from DOE consumption data and the information you just provided. A 22-Minute Facility Review can confirm your exact number &#8212; or open the assumptions panel below and adjust the inputs yourself right now.</p>
+    <div class="rn-trans-hd">Every Month You Wait, This Number Gets Larger.</div>
+    <div class="rn-taxes">
+      <div class="rn-tax-hd">You Are Not Paying One Electricity Bill. You Are Paying Three — and Only One of Them Shows Up on Your Statement.</div>
+      <div class="rn-tax-list">
+        <div class="rn-tax-item">
+          <div><span class="rn-tax-num">01</span><span class="rn-tax-label">You Are Paying for Power You Never Used</span></div>
+          <p class="rn-tax-text">Electrical distortion registers on your meter as real kilowatt hours. Every billing cycle you pay for power that never reached a single device in your building.</p>
+        </div>
+        <div class="rn-tax-item">
+          <div><span class="rn-tax-num">02</span><span class="rn-tax-label">You Are Paying Twice for Every Piece of Equipment</span></div>
+          <p class="rn-tax-text">The distorted current that does reach your equipment runs hotter and cycles harder than it should. You bought the equipment once. Dirty power makes you pay for it again in maintenance — and again when it fails early.</p>
+        </div>
+        <div class="rn-tax-item">
+          <div><span class="rn-tax-num">03</span><span class="rn-tax-label">You Are Replacing Equipment Years Before You Should</span></div>
+          <p class="rn-tax-text">Equipment that should run fifteen years fails in eight. That cost does not show up on your energy bill — it shows up as a capital expense that nobody in your organization connects back to power quality. Until now.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="rn-bridge">
+      <p class="rn-bridge-p">We address this in two steps: cleaning the power at the source and retrofitting your equipment so it runs the way it was designed to. We almost never recommend replacement. Every other energy company leads with new equipment because that is how they make money. We lead with retrofits because the ROI is almost always better and your existing equipment is usually worth saving. If you find a better solution, we will pay you a finder's fee for the introduction.</p>
+      <p class="rn-bridge-p">Our process is designed to ISO standards and is fully third-party auditable. We are required to recommend the highest ROI solution for your facility. That is not a marketing claim. It is a structural commitment.</p>
+      <p class="rn-bridge-p">We do not have customers. We have clients: people under our protection and care. The 22-Minute Facility Review is where that relationship starts.</p>
+    </div>
+    <p class="rn-waiting" id="rn-waiting"></p>
+    <p class="rn-guarantee">The session is free. No card required. If we do not find at least one of these three taxes running in your building, we cover the engineer's $150 consultation fee ourselves. You pay nothing unless you decide to move forward.</p>
+    <a href="#" class="txt-cta-btn" id="sms-link-primary">
       <span class="txt-cta-ico">&#128241;</span>
-      Text Me My Custom Video Walkthrough
+      Text to Confirm Your Number in 22 Minutes
     </a>
   </div>
 </div>
-<div class="option-section gated" id="option-section">
-  <div class="option-cards">
 
-    <div class="option-card" id="option-dwy">
-      <div class="option-tag">Option One</div>
-      <h3 class="option-title">You Lead, We Guide</h3>
-      <p class="option-body">You coordinate your team and installer. We bring the engineering expertise and design everything for you.</p>
-      <ul class="option-list">
-        <li>Send us your bills and equipment inventory</li>
-        <li>EP engineers design your custom solution — DOE-credentialed, Sandia National Laboratory level expertise</li>
-        <li>We identify every applicable incentive including the full 179D deduction</li>
-        <li>You source and coordinate your own installer — we tell you exactly what to look for</li>
-        <li>Full technical guidance from EP throughout the process</li>
-      </ul>
-      <a class="opt-strat-btn" id="sms-link-dwy" href="#"><span>&#128241;</span> Text Your Energy Strategist to Start</a>
-      <button class="partner-btn" onclick="togglePartnerPanel('dwy')">&#128172; Text a Partner for Feedback</button>
-      <div class="partner-panel" id="partner-panel-dwy">
-        <div class="partner-mode-toggle">
-          <button class="partner-mode-btn active" id="partner-mode-group-dwy" onclick="selectPartnerMode('dwy','group')">Text Partner + Strategist</button>
-          <button class="partner-mode-btn" id="partner-mode-solo-dwy" onclick="selectPartnerMode('dwy','solo')">Text Partner Only</button>
-        </div>
-        <div class="partner-preview-lbl">MESSAGE PREVIEW</div>
-        <div class="partner-preview" id="partner-preview-dwy"></div>
-        <label class="partner-lbl">PARTNER'S PHONE NUMBER</label>
-        <div class="partner-send-row">
-          <input class="partner-input" id="partner-num-dwy" type="tel" placeholder="(555) 555-5555" oninput="onPartnerInput('dwy')" maxlength="14"/>
-          <button class="partner-send-btn" id="partner-send-dwy" onclick="sendPartnerText('dwy')" disabled>Send &#8593;</button>
-        </div>
-      </div>
-    </div>
-
-    <div class="option-card" id="option-dfy">
-      <div class="option-tag">Option Two</div>
-      <h3 class="option-title">We Handle Everything</h3>
-      <p class="option-body">We send a technician, design the solution, manage installation, and file your incentives. Zero coordination required on your end.</p>
-      <ul class="option-list">
-        <li>EP technician visits your site to gather all information</li>
-        <li>Gold-standard engineers design your custom solution</li>
-        <li>We source and manage your installer from our vetted network</li>
-        <li>We file all incentive applications including 179D at no additional cost</li>
-        <li>Maximum warranty coverage on all equipment</li>
-        <li>Performance-only basis — no out-of-pocket cost</li>
-      </ul>
-      <div class="option-qualify" id="option-qualify">
-        <strong>Based on your numbers, you likely qualify for a day-one positive cash flow structure</strong> — your savings cover the program cost from month one.
-      </div>
-      <a class="opt-strat-btn" id="sms-link-dfy" href="#"><span>&#128241;</span> Text Your Energy Strategist to Start</a>
-      <button class="partner-btn" onclick="togglePartnerPanel('dfy')">&#128172; Text a Partner for Feedback</button>
-      <div class="partner-panel" id="partner-panel-dfy">
-        <div class="partner-mode-toggle">
-          <button class="partner-mode-btn active" id="partner-mode-group-dfy" onclick="selectPartnerMode('dfy','group')">Text Partner + Strategist</button>
-          <button class="partner-mode-btn" id="partner-mode-solo-dfy" onclick="selectPartnerMode('dfy','solo')">Text Partner Only</button>
-        </div>
-        <div class="partner-preview-lbl">MESSAGE PREVIEW</div>
-        <div class="partner-preview" id="partner-preview-dfy"></div>
-        <label class="partner-lbl">PARTNER'S PHONE NUMBER</label>
-        <div class="partner-send-row">
-          <input class="partner-input" id="partner-num-dfy" type="tel" placeholder="(555) 555-5555" oninput="onPartnerInput('dfy')" maxlength="14"/>
-          <button class="partner-send-btn" id="partner-send-dfy" onclick="sendPartnerText('dfy')" disabled>Send &#8593;</button>
-        </div>
-      </div>
-    </div>
-
-  </div>
-</div>
 
 
   <div class="txt-cta gated" id="txt-cta-top">
@@ -1455,9 +1451,15 @@ function compute(){
     ceil:negoCeil+harmo+coolCeil+heatCeil+combDemCeil+litCeil};
 }
 
+var _cuGen={};
 function countUp(el,target,dur){
+  if(!el)return;
+  var key=el.id||'x';
+  _cuGen[key]=(_cuGen[key]||0)+1;
+  var gen=_cuGen[key];
   var t0=performance.now();
   function step(t){
+    if(_cuGen[key]!==gen)return;
     var p=Math.min((t-t0)/dur,1);
     var e=1-Math.pow(1-p,4);
     el.textContent=fmtFull(target*e);
@@ -1468,7 +1470,7 @@ function countUp(el,target,dur){
 function render(){
   var r = compute();
   var _rp=document.getElementById("result-preamble");
-  if(_rp) _rp.textContent=state.selected&&INSIGHTS[state.selected]?"Your "+INSIGHTS[state.selected].noun+" is likely losing this every year to electrical waste":"";
+  if(_rp) _rp.textContent=state.selected&&INSIGHTS[state.selected]?"Your "+INSIGHTS[state.selected].noun+" is losing this every year to electrical waste":"";
   var _fr=document.getElementById("fac-readout"); if(_fr) _fr.textContent = "";
   document.getElementById("spend-monthly").textContent = fmtFull(state.spend/12) + " / month";
   if(state.heatComp==="gas"){ document.getElementById("split-readout").textContent = "Heating on gas, electric load is all cooling"; }
@@ -1499,7 +1501,7 @@ function render(){
     var el=document.getElementById("s-"+k); if(el){ el.classList.toggle("on",on); el.classList.toggle("off",!on); }
   });
   var _hch=document.getElementById("heat-choice"); if(_hch) _hch.classList.toggle("hidden", !state.tHeat);
-  if(state.selected&&!state.hasAnimated){state.hasAnimated=true;countUp(document.getElementById("r-floor"),r.floor,800);countUp(document.getElementById("r-ceil"),r.ceil,1050);}else{var _rf=document.getElementById("r-floor"),_rc=document.getElementById("r-ceil");if(_rf)_rf.textContent=fmtFull(r.floor);if(_rc)_rc.textContent=fmtFull(r.ceil);}
+  var _rf=document.getElementById("r-floor");if(state.selected&&!state.hasAnimated){state.hasAnimated=true;countUp(_rf,r.floor,800);countUp(document.getElementById("r-ceil"),r.ceil,1050);}else if(state.view==="result"){countUp(_rf,r.floor,350);countUp(document.getElementById("r-ceil"),r.ceil,450);}else{var _rf=document.getElementById("r-floor"),_rc=document.getElementById("r-ceil");if(_rf)_rf.textContent=fmtFull(r.floor);if(_rc)_rc.textContent=fmtFull(r.ceil);}
   document.getElementById("r-pcts").textContent = pctTxt(state.spend>0?r.floor/state.spend:0) + " to " + pctTxt(state.spend>0?r.ceil/state.spend:0) + " of your annual bill";
   var _sName=(document.getElementById("state-select")||{}).value||"";
   var _tier=(_sName&&ESC_TIER[_sName])||3;
@@ -1671,6 +1673,63 @@ function onAdjust(){
   var dd=parseFloat(document.getElementById("r-demred").value); if(!isNaN(dd)) state.demRed=dd/100;
   render();
 }
+
+/* ── TYPEWRITER ────────────────────────────────────────────────────────── */
+var _twRunning=false;
+function typeWriter(el,line1,line2){
+  _twRunning=true;
+  el.innerHTML='';
+  var sp=document.createElement('span');
+  el.appendChild(sp);
+  var i=0;
+  el.onclick=function(){_twRunning=false;};
+  function tick(){
+    if(!_twRunning){
+      sp.textContent=line1;
+      var br=document.createElement('br');
+      var em=document.createElement('em');
+      em.textContent=line2;
+      el.appendChild(br);el.appendChild(em);
+      el.onclick=null;
+      return;
+    }
+    if(i<line1.length){
+      sp.textContent+=line1[i++];
+      setTimeout(tick,28);
+    } else {
+      var br=document.createElement('br');
+      var em=document.createElement('em');
+      em.textContent=line2;
+      em.style.cssText='opacity:0;transition:opacity 0.5s ease;display:block;margin-top:4px;';
+      el.appendChild(br);el.appendChild(em);
+      setTimeout(function(){em.style.opacity='1';_twRunning=false;el.onclick=null;},60);
+    }
+  }
+  tick();
+}
+
+/* ── AMBIENT SPARKS ────────────────────────────────────────────────────── */
+function createSparks(){
+  var inner=document.querySelector('#result-block .result-inner');
+  if(!inner||document.getElementById('sparks-cont'))return;
+  inner.style.position='relative';
+  var cont=document.createElement('div');
+  cont.id='sparks-cont';
+  cont.style.cssText='position:absolute;inset:0;overflow:hidden;pointer-events:none;z-index:0;';
+  inner.insertBefore(cont,inner.firstChild);
+  for(var i=0;i<18;i++){
+    var s=document.createElement('div');
+    var x=(8+Math.random()*84).toFixed(1);
+    var dur=(2.8+Math.random()*3.4).toFixed(2);
+    var delay=(-Math.random()*7).toFixed(2);
+    var sz=(1+Math.random()*2.4).toFixed(1);
+    var sy=(30+Math.random()*50).toFixed(1);
+    var op=(0.22+Math.random()*0.45).toFixed(2);
+    s.style.cssText='position:absolute;width:'+sz+'px;height:'+sz+'px;border-radius:50%;background:rgba(207,147,86,'+op+');left:'+x+'%;top:'+sy+'%;animation:sparkRise '+dur+'s '+delay+'s linear infinite;';
+    cont.appendChild(s);
+  }
+}
+/* ─────────────────────────────────────────────────────────────────────── */
 function toggleAdjust(){ document.getElementById("adjust").classList.toggle("open"); }
 function toggleAssumptions(){
   var aa=document.getElementById("assumptions-accordion");
@@ -1707,9 +1766,9 @@ function goStage(v){
   // summary + title
   var cs=document.getElementById("c-summary"); if(cs) cs.style.display=isR?"":"none";
   var ctt=document.getElementById("calc-title");
-  if(ctt){ if(isR){ ctt.innerHTML="Your Bill Has a Leak.<br><em>Now You Know How Big It Is.</em>"; ctt.style.display=""; } else { ctt.style.display="none"; } }
+  if(ctt){ if(isR){ ctt.style.display=""; typeWriter(ctt,"Your Electrical System Has Been Overcharging You Since Day One.","Now You Have the Number."); } else { _twRunning=false; ctt.style.display="none"; } }
   var cst=document.getElementById("calc-sub");
-  if(cst){ if(isR){ cst.textContent="Most operators never see this. You just did. Here is what to do next."; cst.style.display=""; cst.style.color="#fff"; cst.style.opacity="0.92"; } else { cst.style.display="none"; cst.style.color=""; cst.style.opacity=""; } }
+  if(cst){ if(isR){ cst.textContent="Most operators run their whole career without ever seeing this number. You just did it in three minutes."; cst.style.display=""; cst.style.color="#fff"; cst.style.opacity="0.92"; } else { cst.style.display="none"; cst.style.color=""; cst.style.opacity=""; } }
   // calc-body: only in result
   var cb=document.getElementById("calc-body-main"); if(cb) cb.style.display=isR?"block":"none";
   // gated sections: only in result
@@ -1722,7 +1781,7 @@ function goStage(v){
   var cta=document.querySelector(".cta.gated"); if(cta) cta.style.display=isR?"":"none";
   var foot=document.querySelector(".calc-foot.gated"); if(foot) foot.style.display=isR?"block":"none";
   var tcT=document.getElementById("txt-cta-top"); if(tcT) tcT.style.display="none";
-  var _optS=document.getElementById("option-section"); if(_optS) _optS.style.display=isR?"block":"none";
+
   var rn=document.getElementById("result-narrative"); if(rn) rn.style.display=isR?"block":"none";
   var aa=document.getElementById("assumptions-accordion"); if(aa){ aa.style.display=isR?"block":"none"; aa.classList.remove("assumptions-open"); }
   var ins=document.querySelector(".insight.gated"); if(ins) ins.style.cssText="display:none!important";
@@ -1742,7 +1801,7 @@ function goStage(v){
     });
     // Check deregulated state
     var _sn=document.getElementById("state-select"); if(_sn) updateNegoStream(_sn.value);
-    buildVideoLink();
+    buildPrimaryCta(); updateCostOfWaiting();
     render(); updateSummaryBar();
   }
   // animate
@@ -1755,7 +1814,15 @@ function showResult(){
   if(csq){ var v=parseInt(csq.value.replace(/[^0-9]/g,""))||0; state.sqft=v; var ms=document.getElementById("sqft"); if(ms) ms.value=csq.value; }
   syncSpendField();
   goStage("result");
-
+  setTimeout(function(){
+    var rb=document.getElementById("result-block");
+    if(rb){rb.style.animation="none";void rb.offsetHeight;rb.style.animation="resultReveal 0.55s cubic-bezier(0.22,1,0.36,1) both";}
+    var rnEl=document.getElementById("result-narrative");
+    if(rnEl){rnEl.style.animation="none";void rnEl.offsetHeight;rnEl.style.animation="resultReveal 0.55s cubic-bezier(0.22,1,0.36,1) 0.1s both";}
+    var rp=document.getElementById("result-preamble");
+    if(rp){rp.style.animation="none";void rp.offsetHeight;rp.style.animation="preamblePulse 1.6s ease-out 0.35s both";}
+    createSparks();
+  },40);
 }
 
 function c2Spend(){
@@ -1779,13 +1846,6 @@ function c2State(){
   if(sel&&main){ main.value=sel.value; onStateChange(); }
   var sp=document.getElementById("c2-split");
   if(sp) sp.textContent=state.stateCool?Math.round(state.stateCool)+"% cooling":"";
-  var _t=(sel&&sel.value&&ESC_TIER[sel.value])||3;
-  var _ed=ESC_DATA[_t];
-  var _n=document.getElementById("c2-escal-note");
-  if(_n&&sel&&sel.value){
-    _n.textContent="In "+sel.value+", commercial electricity rates have risen roughly "+_ed.range+" per year historically.";
-    _n.style.display="";
-  }
 }
 function niceRound(v){
   if(v<50000) return Math.round(v/5000)*5000;
@@ -1942,10 +2002,10 @@ function updateClaimS2(){
   });
   eqHtml+="</div>";
   var names=eq.map(function(e){return e.name.toLowerCase();}).join(", ");
-  var b1="<p class='c-copy'>Our data puts energy waste in <strong>"+ins.cat+"</strong> at <strong>"+ins.range+"</strong> of the annual power bill.</p>";
-  var b2a="<p class='c-copy'>"+ins.noun.charAt(0).toUpperCase()+ins.noun.slice(1)+"s typically run "+names+"\u2014all generating distortion in the building\u2019s electrical system.</p>";
-  var b2c="<p class='c-copy'>Think of clean power as water flowing smoothly through a pipe. When air bubbles get in, the meter still runs\u2014and you pay for flow you never used. The same thing happens with electrical distortion. Your meter reads higher than your actual consumption, and you pay the difference on every bill.</p>";
-  var b3="<p class='c-copy'>But electricity has a consequence water doesn\u2019t. Those same surges and spikes create heat inside your equipment\u2014raising maintenance costs and shortening the life of every motor and drive in the building, often by a decade or more.</p>";
+  var b1="<p class='c-copy'>What the DOE number does not explain is where the waste comes from. In most modern facilities, <strong>80% of electrical distortion is generated inside the building</strong> — by the equipment already running in it.</p>";
+  var b2a="<p class='c-copy'>Your "+names+" all generate harmonic distortion as a byproduct of how they operate. The more updated your facility, the more distortion it produces. Nobody disclosed that when you upgraded.</p><p class='c-copy'>That distortion feeds back into your building\u2019s wiring and does two things your utility company does not explain on your bill.</p>";
+  var b2c="<p class='c-copy'>Think of clean power as water flowing smoothly through a pipe. When air bubbles get in, the pipe still runs — but the meter counts the bubbles as flow. You pay for water that never came out the other end. Electrical distortion works the same way. Your meter reads it as real consumption. You are billed for kilowatt hours that never powered a single device.</p>";
+  var b3="<p class='c-copy'>The distorted current that does reach your equipment runs hotter than it was designed to handle. Every cycle does more damage than it should. Equipment that should last fifteen years starts failing in eight.</p>";
   var floorPct=parseFloat(ins.range)||15;
   var inflated=Math.round(100*(1+floorPct/100));
   var illus=buildIllustration(eq,inflated);
@@ -1954,6 +2014,18 @@ function updateClaimS2(){
   var icoSvg=facIcoEl?'<svg style="width:22px;height:22px;flex-shrink:0;stroke:rgba(255,255,255,0.82);stroke-width:1.75;fill:none;stroke-linecap:round;stroke-linejoin:round;" viewBox="0 0 24 24">'+facIcoEl.innerHTML+'</svg>':'';
   var label=ins.noun.charAt(0).toUpperCase()+ins.noun.slice(1);
   el.innerHTML="<h2 class='c-hed' style='justify-content:space-between;'>"+label+icoSvg+"</h2>"+b1+b2a+b2c+illus+b3;
+  // IntersectionObserver: trigger draw-on only when illustration enters view
+  if('IntersectionObserver' in window){
+    var illusW=el.querySelector('.s2-illus-wrap');
+    if(illusW){
+      var aPaths=illusW.querySelectorAll('.ild0,.ild1,.ild2');
+      aPaths.forEach(function(p){p.style.animationPlayState='paused';});
+      var iObs=new IntersectionObserver(function(entries){
+        if(entries[0].isIntersecting){aPaths.forEach(function(p){p.style.animationPlayState='running';});iObs.disconnect();}
+      },{threshold:0.25});
+      iObs.observe(illusW);
+    }
+  }
 }
 
 function updateClaimS3(){
@@ -2136,15 +2208,25 @@ function buildSmsLinks(){
     var el=document.getElementById(id); if(el) el.href=href;
   });
 }
-function buildVideoLink(){
+function buildPrimaryCta(){
   if(!state.selected||!INSIGHTS[state.selected]) return;
   var ins=INSIGHTS[state.selected];
   var spendAmt=state.spend>0?(" spending about "+fmtK(state.spend)+" per year"):"";
   var stateName=(document.getElementById("state-select")||{}).value||"";
   var stateStr=stateName?" in "+stateName:"";
-  var msg="Hi \u2014 I just ran the Energy Plus savings calculator. I have a "+ins.label+spendAmt+stateStr+". I\u2019d like to see the custom video walkthrough for my facility.";
-  var el=document.getElementById("sms-link-video");
+  var msg="Hi \u2014 I just ran the Energy Plus calculator for my "+ins.label+spendAmt+stateStr+". I\u2019d like to confirm my number in 22 minutes.";
+  var el=document.getElementById("sms-link-primary");
   if(el) el.href="sms:+18647770688?body="+encodeURIComponent(msg);
+}
+function updateCostOfWaiting(){
+  var el=document.getElementById("rn-waiting");
+  if(!el||!state.selected||!state.spend) return;
+  var r=compute();
+  var stateName=(document.getElementById("state-select")||{}).value||"";
+  var monthlyFloor=Math.round(r.floor/12);
+  var monthlyCeil=Math.round(r.ceil/12);
+  var stateStr=stateName?" In "+stateName+", rising":"Rising";
+  el.textContent="Every 30 days you wait, "+fmtFull(monthlyFloor)+" to "+fmtFull(monthlyCeil)+" walks out of your building. "+stateStr+" electricity rates mean that number grows automatically — even if nothing else in your operation changes.";
 }
 function updateSummaryBar(){
   var el=document.getElementById("c-sum-text"); if(!el) return;
@@ -2154,6 +2236,7 @@ function updateSummaryBar(){
   if(state.sqft>0) parts.push(state.sqft.toLocaleString("en-US")+" sq ft");
   el.innerHTML=parts.join("<span class='c-sum-sep'> · </span>");
   buildSmsLinks();
+  buildPrimaryCta(); updateCostOfWaiting();
 }
 /* ─────────────────────────────────────────────────────────────────────── */
 
