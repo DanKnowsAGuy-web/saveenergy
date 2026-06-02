@@ -2390,7 +2390,7 @@ function updateClaimS2(){
   var facIcoEl=facTile?facTile.querySelector('.fac-ico'):null;
   var icoSvg=facIcoEl?'<svg style="width:22px;height:22px;flex-shrink:0;stroke:rgba(255,255,255,0.82);stroke-width:1.75;fill:none;stroke-linecap:round;stroke-linejoin:round;" viewBox="0 0 24 24">'+facIcoEl.innerHTML+'</svg>':'';
   var label=ins.noun.charAt(0).toUpperCase()+ins.noun.slice(1);
-  el.innerHTML="<h2 class='c-hed' style='justify-content:space-between;'>"+label+icoSvg+"</h2>"+b1+b2a+b2c+illus+b3;
+  el.innerHTML="<h2 class='c-hed' style='justify-content:space-between;'>"+label+icoSvg+"</h2>"+b1+b2a+b2c+b3+illus;
   // IntersectionObserver: trigger draw-on only when illustration enters view
   if('IntersectionObserver' in window){
     var illusW=el.querySelector('.s2-illus-wrap');
