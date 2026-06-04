@@ -1094,6 +1094,7 @@ body{font-size:17px;}
     <div id="c-s3" style="display:none">
       <div class="c-progress"><span class="c-progress-step done"></span><span class="c-progress-step done"></span><span class="c-progress-step active"></span><span class="c-progress-label">3 / 3</span></div>
       <div id="c-claim-s3" class="c-card"></div>
+      <div id="c-sqft-wrap">
       <span class="c-ask">Adjust your estimated square footage to calculate your Section 179D deduction</span>
       <div style="margin-top:16px;">
         <div class="sqft-slider-row">
@@ -1104,6 +1105,7 @@ body{font-size:17px;}
           </div>
           <input type="range" id="c-sqft" class="rng sqft-rng" min="0" max="100" value="50" oninput="onConsultSqft()">
         </div>
+      </div>
       </div>
       <div class="c-ded-result" id="c-ded-result"></div>
       <div class="c-nav-row">
@@ -1425,7 +1427,7 @@ body{font-size:17px;}
 </div>
 
 <script>
-var STATE_COOL = {"Alabama":65,"Alaska":22,"Arizona":80,"Arkansas":65,"California":50,"Colorado":35,"Connecticut":35,"Delaware":50,"District of Columbia":50,"Florida":80,"Georgia":65,"Hawaii":80,"Idaho":22,"Illinois":35,"Indiana":35,"Iowa":35,"Kansas":50,"Kentucky":50,"Louisiana":80,"Maine":22,"Maryland":50,"Massachusetts":35,"Michigan":22,"Minnesota":22,"Mississippi":65,"Missouri":50,"Montana":22,"Nebraska":35,"Nevada":65,"New Hampshire":22,"New Jersey":35,"New Mexico":65,"New York":35,"North Carolina":65,"North Dakota":22,"Ohio":35,"Oklahoma":65,"Oregon":50,"Pennsylvania":35,"Rhode Island":35,"South Carolina":65,"South Dakota":22,"Tennessee":65,"Texas":80,"Utah":35,"Vermont":22,"Virginia":50,"Washington":50,"West Virginia":50,"Wisconsin":22,"Wyoming":22};
+var STATE_COOL = {"Alabama":65,"Alaska":22,"Arizona":80,"Arkansas":65,"California":50,"Colorado":35,"Connecticut":35,"Delaware":50,"District of Columbia":50,"Florida":80,"Georgia":65,"Hawaii":80,"Idaho":22,"Illinois":35,"Indiana":35,"Iowa":35,"Kansas":50,"Kentucky":50,"Louisiana":80,"Maine":22,"Maryland":50,"Massachusetts":35,"Michigan":22,"Minnesota":22,"Mississippi":65,"Missouri":50,"Montana":22,"Nebraska":35,"Nevada":65,"New Hampshire":22,"New Jersey":35,"New Mexico":65,"New York":35,"North Carolina":65,"North Dakota":22,"Ohio":35,"Oklahoma":65,"Oregon":50,"Pennsylvania":35,"Puerto Rico":80,"Rhode Island":35,"South Carolina":65,"South Dakota":22,"Tennessee":65,"Texas":80,"Utah":35,"Vermont":22,"Virginia":50,"Washington":50,"West Virginia":50,"Wisconsin":22,"Wyoming":22};
 
 var INSIGHTS = {
   cold:    {noun:"cold storage facility",  label:"cold storage",         cat:"cold storage facilities like yours",              fac:"facility", range:"25% to 53%", b1:"Your compressor racks and refrigeration motors are aging faster than they should",                                                                                        b2:"When one fails, you lose not just the equipment but everything behind it"},
@@ -1772,7 +1774,7 @@ var STATE_ABBR={
   "Mississippi":"MS","Missouri":"MO","Montana":"MT","Nebraska":"NE","Nevada":"NV",
   "New Hampshire":"NH","New Jersey":"NJ","New Mexico":"NM","New York":"NY",
   "North Carolina":"NC","North Dakota":"ND","Ohio":"OH","Oklahoma":"OK","Oregon":"OR",
-  "Pennsylvania":"PA","Rhode Island":"RI","South Carolina":"SC","South Dakota":"SD",
+  "Pennsylvania":"PA","Puerto Rico":"PR","Rhode Island":"RI","South Carolina":"SC","South Dakota":"SD",
   "Tennessee":"TN","Texas":"TX","Utah":"UT","Vermont":"VT","Virginia":"VA",
   "Washington":"WA","West Virginia":"WV","Wisconsin":"WI","Wyoming":"WY"
 };
@@ -1781,13 +1783,15 @@ var ESC_TIER = {
   "Maryland":2,"District of Columbia":2,"Illinois":2,"Pennsylvania":2,"Texas":2,
   "Virginia":2,"Rhode Island":2,"New Hampshire":2,"Maine":2,"Delaware":2,"Vermont":2,
   "Washington":4,"Idaho":4,"Montana":4,"North Dakota":4,"South Dakota":4,
-  "Nebraska":4,"Wyoming":4
+  "Nebraska":4,"Wyoming":4,
+  "Puerto Rico":5
 };
 var ESC_DATA = {
   1:{range:"4–6%",rate:0.045,note:"Many analysts expect this pace to accelerate further as grid modernization costs continue rising — which would make these figures conservative."},
   2:{range:"3–4%",rate:0.035,note:"Many analysts expect this pace to accelerate further as grid modernization costs continue rising — which would make these figures conservative."},
   3:{range:"2–3%",rate:0.025,note:"Many analysts expect this pace to accelerate further as grid modernization costs continue rising — which would make these figures conservative."},
-  4:{range:"1–2%",rate:0.018,note:"Many analysts expect this pace to accelerate further as grid modernization costs continue rising — which would make these figures conservative."}
+  4:{range:"1–2%",rate:0.018,note:"Many analysts expect this pace to accelerate further as grid modernization costs continue rising — which would make these figures conservative."},
+  5:{range:"volatile",rate:0.025,note:"Puerto Rico commercial rates rose more than 85% between 2020 and 2022. A new LUMA rate case filed in July 2025 signals further increases are imminent. The 2.5% floor shown here is a conservative projection floor — recent history suggests the real trajectory runs substantially higher."}
 };
 function escalFactor(rate,years){
   if(!rate) return years;
@@ -1956,7 +1960,11 @@ function render(){
   var _rateNote=document.getElementById("cum-rate-note");
   if(_rateNote){
     var _abbr=STATE_ABBR[_sName]||"";
-    _rateNote.innerHTML=_abbr?_ed.range+"% avg annual rate increase<br>"+_abbr+" state average":"Based on "+_ed.range+"% avg annual rate increase";
+    if(_sName==="Puerto Rico"){
+      _rateNote.innerHTML="Conservative 2.5% floor used for projection<br>PR rates rose 85%+ between 2020 and 2022. A new LUMA rate case filed July 2025.";
+    } else {
+      _rateNote.innerHTML=_abbr?_ed.range+"% avg annual rate increase<br>"+_abbr+" state average":"Based on "+_ed.range+"% avg annual rate increase";
+    }
   }
   // Option card qualifying trigger
   var _oq=document.getElementById("option-qualify");
@@ -2061,22 +2069,33 @@ function selectFac(el){
   render();
 }
 function onStateChange(){ var n=document.getElementById("state-select").value; state.stateCool=(STATE_COOL[n]||50); recomputeCool(); document.getElementById("r-cool").value=Math.round(state.coolShare*100); updateNegoStream(n); render(); }
+function isPuertoRico(stateName){ return stateName==="Puerto Rico"; }
+
 function updateNegoStream(stateName){
+  var isPR=isPuertoRico(stateName);
   var isDereg=!!(DEREG_STATES&&DEREG_STATES[stateName]);
-  state.tNego=true; // auto-enable for all states — operator can turn off in assumptions
-  var ns=document.getElementById("ss-nego"); if(ns) ns.style.display="block";
-  var stEl=document.getElementById("ss-st-nego"); if(stEl) stEl.textContent="Included";
-  // Update stream description based on regulated vs deregulated
-  var descEl=document.querySelector("#ss-nego .ss-desc");
-  var lockEl=document.querySelector("#ss-nego .lock-tag");
-  if(descEl){
-    if(isDereg){
-      descEl.textContent="Your state has a deregulated electricity market, meaning you can shop your supply rate. We negotiate directly with generators on your behalf to lower the supply portion of your bill without changing your utility relationship.";
-      if(lockEl) lockEl.textContent="Deregulated market";
-    } else {
-      descEl.textContent="Your state is regulated, but utilities regularly add demand programs, infrastructure surcharges, and billing riders that most operators never notice. Many can be restructured or opted out of with the right knowledge of your utility's rate structure.";
-      if(lockEl) lockEl.textContent="Regulated market";
+  // Puerto Rico: hide nego entirely — fully regulated, no deregulated option, no tariff negotiation framing applies
+  state.tNego=isPR?false:true;
+  var ns=document.getElementById("ss-nego"); if(ns) ns.style.display=isPR?"none":"block";
+  var stEl=document.getElementById("ss-st-nego"); if(stEl) stEl.textContent=isPR?"Not available":"Included";
+  if(!isPR){
+    var descEl=document.querySelector("#ss-nego .ss-desc");
+    var lockEl=document.querySelector("#ss-nego .lock-tag");
+    if(descEl){
+      if(isDereg){
+        descEl.textContent="Your state has a deregulated electricity market, meaning you can shop your supply rate. We negotiate directly with generators on your behalf to lower the supply portion of your bill without changing your utility relationship.";
+        if(lockEl) lockEl.textContent="Deregulated market";
+      } else {
+        descEl.textContent="Your state is regulated, but utilities regularly add demand programs, infrastructure surcharges, and billing riders that most operators never notice. Many can be restructured or opted out of with the right knowledge of your utility's rate structure.";
+        if(lockEl) lockEl.textContent="Regulated market";
+      }
     }
+  }
+  // Puerto Rico: force heating off, cooling fixed at 80
+  if(isPR){
+    state.tHeat=false; state.hasElecHeat=false;
+    state.stateCool=80; recomputeCool();
+    var heatRow=document.getElementById("ss-heat"); if(heatRow) heatRow.style.display="none";
   }
 }
 function toggleStream(which){
@@ -2696,40 +2715,55 @@ function updateClaimS3(){
   var stateNameBold=_s3sn?"<strong>"+_s3sn+"</strong>":"Your state";
   var stateText="";
   if(_s3sn){
-    if(_s3dereg){
+    if(isPuertoRico(_s3sn)){
+      stateText="<strong>Puerto Rico</strong> commercial operators pay roughly double the US mainland average rate, currently between $0.28 and $0.30 per kilowatt-hour all-in. Rates on the island rose more than 85% between 2020 and 2022. A new LUMA rate case was filed in July 2025, signaling further increases are imminent. The PREPA grid carries documented voltage instability that most mainland facilities never experience. Your equipment is dealing with distortion from two directions simultaneously: the harmonics your own systems generate, and an external supply that is not clean to begin with. Every dollar of waste inside your building costs you twice what it would cost the same facility in most US states.";
+    } else if(_s3dereg){
       stateText=stateNameBold+" is a deregulated electricity market. Your facility has the legal right to shop its rate — most operators never exercise it. A properly structured negotiation typically reduces your per-kilowatt-hour cost without changing a single piece of equipment.";
     } else {
       stateText=stateNameBold+" is a regulated electricity market. You cannot switch suppliers, but regulated utilities regularly add demand programs, infrastructure surcharges, and billing riders that most operators never notice. Many can be restructured or opted out of entirely with the right knowledge of your utility's rate structure.";
     }
   }
 
+  var isPR=isPuertoRico(_s3sn);
   var isHealth=(state.selected==='health');
   var h="";
-  var itemCount=_s3sn?(isHealth?5:4):(isHealth?4:3);
   var diagText="Electrical distortion does not only damage your diagnostic equipment. It affects what that equipment measures. Mass spectrometers require parts-per-million voltage stability. Instability causes compound misidentification, which is a direct diagnostic error. Ultrasound systems on dirty power corrupt the harmonic imaging signal that tissue imaging depends on. Electron microscopes are among the most EMI-sensitive instruments in any building, and better instruments are more susceptible, not less. MRI, CT, DEXA, and DNA sequencers each carry documented vulnerabilities as well. This is the one electrical problem that does not announce itself.";
+  var showDed=!isPR;
+  var diagCount=isHealth?1:0;
+  var stateCount=_s3sn?1:0;
+  var itemCount=stateCount+1+1+diagCount+(showDed?1:0);
 
   h+="<div class='s3-known-hd-main'>"+itemCount+" things worth knowing about your "+noun+"</div>";
   h+="<div class='s3-known-wrap'>";
+  var idx=1;
   if(_s3sn){
-    h+="<div class='s3-known-item'><div class='s3-known-num'>01</div><div class='s3-known-body'><div class='s3-known-label'>Your State</div><div class='s3-known-text'>"+stateText+"</div></div></div>";
+    h+="<div class='s3-known-item'><div class='s3-known-num'>0"+idx+"</div><div class='s3-known-body'><div class='s3-known-label'>Your State</div><div class='s3-known-text'>"+stateText+"</div></div></div>"; idx++;
   }
-  var n2=_s3sn?"02":"01", n3=_s3sn?"03":"02", n4=_s3sn?(isHealth?"04":"03"):(isHealth?"03":"02"), n5=_s3sn?(isHealth?"05":"04"):(isHealth?"04":"03");
-  h+="<div class='s3-known-item'><div class='s3-known-num'>"+n2+"</div><div class='s3-known-body'><div class='s3-known-label'>Your Future Bill</div><div class='s3-known-text'>"+billText+"</div></div></div>";
-  h+="<div class='s3-known-item'><div class='s3-known-num'>"+n3+"</div><div class='s3-known-body'><div class='s3-known-label'>Your Equipment</div><div class='s3-known-text'>"+equipText+"</div>"+costsHtml+"</div></div>";
+  h+="<div class='s3-known-item'><div class='s3-known-num'>0"+idx+"</div><div class='s3-known-body'><div class='s3-known-label'>Your Future Bill</div><div class='s3-known-text'>"+billText+"</div></div></div>"; idx++;
+  h+="<div class='s3-known-item'><div class='s3-known-num'>0"+idx+"</div><div class='s3-known-body'><div class='s3-known-label'>Your Equipment</div><div class='s3-known-text'>"+equipText+"</div>"+costsHtml+"</div></div>"; idx++;
   if(isHealth){
-    h+="<div class='s3-known-item s3-known-item-alert'><div class='s3-known-num'>"+n4+"</div><div class='s3-known-body'><div class='s3-known-label'>Your Diagnostic Results</div><div class='s3-known-text'>"+diagText+"</div></div></div>";
+    h+="<div class='s3-known-item s3-known-item-alert'><div class='s3-known-num'>0"+idx+"</div><div class='s3-known-body'><div class='s3-known-label'>Your Diagnostic Results</div><div class='s3-known-text'>"+diagText+"</div></div></div>"; idx++;
   }
-  h+="<div class='s3-known-item'><div class='s3-known-num'>"+n5+"</div><div class='s3-known-body'><div class='s3-known-label'>Your Deductions</div><div class='s3-known-text'>"+dedText+"</div></div></div>";
+  if(showDed){
+    h+="<div class='s3-known-item'><div class='s3-known-num'>0"+idx+"</div><div class='s3-known-body'><div class='s3-known-label'>Your Deductions</div><div class='s3-known-text'>"+dedText+"</div></div></div>";
+  }
   h+="</div>";
 
   el.innerHTML=h;
   buildSmsLinks();
 
-  // Auto-populate sqft slider based on spend and facility type
-  if(state.selected && state.spend>0){
-    var defSqft=estimateSqft(state.selected,state.spend);
-    if(!state.sqft) initSqftSlider(defSqft);
-    else initSqftSlider(state._sqftEst||defSqft);
+  // Auto-populate sqft slider based on spend and facility type — hidden for Puerto Rico
+  var _sliderWrap=document.getElementById("c-sqft-wrap");
+  if(isPuertoRico((document.getElementById("c2-state")||{}).value||"")){
+    if(_sliderWrap) _sliderWrap.style.display="none";
+    var _ded=document.getElementById("c-ded-result"); if(_ded) _ded.style.display="none";
+  } else {
+    if(_sliderWrap) _sliderWrap.style.display="";
+    if(state.selected && state.spend>0){
+      var defSqft=estimateSqft(state.selected,state.spend);
+      if(!state.sqft) initSqftSlider(defSqft);
+      else initSqftSlider(state._sqftEst||defSqft);
+    }
   }
 }
 
