@@ -30,7 +30,7 @@ body::before{content:'';position:fixed;inset:0;background-image:url("data:image/
 @keyframes calcEntrance{from{opacity:0;transform:translateY(12px);}to{opacity:1;transform:translateY(0);}}
 .calc{width:100%;max-width:700px;background:var(--ink-2);border:1px solid var(--gold-rule);box-shadow:0 0 0 1px rgba(200,169,110,0.06),0 24px 60px -28px rgba(0,0,0,0.72);overflow-x:hidden;position:relative;z-index:1;animation:calcEntrance 0.6s cubic-bezier(0.22,1,0.36,1) both;}
 
-.calc-head{background:radial-gradient(ellipse 60% 100% at 90% 50%,rgba(200,169,110,0.05) 0%,transparent 55%),var(--ink);padding:34px 38px 30px;position:relative;overflow:hidden;}
+.calc-head{background:radial-gradient(ellipse 60% 100% at 90% 50%,rgba(200,169,110,0.05) 0%,transparent 55%),var(--ink);padding:34px 38px 30px;position:relative;}
 .calc-head::before{content:'';position:absolute;inset:0;background:repeating-linear-gradient(0deg,rgba(200,169,110,0.016) 0px,rgba(200,169,110,0.016) 1px,transparent 1px,transparent 30px),repeating-linear-gradient(90deg,rgba(200,169,110,0.016) 0px,rgba(200,169,110,0.016) 1px,transparent 1px,transparent 30px);pointer-events:none;z-index:0;}
 .calc-head::after{content:'';position:absolute;right:-40px;top:-40px;width:180px;height:180px;background:radial-gradient(circle,rgba(200,169,110,0.10),transparent 70%);}
 .calc-eyebrow{position:relative;font-family:'Barlow',sans-serif;font-size:14px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:var(--copper-light);margin-bottom:14px;display:flex;align-items:center;gap:10px;}
@@ -701,13 +701,40 @@ body::before{content:'';position:fixed;inset:0;background-image:url("data:image/
 .band-btn.active .band-btn-range{color:#fff;}
 .band-btn-arrow{font-size:14px;color:rgba(255,255,255,0.3);flex-shrink:0;margin-left:10px;}
 .band-btn.active .band-btn-arrow{color:var(--copper-pale);}
-/* Step 1 grayed out after selection */
-.band-step1-done .band-btn{opacity:0.38;pointer-events:none;}
-.band-step1-done .band-btn.active{opacity:0.75;}
+/* Step 1 dimmed after selection but still re-tappable (pick a different range) */
+.band-step1-done .band-btn{opacity:0.5;}
+.band-step1-done .band-btn:hover{opacity:0.85;}
+.band-step1-done .band-btn.active{opacity:1;}
 .band-refine-label{font-family:'Barlow',sans-serif;font-size:clamp(15px,2.2vw,17px);font-weight:700;color:#fff;margin:16px 0 10px;display:flex;align-items:center;gap:8px;flex-wrap:wrap;}
 .band-refine-range{color:var(--copper-pale);font-weight:400;font-size:clamp(13px,1.8vw,15px);}
 .band-reset-btn{margin-top:10px;background:none;border:none;color:rgba(255,255,255,0.35);font-family:'Barlow',sans-serif;font-size:13px;cursor:pointer;padding:4px 0;text-decoration:underline;text-underline-offset:3px;}
 .band-reset-btn:hover{color:rgba(255,255,255,0.65);}
+/* ── FACILITY COUNT CHIPS ── */
+.c-field-sub{font-family:'Barlow',sans-serif;font-size:13px;color:rgba(255,255,255,0.5);line-height:1.5;margin-top:4px;}
+.fac-count-grid{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px;}
+.fc-chip{flex:0 0 auto;padding:12px 18px;border:1px solid rgba(200,169,110,0.22);background:rgba(200,169,110,0.045);color:var(--white);font-family:'Barlow',sans-serif;font-size:clamp(14px,2vw,16px);font-weight:500;cursor:pointer;transition:all 0.16s;line-height:1.2;position:relative;overflow:hidden;}
+.fc-chip::after{content:'';position:absolute;top:0;left:-100%;width:50%;height:100%;background:linear-gradient(105deg,transparent 20%,rgba(200,169,110,0.12) 50%,transparent 80%);transform:skewX(-18deg);transition:left 0.55s ease;pointer-events:none;}
+.fc-chip:hover::after{left:160%;}
+.fc-chip:hover{border-color:var(--gold);background:rgba(200,169,110,0.11);box-shadow:0 0 14px rgba(200,169,110,0.2);}
+.fc-chip.active{border-color:var(--gold);background:rgba(200,169,110,0.18);color:var(--gold-bright);font-weight:700;}
+/* ── SIGNAL BOX ── */
+.signal-box{margin-top:16px;padding:14px 16px;background:rgba(200,169,110,0.08);border:1px solid rgba(200,169,110,0.28);border-left:3px solid var(--copper);animation:bandShimmer 0.35s cubic-bezier(0.22,1,0.36,1) both;}
+.signal-box-label{font-family:'Barlow',sans-serif;font-size:12px;font-weight:700;letter-spacing:0.05em;text-transform:uppercase;color:var(--copper-pale);margin-bottom:7px;}
+.signal-box-text{font-family:'Barlow',sans-serif;font-size:14px;color:rgba(255,255,255,0.82);line-height:1.65;}
+/* ── PORTFOLIO / PER-FACILITY (RESULT) ── */
+.hero-tag{font-family:'Barlow',sans-serif;font-size:13px;font-weight:700;letter-spacing:0.07em;text-transform:uppercase;color:var(--copper-pale);margin-bottom:10px;}
+.portfolio-defer{font-family:'Barlow',sans-serif;font-size:12.5px;color:rgba(255,255,255,0.5);line-height:1.55;margin-top:12px;}
+.perfac-block{margin-top:24px;padding-top:20px;border-top:1px solid rgba(200,169,110,0.18);}
+.perfac-tag{font-family:'Barlow',sans-serif;font-size:12px;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;color:var(--copper-pale);margin-bottom:8px;}
+.perfac-range{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;margin-bottom:6px;}
+.perfac-range #pf-floor,.perfac-range #pf-ceil{font-family:'Cormorant Garamond',serif;font-weight:500;font-size:clamp(22px,4.5vw,32px);color:rgba(255,255,255,0.92);line-height:1;letter-spacing:-0.01em;}
+.perfac-range .perfac-to{font-family:'Barlow',sans-serif;font-size:13px;font-weight:500;letter-spacing:0.03em;text-transform:uppercase;color:rgba(255,255,255,0.45);}
+.cum-row-sm{margin-top:12px;}
+.cum-row-sm .cum-cell{padding:13px 16px;}
+.cum-row-sm .cum-val{font-size:clamp(18px,4vw,26px)!important;margin-bottom:5px;}
+.cum-row-sm .cum-lab{font-size:11px;}
+.rn-equip-cta{margin-top:18px;padding:16px 18px;background:rgba(200,169,110,0.08);border:1px solid rgba(200,169,110,0.28);border-left:3px solid var(--copper);font-family:'Barlow',sans-serif;font-size:15px;color:rgba(255,255,255,0.9);line-height:1.6;}
+.rn-equip-cta a{color:var(--gold-bright);text-decoration:underline;text-underline-offset:3px;}
 .s3-known-item-alert{border-left:3px solid var(--gold);background:rgba(200,169,110,0.06);padding-left:14px;margin-left:-14px;}
 .s3-known-item-alert .s3-known-label{color:var(--gold-light);}
 /* ── SOCIAL PROOF STRIP ── */
@@ -1016,8 +1043,71 @@ body{font-size:17px;}
 .assumptions-open .assump-chev{transform:rotate(90deg);}
 /* ── INTER-SECTION DIVIDERS — gold gradient rule ── */
 .s3-known-hd{border-top:1px solid transparent!important;border-image:linear-gradient(to right,transparent,rgba(200,169,110,0.3),transparent) 1!important;}
-/* ── REDUCED MOTION ── */
-@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition-duration:0.01ms!important;}}
+/* ── LANGUAGE TOGGLE — sticky bar above card ── */
+.lang-bar{
+  position:sticky;
+  top:0;
+  z-index:100;
+  display:flex;
+  align-items:center;
+  justify-content:flex-end;
+  padding:7px 14px;
+  background:rgba(8,11,13,0.92);
+  border-bottom:1px solid rgba(200,169,110,0.18);
+  backdrop-filter:blur(8px);
+  -webkit-backdrop-filter:blur(8px);
+}
+.lang-toggle{display:flex;align-items:center;gap:0;border:1px solid rgba(200,169,110,0.35);overflow:hidden;}
+.lang-btn{font-family:'Barlow',sans-serif;font-size:12px;font-weight:700;letter-spacing:0.08em;padding:6px 14px;background:transparent;border:none;color:rgba(255,255,255,0.45);cursor:pointer;transition:all 0.18s;line-height:1;}
+.lang-btn.active{background:var(--copper);color:#fff;}
+.lang-btn:hover:not(.active){color:rgba(255,255,255,0.82);}
+/* ── GUARANTEE TOOLTIP ── */
+.guarantee-wrap{position:relative;display:inline;}
+.guarantee-asterisk{display:inline-flex;align-items:center;justify-content:center;width:16px;height:16px;border-radius:50%;background:rgba(200,169,110,0.25);border:1px solid rgba(200,169,110,0.45);color:var(--copper-pale);font-family:'Barlow',sans-serif;font-size:11px;font-weight:700;cursor:pointer;margin-left:5px;vertical-align:middle;line-height:1;flex-shrink:0;transition:background 0.18s;}
+.guarantee-asterisk:hover{background:rgba(200,169,110,0.45);}
+.guarantee-tooltip{position:absolute;bottom:calc(100% + 8px);left:50%;transform:translateX(-50%);background:rgba(8,11,13,0.97);border:1px solid rgba(200,169,110,0.35);padding:10px 14px;font-family:'Barlow',sans-serif;font-size:12px;color:rgba(255,255,255,0.72);line-height:1.6;white-space:nowrap;pointer-events:none;opacity:0;transition:opacity 0.18s;z-index:200;}
+.guarantee-tooltip.visible{opacity:1;pointer-events:auto;}
+.guarantee-tooltip::after{content:'';position:absolute;top:100%;left:50%;transform:translateX(-50%);border:5px solid transparent;border-top-color:rgba(200,169,110,0.35);}
+@media(max-width:560px){
+  .guarantee-tooltip{white-space:normal;width:240px;left:auto;right:-8px;transform:none;}
+  .guarantee-tooltip::after{left:auto;right:16px;transform:none;}
+}
+/* ── STAGE 0 HERO ── */
+.s0-title{font-family:'Playfair Display',serif;font-weight:800;font-size:clamp(26px,5vw,38px);line-height:1.1;letter-spacing:-0.02em;color:#fff;margin-bottom:10px;}
+.s0-title em{font-style:italic;color:var(--copper-pale);}
+.s0-hook{font-size:clamp(17px,2.4vw,20px);color:rgba(255,255,255,0.78);line-height:1.65;margin-bottom:22px;font-family:'Barlow',sans-serif;}
+.s0-guarantee{display:flex;align-items:flex-start;gap:12px;background:rgba(200,169,110,0.08);border:1px solid rgba(200,169,110,0.28);border-left:3px solid var(--copper);padding:16px 18px;margin-bottom:26px;}
+.s0-guarantee-ico{font-size:20px;flex-shrink:0;line-height:1.3;}
+.s0-guarantee-text{font-family:'Barlow',sans-serif;font-size:clamp(15px,2.2vw,17px);color:rgba(255,255,255,0.88);line-height:1.6;}
+.s0-proof{display:flex;flex-direction:column;gap:10px;margin-bottom:26px;padding-bottom:22px;border-bottom:1px solid rgba(200,169,110,0.18);}
+.s0-proof-item{display:flex;align-items:baseline;gap:10px;}
+.s0-proof-num{font-family:'Barlow',sans-serif;font-size:clamp(22px,3.5vw,28px);font-weight:700;color:var(--copper-pale);flex-shrink:0;line-height:1;font-variant-numeric:tabular-nums;}
+.s0-proof-desc{font-size:clamp(14px,2vw,16px);color:rgba(255,255,255,0.62);line-height:1.4;font-family:'Barlow',sans-serif;}
+.s0-proof-name{font-weight:700;color:rgba(255,255,255,0.88);}
+.s0-transition{font-family:'Barlow',sans-serif;font-size:14px;color:rgba(255,255,255,0.48);letter-spacing:0.04em;text-transform:uppercase;margin-bottom:12px;}
+/* ── COUNTRY SELECTOR ── */
+.country-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:14px;}
+.country-opt{border:1px solid rgba(200,169,110,0.22);background:rgba(200,169,110,0.045);padding:22px 16px;cursor:pointer;transition:all 0.18s;display:flex;flex-direction:column;align-items:center;gap:8px;text-align:center;}
+.country-opt:hover{border-color:var(--gold);background:rgba(200,169,110,0.12);transform:translateY(-2px);box-shadow:0 6px 18px rgba(0,0,0,0.28);}
+.country-opt.active{background:linear-gradient(135deg,rgba(200,169,110,0.26) 0%,rgba(200,169,110,0.12) 100%);border-color:var(--gold);color:#fff;}
+.country-name{font-family:'Barlow',sans-serif;font-size:17px;font-weight:700;color:#fff;letter-spacing:0.01em;}
+.country-sub{font-family:'Barlow',sans-serif;font-size:12px;color:rgba(255,255,255,0.52);letter-spacing:0.02em;}
+/* ── MEXICO ASSUMPTION CHIPS ── */
+.mx-assumption-chip{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:10px;padding:12px 14px;background:rgba(200,169,110,0.08);border:1px solid rgba(200,169,110,0.28);border-left:3px solid var(--copper);}
+.mx-chip-content{font-family:'Barlow',sans-serif;font-size:14px;color:rgba(255,255,255,0.82);line-height:1.5;flex:1;}
+.mx-chip-label{color:var(--copper-pale);font-weight:600;margin-right:6px;letter-spacing:0.02em;text-transform:uppercase;font-size:12px;}
+.mx-chip-edit{background:none;border:1px solid rgba(200,169,110,0.38);color:var(--copper-pale);font-family:'Barlow',sans-serif;font-size:12px;letter-spacing:0.04em;padding:6px 10px;cursor:pointer;transition:all 0.18s;white-space:nowrap;flex-shrink:0;}
+.mx-chip-edit:hover{border-color:var(--copper);color:#fff;}
+.mx-assumption-edit{margin-top:2px;padding:16px;background:rgba(255,255,255,0.04);border:1px solid rgba(200,169,110,0.18);border-top:none;}
+.mx-edit-row{margin-bottom:16px;}
+.mx-edit-row:last-child{margin-bottom:0;}
+.mx-edit-row label{display:block;font-family:'Barlow',sans-serif;font-size:13px;font-weight:600;letter-spacing:0.04em;text-transform:uppercase;color:rgba(255,255,255,0.58);margin-bottom:10px;}
+.mx-slider-wrap{display:flex;align-items:center;gap:12px;}
+.mx-slider-wrap .rng{flex:1;}
+.mx-slider-val{font-family:'Barlow',sans-serif;font-size:15px;font-weight:600;color:var(--copper-pale);flex-shrink:0;min-width:38px;text-align:right;}
+/* ── MX DUAL CURRENCY DISPLAY ── */
+.mx-peso-line{font-family:'Barlow',sans-serif;font-size:14px;color:rgba(255,255,255,0.45);margin-top:4px;letter-spacing:0.02em;}
+/* ─────────────────────────────────────────────────────────────────────── */
 /* ─────────────────────────────────────────────────────────────────────── */
 </style>
 </head>
@@ -1025,8 +1115,15 @@ body{font-size:17px;}
 
 <div class="calc" id="calc">
 
+  <div class="lang-bar">
+    <div class="lang-toggle" id="lang-toggle">
+      <button class="lang-btn active" id="lang-en" onclick="setLang('en')">EN</button>
+      <button class="lang-btn" id="lang-es" onclick="setLang('es')">ES</button>
+    </div>
+  </div>
+
   <div class="calc-head">
-    <div class="calc-eyebrow">Energy savings estimator</div>
+    <div class="calc-eyebrow" id="calc-eyebrow">Your Energy Saver</div>
     <h1 class="calc-title" id="calc-title">Most commercial operators are paying three electricity bills. <em>They only know about one.</em></h1>
     <p class="calc-sub" id="calc-sub">Select your facility type. We will show you exactly where your building is losing money and why it does not show up on your bill.</p>
   </div>
@@ -1037,12 +1134,40 @@ body{font-size:17px;}
 
     <div id="c-crumbs" class="c-crumbs" style="display:none"></div>
 
+    <!-- Stage 0: Country selector -->
+    <div id="c-s0">
+      <h2 class="s0-title" id="t-s0-title"><em>Slash Your Energy Cost</em></h2>
+      <p class="s0-hook" id="t-s0-hook">Most commercial operators are overpaying on their electric bill. Almost none of them know by how much. This tells you.</p>
+      <div class="s0-guarantee">
+        <span class="s0-guarantee-ico">&#9889;</span>
+        <span class="s0-guarantee-text" id="t-s0-guarantee">If this calculator can't find you savings in under two minutes, we'll pay our engineer to find them for you.<span class="guarantee-wrap"><button class="guarantee-asterisk" onclick="toggleGuaranteeTooltip(event)" aria-label="Guarantee terms">*</button><span class="guarantee-tooltip" id="guarantee-tooltip" id="t-guarantee-tooltip">Valid for commercial facilities. $2,000+/month spend. New inquiries only. One per facility. Engineer fee capped at $150.</span></span></span>
+      </div>
+      <div class="s0-proof">
+        <div class="s0-proof-item"><span class="s0-proof-num">49%</span><span class="s0-proof-desc">energy savings — <strong class="s0-proof-name">Arizona Ford Dealership</strong></span></div>
+        <div class="s0-proof-item"><span class="s0-proof-num">$180K/yr</span><span class="s0-proof-desc">independently verified — <strong class="s0-proof-name">Edward Hospital, Illinois</strong></span></div>
+        <div class="s0-proof-item"><span class="s0-proof-num">33%</span><span class="s0-proof-desc">energy savings — <strong class="s0-proof-name">Midwest Bottling Facility</strong></span></div>
+      </div>
+      <div class="s0-transition" id="t-s0-transition">Where is your facility located?</div>
+      <div class="country-grid" id="country-grid">
+        <div class="country-opt" data-country="us" onclick="selectCountry('us')">
+          <svg class="fac-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="9" x2="23" y2="9"/><line x1="1" y1="14" x2="23" y2="14"/><line x1="8" y1="4" x2="8" y2="20"/></svg>
+          <span class="country-name" id="t-us-name">United States</span>
+          <span class="country-sub" id="t-us-sub">All 50 states + Puerto Rico</span>
+        </div>
+        <div class="country-opt" data-country="mx" onclick="selectCountry('mx')">
+          <svg class="fac-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg>
+          <span class="country-name">México</span>
+          <span class="country-sub">Tarifa CFE — todas las regiones</span>
+        </div>
+      </div>
+    </div>
+
     <!-- Stage 1: DOE claim + facility grid -->
-    <div id="c-s1">
-      <p class="c-doe">According to the DOE, the average commercial building wastes <strong>30% of its energy</strong>. Facilities with newer equipment are often losing significantly more.</p>
-      <div class="c-progress"><span class="c-progress-step active"></span><span class="c-progress-step"></span><span class="c-progress-step"></span><span class="c-progress-label">1 / 3</span></div>
+    <div id="c-s1" style="display:none">
+      <p class="c-doe" id="t-s1-doe">According to the DOE, the average commercial building wastes <strong>30% of its energy</strong>. Facilities with newer equipment are often losing significantly more.</p>
+      <div class="c-progress"><span class="c-progress-step done"></span><span class="c-progress-step active"></span><span class="c-progress-step"></span><span class="c-progress-step"></span><span class="c-progress-label">2 / 4</span></div>
       
-      <div class="c-choose-label">Choose your facility type</div>
+      <div class="c-choose-label" id="t-choose-fac">Choose your facility type</div>
       <div class="fac-grid" id="fac-grid">
         <div class="fac-opt" data-key="ind"     data-share="15" data-harmo="13" data-coolmin="0"  data-min="50000"   data-max="20000000" data-step="25000" data-def="800000"><svg class="fac-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/></svg>Industrial / Mfg</div>
         <div class="fac-opt" data-key="datactr" data-share="10" data-harmo="18" data-coolmin="0"  data-min="200000"  data-max="50000000" data-step="50000" data-def="2000000"><svg class="fac-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="2"/><line x1="2" y1="7" x2="22" y2="7"/><line x1="2" y1="12" x2="22" y2="12"/><line x1="2" y1="17" x2="22" y2="17"/><circle cx="18" cy="4.5" r="1" fill="currentColor" stroke="none"/><circle cx="18" cy="9.5" r="1" fill="currentColor" stroke="none"/><circle cx="18" cy="14.5" r="1" fill="currentColor" stroke="none"/></svg>Data Center</div>
@@ -1061,41 +1186,135 @@ body{font-size:17px;}
         <div class="fac-opt" data-key="cstore"  data-share="45" data-harmo="9"  data-coolmin="85" data-min="15000"   data-max="250000"   data-step="1000"  data-def="50000"><svg class="fac-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M4 22V6a2 2 0 012-2h8a2 2 0 012 2v16M4 22h12"/><rect x="6" y="8" width="6" height="3" rx="0.5"/><path d="M18 7l2.5 2.5a2 2 0 010 2.83L18 14v8"/></svg>Convenience Store / Fuel</div>
         <div class="fac-opt" data-key="mixed"   data-share="35" data-harmo="8"  data-coolmin="0"  data-min="24000"   data-max="4000000"  data-step="5000"  data-def="250000"><svg class="fac-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="10" width="6" height="12"/><rect x="9" y="5" width="6" height="17"/><rect x="16" y="13" width="6" height="9"/><line x1="2" y1="22" x2="22" y2="22"/></svg>Mixed / Other</div>
       </div>
+      <button class="band-reset-btn" id="t-back-country" style="margin-top:14px;" onclick="goStage('s0')">← Change country</button>
     </div>
 
-    <!-- Stage 2: state first, then spend chips + custom text input -->
+    <!-- Stage 2: tariff (MX first), spend, location, cooling -->
     <div id="c-s2" style="display:none">
-      <div class="c-progress"><span class="c-progress-step done"></span><span class="c-progress-step active"></span><span class="c-progress-step"></span><span class="c-progress-label">2 / 3</span></div>
+      <div class="c-progress"><span class="c-progress-step done"></span><span class="c-progress-step done"></span><span class="c-progress-step active"></span><span class="c-progress-step"></span><span class="c-progress-label">3 / 4</span></div>
       <div id="c-claim-s2"></div>
-      <span class="c-ask">Two inputs and we will calculate exactly what this is costing your facility.</span>
-      <div style="margin-top:18px;">
-        <div class="c-field-lbl">Monthly electricity spend <span id="c2-mo" class="c-field-aside"></span></div>
-        <!-- Step 1: broad bands -->
-        <div id="band-step1" class="band-grid"></div>
-        <!-- Step 2: narrow bands (hidden until step 1 chosen) -->
-        <div id="band-step2-wrap" style="display:none">
-          <div class="band-refine-label">Narrow it down <span id="band-refine-range" class="band-refine-range"></span></div>
-          <div id="band-step2" class="band-grid"></div>
-          <button class="band-reset-btn" onclick="bandReset()">Change range</button>
+      <span class="c-ask" id="t-s2-ask">Three inputs and we will calculate exactly what this is costing your facility.</span>
+
+      <!-- MX ONLY: Tariff selector — first input -->
+      <div id="s2-mx-tariff-block" style="display:none;margin-top:22px;">
+        <div class="c-field-lbl" id="t-mx-tariff-top-lbl">CFE tariff class</div>
+        <div class="c-heat-row" style="flex-wrap:wrap;gap:6px;margin-bottom:0;">
+          <button class="c-heat-btn" data-tariff="PDBT" onclick="setMxTariff('PDBT')">PDBT<span style="display:block;font-size:11px;opacity:0.7;">hasta 25 kW</span></button>
+          <button class="c-heat-btn" data-tariff="GDMTO" onclick="setMxTariff('GDMTO')">GDMTO<span style="display:block;font-size:11px;opacity:0.7;">hasta 100 kW</span></button>
+          <button class="c-heat-btn active" data-tariff="GDMTH" onclick="setMxTariff('GDMTH')">GDMTH<span style="display:block;font-size:11px;opacity:0.7;">más de 100 kW</span></button>
+        </div>
+        <div class="mx-assumption-edit" id="mx-tariff-detail" style="margin-top:4px;border-top:none;">
+          <div class="mx-edit-row">
+            <label id="t-mx-dem-lbl">Demand charge (% of bill)</label>
+            <div class="mx-slider-wrap">
+              <input type="range" id="mx-dem-slider" class="rng" min="15" max="55" value="40" oninput="onMxDemSlider()">
+              <span id="mx-dem-pct" class="mx-slider-val">40%</span>
+            </div>
+          </div>
+          <div class="mx-edit-row">
+            <label id="t-mx-pf-lbl">Power factor (already corrected?)</label>
+            <div class="c-heat-row">
+              <button class="c-heat-btn" id="t-mx-pf-yes" data-pf="yes" onclick="setMxPF(false)">Yes, already corrected</button>
+              <button class="c-heat-btn active" id="t-mx-pf-no" data-pf="no" onclick="setMxPF(true)">No / unknown</button>
+            </div>
+          </div>
+          <div class="mx-edit-row" id="mx-pf-pct-row">
+            <label id="t-mx-pf-pct-lbl">P.F. surcharge (% of bill)</label>
+            <div class="mx-slider-wrap">
+              <input type="range" id="mx-pf-slider" class="rng" min="2" max="20" value="8" oninput="onMxPFSlider()">
+              <span id="mx-pf-pct" class="mx-slider-val">8%</span>
+            </div>
+          </div>
         </div>
       </div>
-      <div style="margin-top:24px;">
-        <div class="c-field-lbl">Primary state <span id="c2-split" class="c-field-aside"></span></div>
-        <div class="sel-wrap"><select id="c2-state" onchange="c2State()"></select></div>
+
+      <!-- SPEND — both US and MX -->
+      <div style="margin-top:22px;">
+        <div class="c-field-lbl" id="t-s2-spend-lbl">Monthly electricity spend per facility <span id="c2-mo" class="c-field-aside"></span></div>
+        <div id="band-step1" class="band-grid"></div>
+        <div id="band-step2-wrap" style="display:none">
+          <div class="band-refine-label" id="t-narrow">Narrow it down <span id="band-refine-range" class="band-refine-range"></span></div>
+          <div id="band-step2" class="band-grid"></div>
+          <button class="band-reset-btn" id="t-change-range" onclick="bandReset()">Change range</button>
+        </div>
+      </div>
+
+      <!-- FACILITY COUNT — per-facility portfolio signal -->
+      <div style="margin-top:24px;" id="fac-count-block">
+        <div class="c-field-lbl" id="t-faccount-lbl">Roughly how many similar facilities do you operate?</div>
+        <div class="c-field-sub" id="t-faccount-sub">An estimate is fine. We'll confirm the details later.</div>
+        <div class="fac-count-grid" id="fac-count-chips"></div>
+        <div class="signal-box" id="signal-box" style="display:none;">
+          <div class="signal-box-label" id="signal-box-label"></div>
+          <div class="signal-box-text" id="signal-box-text"></div>
+        </div>
+      </div>
+
+      <!-- LOCATION — US state or MX region + cooling -->
+      <div style="margin-top:24px;" id="s2-location-block">
+        <div id="s2-us-location">
+          <div class="c-field-lbl" id="t-us-state-lbl">Primary state <span id="c2-split" class="c-field-aside"></span></div>
+          <div class="sel-wrap"><select id="c2-state" onchange="c2State()"></select></div>
+        </div>
+        <div id="s2-mx-location" style="display:none">
+          <div class="c-field-lbl" id="t-mx-region-lbl">CFE Region <span id="c2-mx-split" class="c-field-aside"></span></div>
+          <div class="sel-wrap">
+            <select id="c2-mx-region" onchange="c2MxRegion()">
+              <option value="" disabled selected id="t-mx-region-placeholder">Select your region</option>
+              <option value="Norte">Norte — Chihuahua, Sonora, Baja California, Coahuila, Nuevo León, Tamaulipas</option>
+              <option value="Occidente">Occidente — Jalisco, Nayarit, Colima, Michoacán, Aguascalientes</option>
+              <option value="Central">Central — CDMX, Estado de México, Puebla, Hidalgo, Querétaro, Morelos</option>
+              <option value="Centro-Norte">Centro-Norte — Guanajuato, San Luis Potosí, Zacatecas, Durango, Sinaloa</option>
+              <option value="Oriente">Oriente — Veracruz, Tabasco, Oaxaca, Chiapas</option>
+              <option value="Sur-Sureste">Sur-Sureste — Yucatán, Campeche, Quintana Roo</option>
+            </select>
+          </div>
+          <div class="mx-assumption-chip" id="mx-region-chip" style="display:none">
+            <div class="mx-chip-content">
+              <span class="mx-chip-label" id="t-mx-region-chip-lbl">Auto-generated assumption:</span>
+              <span id="mx-region-chip-text"></span>
+            </div>
+            <button class="mx-chip-edit" id="t-mx-region-edit-btn" onclick="toggleMxRegionEdit()">Edit ▾</button>
+          </div>
+          <div class="mx-assumption-edit" id="mx-region-edit" style="display:none">
+            <div class="mx-edit-row">
+              <label id="t-mx-cool-lbl">Cooling load</label>
+              <div class="mx-slider-wrap">
+                <input type="range" id="mx-cool-slider" class="rng" min="30" max="95" value="65" oninput="onMxCoolSlider()">
+                <span id="mx-cool-pct" class="mx-slider-val">65%</span>
+              </div>
+            </div>
+            <div class="mx-edit-row" id="mx-heat-row">
+              <label id="t-mx-heat-lbl">Electric heating</label>
+              <div class="c-heat-row">
+                <button class="c-heat-btn" data-v="no" id="t-mx-heat-no" onclick="setMxHeat(false)">No</button>
+                <button class="c-heat-btn active" data-v="yes" id="t-mx-heat-yes" onclick="setMxHeat(true)">Yes</button>
+              </div>
+            </div>
+          </div>
+          <div style="margin-top:18px;">
+            <div class="c-field-lbl" id="t-mx-fx-lbl">Exchange rate <span class="c-field-aside">USD / MXN</span></div>
+            <div class="spend-input-row" style="max-width:280px;">
+              <span class="spend-currency" style="font-size:16px;white-space:nowrap;padding-right:8px;">1 USD =</span>
+              <input type="text" inputmode="decimal" id="mx-fx-rate" class="spend-input" style="font-size:20px;min-width:80px;" value="17.50" oninput="onMxFxRate()">
+              <span class="spend-suffix">MXN</span>
+            </div>
+          </div>
+        </div>
       </div>
 
       <div class="c-nav-row">
-        <button class="c-back-vis" onclick="goStage('s1')">Back</button>
-        <button class="c-next-btn c-nav-next" id="s2-next-btn" disabled onclick="goStage('s3')" style="opacity:0.38;cursor:not-allowed;pointer-events:none;">Next</button>
+        <button class="c-back-vis" id="t-s2-back" onclick="goStage('s1')">Back</button>
+        <button class="c-next-btn c-nav-next" id="s2-next-btn" disabled onclick="goStage('s3')" style="opacity:0.38;cursor:not-allowed;pointer-events:none;" data-t="t-next">Next</button>
       </div>
     </div>
 
     <!-- Stage 3: dollar reveal + sqft -->
     <div id="c-s3" style="display:none">
-      <div class="c-progress"><span class="c-progress-step done"></span><span class="c-progress-step done"></span><span class="c-progress-step active"></span><span class="c-progress-label">3 / 3</span></div>
+      <div class="c-progress"><span class="c-progress-step done"></span><span class="c-progress-step done"></span><span class="c-progress-step done"></span><span class="c-progress-step active"></span><span class="c-progress-label">4 / 4</span></div>
       <div id="c-claim-s3" class="c-card"></div>
       <div id="c-sqft-wrap">
-      <span class="c-ask">Adjust your estimated square footage to calculate your Section 179D deduction</span>
+      <span class="c-ask" id="t-s3-179d-ask">Adjust your estimated square footage to calculate your Section 179D deduction</span>
       <div style="margin-top:16px;">
         <div class="sqft-slider-row">
           <div class="sqft-slider-labels">
@@ -1109,8 +1328,8 @@ body{font-size:17px;}
       </div>
       <div class="c-ded-result" id="c-ded-result"></div>
       <div class="c-nav-row">
-        <button class="c-back-vis" onclick="goStage('s2')">Back</button>
-        <button class="c-next-btn c-nav-next" onclick="showResult()">Calculate my savings now</button>
+        <button class="c-back-vis" id="t-s3-back" onclick="goStage('s2')">Back</button>
+        <button class="c-next-btn c-nav-next" id="t-calculate-btn" onclick="showResult()">Calculate my savings now</button>
       </div>
     </div>
 
@@ -1120,75 +1339,103 @@ body{font-size:17px;}
   <div class="result-box">
     <div class="result-preamble" id="result-preamble"></div>
     <div class="result-inner">
+      <!-- HERO: portfolio total when >1 facility, otherwise the single-facility range -->
+      <div class="hero-tag" id="hero-tag" style="display:none;">Across your portfolio</div>
       <div class="result-range">
         <span class="result-num" id="r-floor">$0</span>
         <span class="result-to">to</span>
         <span class="result-num" id="r-ceil">$0</span>
       </div>
       <div class="result-pcts" id="r-pcts">0% to 0% of your annual bill</div>
+      <div class="mx-peso-line" id="r-peso-line" style="display:none"></div>
       <div class="cum-row">
         <div class="cum-cell"><div class="cum-val" id="cum-5yr">$0</div><div class="cum-lab">5-year range</div></div>
         <div class="cum-cell"><div class="cum-val" id="cum-10yr">$0</div><div class="cum-lab">10-year range</div></div>
       </div>
+      <div class="portfolio-defer" id="t-portfolio-defer" style="display:none;">Estimate assumes similar facilities. Multi-state portfolios get a tailored review.</div>
       <div class="cum-rate-note" id="cum-rate-note"></div>
+      <!-- SECONDARY: per-facility detail, shown only when >1 facility -->
+      <div class="perfac-block" id="perfac-block" style="display:none;">
+        <div class="perfac-tag" id="perfac-tag">Per facility</div>
+        <div class="perfac-range">
+          <span id="pf-floor">$0</span>
+          <span class="perfac-to" id="t-portfolio-to">to</span>
+          <span id="pf-ceil">$0</span>
+        </div>
+        <div class="cum-row cum-row-sm">
+          <div class="cum-cell"><div class="cum-val" id="pf-cum-5yr">$0</div><div class="cum-lab" id="t-pf-cum5">5-year range</div></div>
+          <div class="cum-cell"><div class="cum-val" id="pf-cum-10yr">$0</div><div class="cum-lab" id="t-pf-cum10">10-year range</div></div>
+        </div>
+      </div>
     </div>
   </div>
 </div>
 <div class="result-narrative" id="result-narrative" style="display:none">
   <div class="rn-inner">
-    <p class="rn-cred">Independently verified. Built from DOE consumption data and the information you just provided. A 22-Minute Facility Review can confirm your exact number, or open the assumptions panel below and adjust the inputs yourself right now.</p>
+    <p class="rn-cred" id="t-rn-cred">Independently verified. Built from DOE consumption data and the information you just provided. A 22-Minute Facility Review can confirm your exact number, or open the assumptions panel below and adjust the inputs yourself right now.</p>
     <div class="rn-trans-hd" id="rn-trans-hd">Based on your inputs, that is leaving your building this month alone.</div>
     <div class="rn-taxes">
-      <div class="rn-tax-hd">You Are Not Paying One Electricity Bill. You Are Paying Three. Only One of Them Shows Up on Your Statement.</div>
+      <div class="rn-tax-hd" id="t-tax-hd">You Are Not Paying One Electricity Bill. You Are Paying Three. Only One of Them Shows Up on Your Statement.</div>
       <div class="rn-tax-list">
         <div class="rn-tax-item">
-          <div><span class="rn-tax-num">01</span><span class="rn-tax-label">You Are Paying for Power You Never Used</span></div>
-          <p class="rn-tax-text">Every month you get a bill for electricity that entered your building and did nothing except damage your most expensive equipment.</p>
+          <div><span class="rn-tax-num">01</span><span class="rn-tax-label" id="t-tax1-lbl">You Are Paying for Power You Never Used</span></div>
+          <p class="rn-tax-text" id="t-tax1-txt">Every month you get a bill for electricity that entered your building and did nothing except damage your most expensive equipment.</p>
         </div>
         <div class="rn-tax-item">
-          <div><span class="rn-tax-num">02</span><span class="rn-tax-label">You Are Paying Twice for Every Piece of Equipment</span></div>
-          <p class="rn-tax-text">The distorted current that does reach your equipment runs hotter and cycles harder than it should. You bought the equipment once. Dirty power makes you pay for it again in maintenance, and again when it fails early. Roughly half of those service calls are preventable by addressing power quality.</p>
+          <div><span class="rn-tax-num">02</span><span class="rn-tax-label" id="t-tax2-lbl">You Are Paying Twice for Every Piece of Equipment</span></div>
+          <p class="rn-tax-text" id="t-tax2-txt">The distorted current that does reach your equipment runs hotter and cycles harder than it should. You bought the equipment once. Dirty power makes you pay for it again in maintenance, and again when it fails early. Roughly half of those service calls are preventable by addressing power quality.</p>
         </div>
         <div class="rn-tax-item">
-          <div><span class="rn-tax-num">03</span><span class="rn-tax-label">You Are Replacing Equipment Years Before You Should</span></div>
-          <p class="rn-tax-text">Equipment that should run fifteen years fails in eight. That cost does not show up on your energy bill. It shows up as a capital expense that nobody in your organization connects back to power quality. Until now.</p>
+          <div><span class="rn-tax-num">03</span><span class="rn-tax-label" id="t-tax3-lbl">You Are Replacing Equipment Years Before You Should</span></div>
+          <p class="rn-tax-text" id="t-tax3-txt">Equipment that should run fifteen years fails in eight. That cost does not show up on your energy bill. It shows up as a capital expense that nobody in your organization connects back to power quality. Until now.</p>
         </div>
       </div>
     </div>
 
-    <!-- Social proof strip — after taxes, before bridge -->
+    <!-- Social proof strip -->
     <div class="rn-proof">
-      <div class="rn-proof-label">Verified Client Results</div>
+      <div class="rn-proof-label" id="t-proof-lbl">Verified Client Results</div>
       <div class="rn-proof-items">
-        <div class="rn-proof-item"><span class="rn-proof-result">49%</span><span class="rn-proof-desc">energy savings — <strong class="rn-proof-name">Arizona Ford Dealership</strong></span></div>
-        <div class="rn-proof-item"><span class="rn-proof-result">33%</span><span class="rn-proof-desc">energy savings — <strong class="rn-proof-name">Midwest Bottling Facility</strong></span></div>
+        <div class="rn-proof-item"><span class="rn-proof-result">49%</span><span class="rn-proof-desc" id="t-proof1">energy savings — <strong class="rn-proof-name">Arizona Ford Dealership</strong></span></div>
+        <div class="rn-proof-item"><span class="rn-proof-result">33%</span><span class="rn-proof-desc" id="t-proof2">energy savings — <strong class="rn-proof-name">Midwest Bottling Facility</strong></span></div>
         <div class="rn-proof-item rn-proof-item-featured">
           <div class="rn-proof-featured">
-            <div class="rn-proof-featured-header"><strong class="rn-proof-name">Edward Hospital, Illinois</strong> <span class="rn-proof-attr">360 Energy Solutions documented</span></div>
-            <div class="rn-proof-featured-stat">1,387,172 kWh of verified annual savings. <span class="rn-proof-featured-dollars">$112,360 in annual energy savings when installed in 2012.</span> Today saving approximately <span class="rn-proof-featured-now">$180,000 per year.</span></div>
-            <div class="rn-proof-featured-close">Same work. Compounding returns.</div>
+            <div class="rn-proof-featured-header"><strong class="rn-proof-name">Edward Hospital, Illinois</strong> <span class="rn-proof-attr" id="t-proof3-attr">360 Energy Solutions documented</span></div>
+            <div class="rn-proof-featured-stat" id="t-proof3-stat">1,387,172 kWh of verified annual savings. <span class="rn-proof-featured-dollars">$112,360 in annual energy savings when installed in 2012.</span> Today saving approximately <span class="rn-proof-featured-now">$180,000 per year.</span></div>
+            <div class="rn-proof-featured-close" id="t-proof3-close">Same work. Compounding returns.</div>
           </div>
         </div>
       </div>
     </div>
 
-    <div class="rn-bridge">
-      <p class="rn-bridge-p"><strong>We address this in two steps:</strong> (1) cleaning the power at the source, and (2) retrofitting your equipment so it runs intelligently.</p>
-      <p class="rn-bridge-p">We almost never recommend replacement. Every other energy company leads with new equipment because that is how they make money. We lead with retrofits because the ROI is almost always better and your existing equipment is usually worth saving.</p>
-      <p class="rn-bridge-p rn-bridge-bold">If you find a better solution, we will pay you a finder's fee for the introduction.</p>
-      <p class="rn-bridge-p">Our process is designed to ISO standards and is fully third-party auditable. We are required by our own process to recommend the highest ROI solution on our platform for your facility. Not because it sounds good. Because our process does not allow anything else.</p>
-      <p class="rn-bridge-p">We do not have customers. We have clients: people under our protection and care. The 22-Minute Facility Review is where that relationship starts.</p>
+    <div class="rn-bridge" id="rn-bridge-turnkey">
+      <p class="rn-bridge-p" id="t-bridge1"><strong>We address this in two steps:</strong> (1) cleaning the power at the source, and (2) retrofitting your equipment so it runs intelligently.</p>
+      <p class="rn-bridge-p" id="t-bridge2">We almost never recommend replacement. Every other energy company leads with new equipment because that is how they make money. We lead with retrofits because the ROI is almost always better and your existing equipment is usually worth saving.</p>
+      <p class="rn-bridge-p rn-bridge-bold" id="t-bridge3">If you find a better solution, we will pay you a finder's fee for the introduction.</p>
+      <p class="rn-bridge-p" id="t-bridge4">Our process is designed to ISO standards and is fully third-party auditable. We are required by our own process to recommend the highest ROI solution on our platform for your facility. Not because it sounds good. Because our process does not allow anything else.</p>
+      <p class="rn-bridge-p" id="t-bridge5">We do not have customers. We have clients: people under our protection and care. The 22-Minute Facility Review is where that relationship starts.</p>
     </div>
-    <p class="rn-guarantee">Your session with an energy strategist is on us. If our engineer cannot find at least one of these three taxes running in your building, we cover their $150 diagnostic fee as well. You pay nothing unless you decide to move forward. No card required.</p>
+
+    <!-- EQUIPMENT-ONLY narrative variant (per-facility spend < $1,500/mo) -->
+    <div class="rn-bridge" id="rn-equip" style="display:none;">
+      <p class="rn-bridge-p" id="t-equip1"></p>
+      <p class="rn-bridge-p" id="t-equip2"></p>
+      <p class="rn-bridge-p" id="t-equip3"></p>
+      <p class="rn-bridge-p rn-bridge-bold" id="t-equip4"></p>
+      <p class="rn-guarantee" id="t-equip-guarantee"></p>
+      <div class="rn-equip-cta" id="rn-equip-cta"></div>
+    </div>
+
+    <p class="rn-guarantee" id="t-guarantee">Your session with an energy strategist is on us. If our engineer cannot find at least one of these three taxes running in your building, we cover their $150 diagnostic fee as well. You pay nothing unless you decide to move forward. No card required.</p>
 
     <!-- Primary CTA: calendar booking -->
     <a href="https://zcal.co/danielg/saveenergy" target="_blank" class="cta-btn rn-cal-btn" id="cal-btn-primary">
       <span class="cta-btn-ico">&#128197;</span>
-      Book Your 22-Minute Facility Review
+      <span id="t-cal-btn">Book Your 22-Minute Facility Review</span>
     </a>
 
     <!-- Secondary CTA: SMS with preview -->
-    <div class="rn-sms-wrap">
+    <div class="rn-sms-wrap" id="rn-sms-wrap">
       <div class="rn-sms-label">Or send a text to get started now</div>
       <div class="rn-sms-preview" id="sms-preview-card">
         <div class="rn-sms-preview-to">To: Energy Plus <span class="rn-sms-num">(864) 777-0688</span></div>
@@ -1207,7 +1454,7 @@ body{font-size:17px;}
   <div class="txt-cta gated" id="txt-cta-top">
     <a href="#" class="txt-cta-btn" id="sms-link-top">
       <span class="txt-cta-ico">&#128241;</span>
-          Text Your Energy Strategist
+          <span id="t-sms-btn">Text Your Energy Strategist</span>
     </a>
     <button class="partner-btn" onclick="togglePartnerPanel('top')">&#128172; Text a Partner for Feedback</button>
     <div class="partner-panel" id="partner-panel-top">
@@ -1236,11 +1483,9 @@ body{font-size:17px;}
     <p class="ded-prompt">What is your approximate square footage? Within 500 ft is fine.</p>
     <div class="sqft-input-row">
       <input type="text" inputmode="numeric" id="sqft" class="sqft-input" placeholder="e.g. 45,000" oninput="onSqftInput()">
-      <span class="sqft-suf">sq ft</span>
+      <span class="sqft-suf" id="t-sqft-suf">sq ft</span>
     </div>
-    <div class="ded-result ded-hidden" id="ded-result">
-      Up to <span class="ded-num" id="ded-amount">$0</span> in deductions. About <span class="ded-num" id="ded-tax">$0</span> in real tax at 21%.
-    </div>
+    <div class="ded-result ded-hidden" id="ded-result"></div>
   </div>
 
 <div class="ledger gated" id="fin-section">
@@ -1273,7 +1518,7 @@ body{font-size:17px;}
       <div class="spend-input-row">
         <span class="spend-currency">$</span>
         <input type="text" inputmode="numeric" id="spend" class="spend-input" value="250,000" oninput="onSpendInput()">
-        <span class="spend-suffix">per year</span>
+        <span class="spend-suffix" id="t-per-year">per year</span>
       </div>
       <input type="range" id="spend-slider" class="rng" min="24000" max="4000000" step="5000" value="0" oninput="onSliderInput()">
       <div class="slider-ends"><span id="slider-lo">$24K</span><span id="slider-hi">$4M</span></div>
@@ -1289,12 +1534,12 @@ body{font-size:17px;}
 
     <!-- ASSUMPTIONS ACCORDION TOGGLE -->
     <div id="assumptions-accordion" style="display:none">
-      <button class="assumptions-toggle" onclick="toggleAssumptions()"><span class="assump-chev">&#9656;</span> Adjust our assumptions</button>
+      <button class="assumptions-toggle" id="t-adjust-our" onclick="toggleAssumptions()"><span class="assump-chev">&#9656;</span> Adjust our assumptions</button>
     </div>
 
     <!-- 04 PROGRAMS -->
     <div class="streams gated">
-      <div class="streams-label"><span class="step">04</span> &nbsp;Programs included in your estimate</div>
+      <div class="streams-label"><span class="step">04</span> &nbsp;<span id="t-programs-lbl">Programs included in your estimate</span></div>
 
 
       <div class="stream-section" id="ss-nego" style="display:none">
@@ -1387,20 +1632,20 @@ body{font-size:17px;}
 
 <div class="method gated">
     <div class="adjust" id="adjust">
-      <button class="adjust-toggle" onclick="toggleAdjust()"><span class="chev">&#9656;</span> Adjust the assumptions</button>
+      <button class="adjust-toggle" onclick="toggleAdjust()"><span class="chev">&#9656;</span> <span id="t-adjust-the">Adjust the assumptions</span></button>
       <div class="adjust-panel">
         <div class="adjust-inner">
-          <div class="adjust-sec">Consumption and HVAC</div>
-          <div class="rate-row"><label for="r-harmo">Harmonization floor</label><div class="rate-input-wrap"><input type="number" id="r-harmo" class="rate-input" value="9" min="0" max="30" step="0.5" oninput="onAdjust()"><span class="rate-suf">%</span></div></div>
-          <div class="rate-row"><label for="r-hvac">HVAC share of bill</label><div class="rate-input-wrap"><input type="number" id="r-hvac" class="rate-input" value="40" min="0" max="90" step="1" oninput="onAdjust()"><span class="rate-suf">%</span></div></div>
-          <div class="rate-row"><label for="r-cool">Cooling share of HVAC</label><div class="rate-input-wrap"><input type="number" id="r-cool" class="rate-input" value="65" min="0" max="100" step="1" oninput="onAdjust()"><span class="rate-suf">%</span></div></div>
+          <div class="adjust-sec" id="t-adj-sec1">Consumption and HVAC</div>
+          <div class="rate-row"><label id="t-lbl-harmo" for="r-harmo">Harmonization floor</label><div class="rate-input-wrap"><input type="number" id="r-harmo" class="rate-input" value="9" min="0" max="30" step="0.5" oninput="onAdjust()"><span class="rate-suf">%</span></div></div>
+          <div class="rate-row"><label id="t-lbl-hvac" for="r-hvac">HVAC share of bill</label><div class="rate-input-wrap"><input type="number" id="r-hvac" class="rate-input" value="40" min="0" max="90" step="1" oninput="onAdjust()"><span class="rate-suf">%</span></div></div>
+          <div class="rate-row"><label id="t-lbl-cool" for="r-cool">Cooling share of HVAC</label><div class="rate-input-wrap"><input type="number" id="r-cool" class="rate-input" value="65" min="0" max="100" step="1" oninput="onAdjust()"><span class="rate-suf">%</span></div></div>
           <div class="adjust-divider"></div>
-          <div class="adjust-sec">Peak demand (demand-tariff sites)</div>
-          <div class="rate-row"><label for="r-demrate">Demand charge</label><div class="rate-input-wrap"><span class="rate-pre">$</span><input type="number" id="r-demrate" class="rate-input" value="12" min="0" max="60" step="0.5" oninput="onAdjust()"><span class="rate-suf">/ kW-mo</span></div></div>
-          <div class="rate-row"><label for="r-demportion">Demand share of bill</label><div class="rate-input-wrap"><input type="number" id="r-demportion" class="rate-input" value="40" min="0" max="70" step="1" oninput="onAdjust()"><span class="rate-suf">%</span></div></div>
-          <div class="rate-row"><label for="r-demred">Demand reduction</label><div class="rate-input-wrap"><input type="number" id="r-demred" class="rate-input" value="5" min="0" max="30" step="0.5" oninput="onAdjust()"><span class="rate-suf">%</span></div></div>
+          <div class="adjust-sec" id="t-adj-sec2">Peak demand (demand-tariff sites)</div>
+          <div class="rate-row"><label id="t-lbl-demrate" for="r-demrate">Demand charge</label><div class="rate-input-wrap"><span class="rate-pre">$</span><input type="number" id="r-demrate" class="rate-input" value="12" min="0" max="60" step="0.5" oninput="onAdjust()"><span class="rate-suf">/ kW-mo</span></div></div>
+          <div class="rate-row"><label id="t-lbl-demportion" for="r-demportion">Demand share of bill</label><div class="rate-input-wrap"><input type="number" id="r-demportion" class="rate-input" value="40" min="0" max="70" step="1" oninput="onAdjust()"><span class="rate-suf">%</span></div></div>
+          <div class="rate-row"><label id="t-lbl-demred" for="r-demred">Demand reduction</label><div class="rate-input-wrap"><input type="number" id="r-demred" class="rate-input" value="5" min="0" max="30" step="0.5" oninput="onAdjust()"><span class="rate-suf">%</span></div></div>
           <p class="demand-implied" id="demand-implied"></p>
-          <p class="adjust-note">Consumption shares are DOE and EIA CBECS averages by building type. Harmonization floors are Energy Plus verified results where data exists (office, quick-serve, convenience store, hotel, healthcare, manufacturing, fitness). The newer types (retail, cold storage, education, multifamily, warehouse, supermarket, mixed) currently use estimated floors pending verified figures. Demand pricing and Hawaii rate extremes are placeholders. Every field is editable.</p>
+          <p class="adjust-note" id="t-adj-note">Consumption shares are DOE and EIA CBECS averages by building type. Harmonization floors are Energy Plus verified results where data exists (office, quick-serve, convenience store, hotel, healthcare, manufacturing, fitness). The newer types (retail, cold storage, education, multifamily, warehouse, supermarket, mixed) currently use estimated floors pending verified figures. Demand pricing and Hawaii rate extremes are placeholders. Every field is editable.</p>
         </div>
       </div>
     </div>
@@ -1413,14 +1658,14 @@ body{font-size:17px;}
   <!-- ── SUMMARY BAR / EDIT — below CTA ───────────────────── -->
   <div id="c-summary" class="c-summary" style="display:none">
     <div class="c-sum-text" id="c-sum-text"></div>
-    <button class="c-edit-btn" onclick="goStage('s1')">Edit</button>
+    <button class="c-edit-btn" id="t-edit-btn" onclick="goStage('s1')">Edit</button>
   </div>
 
 
 <div class="calc-foot gated">
-    <span class="tag">About this estimate</span>
-    <p>This estimator returns a conservative range, not a projection of peak performance. Savings across each program are achieved through a combination of retrofits and replacements, whichever delivers the best return on investment for your specific facility. The approach is performance-based, not vendor-driven.</p>
-    <p>Actual verified savings depend on a site assessment of equipment, load profile, rate structure, and condition. Energy Plus is an Independent Energy Solutions Partner with no vendor incentive to inflate these figures. Every assumption is editable above.</p>
+    <span class="tag" id="t-about-tag">About this estimate</span>
+    <p id="t-about-p1">This estimator returns a conservative range, not a projection of peak performance. Savings across each program are achieved through a combination of retrofits and replacements, whichever delivers the best return on investment for your specific facility. The approach is performance-based, not vendor-driven.</p>
+    <p id="t-about-p2">Actual verified savings depend on a site assessment of equipment, load profile, rate structure, and condition. Energy Plus is an Independent Energy Solutions Partner with no vendor incentive to inflate these figures. Every assumption is editable above.</p>
   </div>
 
 
@@ -1778,20 +2023,46 @@ var STATE_ABBR={
   "Tennessee":"TN","Texas":"TX","Utah":"UT","Vermont":"VT","Virginia":"VA",
   "Washington":"WA","West Virginia":"WV","Wisconsin":"WI","Wyoming":"WY"
 };
+// ── MEXICO DATA LAYER ────────────────────────────────────────────────────────
+var MX_FX_RATE = 17.50; // USD per MXN — user-editable
+var MX_REGIONS = {
+  "Norte":       {cool:68, heat:true,  esc:6, demPortion:0.42, label:"Norte",       desc:"68% cooling · heating active · alta demanda industrial"},
+  "Occidente":   {cool:60, heat:false, esc:6, demPortion:0.38, label:"Occidente",   desc:"60% cooling · calefacción mínima · tarifas GDMTO/GDMTH"},
+  "Central":     {cool:45, heat:true,  esc:6, demPortion:0.35, label:"Central",     desc:"45% cooling · heating activo (altitud)"},
+  "Centro-Norte":{cool:55, heat:false, esc:6, demPortion:0.38, label:"Centro-Norte",desc:"55% cooling · industria manufacturera dominante"},
+  "Oriente":     {cool:75, heat:false, esc:6, demPortion:0.40, label:"Oriente",     desc:"75% cooling · clima cálido-húmedo · sin calefacción"},
+  "Sur-Sureste": {cool:82, heat:false, esc:6, demPortion:0.42, label:"Sur-Sureste", desc:"82% cooling · tropical · sin calefacción"}
+};
+var MX_TARIFF_DEFAULTS = {
+  PDBT:  {demPortion:0.25, label:"PDBT",  desc:"Pequeña empresa — demanda hasta 25 kW"},
+  GDMTO: {demPortion:0.35, label:"GDMTO", desc:"Mediana empresa — tarifa ordinaria, precio fijo 24h"},
+  GDMTH: {demPortion:0.45, label:"GDMTH", desc:"Gran empresa — tarifa horaria con cargo por demanda máxima de 15 min"}
+};
+// Auto-detect tariff from annual spend (USD) and facility type
+function mxAutoTariff(annualSpend, facKey){
+  if(facKey==="super"||facKey==="health"||facKey==="hotel"||facKey==="datactr"||facKey==="ind"||facKey==="whse"||facKey==="cold") return "GDMTH";
+  if(annualSpend < 60000) return "PDBT";
+  if(annualSpend < 300000) return "GDMTO";
+  return "GDMTH";
+}
+// ─────────────────────────────────────────────────────────────────────────────
+
 var ESC_TIER = {
   "California":1,"Hawaii":1,"Massachusetts":1,"New York":1,"New Jersey":1,"Connecticut":1,
   "Maryland":2,"District of Columbia":2,"Illinois":2,"Pennsylvania":2,"Texas":2,
   "Virginia":2,"Rhode Island":2,"New Hampshire":2,"Maine":2,"Delaware":2,"Vermont":2,
   "Washington":4,"Idaho":4,"Montana":4,"North Dakota":4,"South Dakota":4,
   "Nebraska":4,"Wyoming":4,
-  "Puerto Rico":5
+  "Puerto Rico":5,
+  "Norte":6,"Occidente":6,"Central":6,"Centro-Norte":6,"Oriente":6,"Sur-Sureste":6
 };
 var ESC_DATA = {
   1:{range:"4–6%",rate:0.045,note:"Many analysts expect this pace to accelerate further as grid modernization costs continue rising — which would make these figures conservative."},
   2:{range:"3–4%",rate:0.035,note:"Many analysts expect this pace to accelerate further as grid modernization costs continue rising — which would make these figures conservative."},
   3:{range:"2–3%",rate:0.025,note:"Many analysts expect this pace to accelerate further as grid modernization costs continue rising — which would make these figures conservative."},
   4:{range:"1–2%",rate:0.018,note:"Many analysts expect this pace to accelerate further as grid modernization costs continue rising — which would make these figures conservative."},
-  5:{range:"volatile",rate:0.025,note:"Puerto Rico commercial rates rose more than 85% between 2020 and 2022. A new LUMA rate case filed in July 2025 signals further increases are imminent. The 2.5% floor shown here is a conservative projection floor — recent history suggests the real trajectory runs substantially higher."}
+  5:{range:"volatile",rate:0.025,note:"Puerto Rico commercial rates rose more than 85% between 2020 and 2022. A new LUMA rate case filed in July 2025 signals further increases are imminent. The 2.5% floor shown here is a conservative projection floor — recent history suggests the real trajectory runs substantially higher."},
+  6:{range:"3–5%",rate:0.035,note:"Las tarifas CFE para empresas subieron ~15% anual entre 2020 y 2023, moderando a ~3.5% anual actualmente. La reforma energética de 2025 que fortalece a CFE añade presión alcista estructural — estas proyecciones son conservadoras."}
 };
 function escalFactor(rate,years){
   if(!rate) return years;
@@ -1832,19 +2103,63 @@ var OUTDOOR = {
 var HEAT = { heatpump:0.50, resistance:0.80 };
 
 var state = {
+  country:"us", lang:"en",
   selected:false, hasElecHeat:false, sqft:0, hasAnimated:false,
   spend:0, hvacShare:0.40, harmoRate:0.09,
   stateCool:50, coolMin:0, coolShare:0.50,
-  view:"s1", tCool:true, tHeat:false, tDem:true, tLit:true, litMode:"offgrid", tMot:false, tNego:false,
+  view:"s0", tCool:true, tHeat:false, tDem:true, tLit:true, litMode:"offgrid", tMot:false, tNego:false,
   heatComp:"heatpump",
-  demRate:12, demPortion:0.40, demRed:0.05, demBattery:false
+  demRate:12, demPortion:0.40, demRed:0.05, demBattery:false,
+  // Mexico-specific
+  mxRegion:"", mxTariff:"GDMTH", mxPFActive:true, mxPFShare:0.08, mxFxRate:17.50,
+  // Facility count / portfolio
+  count:0, countKey:"", countLabel:"", resultSummary:null
 };
 
-function fmtFull(n){ return "$" + Math.round(n).toLocaleString("en-US"); }
-function fmtBoxRange(lo,hi){
-  if(hi>=100000)return "$"+Math.round(lo/1000)+"k – $"+Math.round(hi/1000)+"k";
-  return "$"+Math.round(lo).toLocaleString("en-US")+" – $"+Math.round(hi).toLocaleString("en-US");
+// ── EQUIPMENT-ONLY CTA CONFIG (parameterized; not yet finalized) ──
+// mode: "note" = static text, no link | "sms" = sms link w/ body | "link" = URL
+var EQUIP_ONLY_CTA = { mode:"note", link:"", smsBody:"" };
+
+// ── FACILITY COUNT OPTIONS (low-end values drive all math) ──
+// low drives qualification/tier math; [low,high] span drives the defensible portfolio range.
+// "20plus" is open-ended → high capped at 20 (conservative; understates by design).
+var FAC_COUNTS = [
+  { key:"one",    low:1,  high:1,  t:"facCountOne"  },
+  { key:"2to4",   low:2,  high:4,  t:"facCount2"    },
+  { key:"5to9",   low:5,  high:9,  t:"facCount5"    },
+  { key:"10to19", low:10, high:19, t:"facCount10"   },
+  { key:"20plus", low:20, high:20, t:"facCount20"   }
+];
+function highCount(){
+  var fc=FAC_COUNTS.filter(function(x){return x.key===state.countKey;})[0];
+  return fc?fc.high:(state.count||1);
 }
+
+// ── SPEND TIER + STATE LOGIC (driver = per-facility MONTHLY spend) ──
+// state.spend is stored ANNUAL; per-facility monthly = state.spend / 12.
+function spendTier(monthly){
+  if(monthly < 1500) return { key:"under1500", min:Infinity };
+  if(monthly < 2000) return { key:"1500_1999", min:20 };
+  if(monthly < 3500) return { key:"2000_3499", min:10 };
+  if(monthly < 5000) return { key:"3500_4999", min:5  };
+  return { key:"5000plus", min:1 };
+}
+function facilityState(){
+  if(!state.spend || !state.count) return null;
+  var tier = spendTier(state.spend/12);
+  if(tier.key==="under1500") return { state:"equipment_only", tier:tier };
+  if(state.count >= tier.min) return { state:"turnkey_fit", tier:tier };
+  return { state:"turnkey_warm", tier:tier };
+}
+
+function fmtFull(n){ return "$" + Math.round(n).toLocaleString("en-US"); }
+function fmtBoxVal(n){
+  n=Math.round(n);
+  if(n>=1000000) return "$"+(n/1000000).toFixed(3)+"m";   // e.g. $2.480m
+  if(n>=1000)    return "$"+Math.round(n/1000)+"k";        // e.g. $536k
+  return "$"+n.toLocaleString("en-US");
+}
+function fmtBoxRange(lo,hi){ return fmtBoxVal(lo)+" – "+fmtBoxVal(hi); }
 function fmtM(n){ n=Math.round(n); if(n>=1000000) return "$"+(Math.round(n/100000)/10).toFixed(1).replace(/\.0$/,"")+"M"; return "$"+n.toLocaleString("en-US"); }
 function fmtK(n){ if(n>=1000000) return "$"+(Math.round(n/100000)/10).toFixed(1).replace(/\.0$/,"")+"M"; return "$"+Math.round(n/1000)+"K"; }
 function pctTxt(x){ var v=x*100; return (Math.abs(v-Math.round(v))<0.05?Math.round(v):v.toFixed(1))+"%"; }
@@ -1874,12 +2189,15 @@ function compute(){
   var demPool  = state.demPortion * state.spend;
   var combDemCeil = Math.min(demCeil + motCeil, demPool);
   var combDemFloor = demFloor + motFloor;
+  var pfFloor = (state.country==="mx"&&state.mxPFActive) ? state.mxPFShare * state.spend * 0.60 : 0;
+  var pfCeil  = (state.country==="mx"&&state.mxPFActive) ? state.mxPFShare * state.spend * 0.90 : 0;
   return {harmo:harmo,coolFloor:coolFloor,coolCeil:coolCeil,heatCeil:heatCeil,
     demFloor:demFloor,demCeil:demCeil,motFloor:motFloor,motCeil:motCeil,
     litFloor:litFloor,litCeil:litCeil,
     negoFloor:negoFloor,negoCeil:negoCeil,
-    floor:negoFloor+harmo+coolFloor+combDemFloor+litFloor,
-    ceil:negoCeil+harmo+coolCeil+heatCeil+combDemCeil+litCeil};
+    pfFloor:pfFloor,pfCeil:pfCeil,
+    floor:negoFloor+harmo+coolFloor+combDemFloor+litFloor+pfFloor,
+    ceil:negoCeil+harmo+coolCeil+heatCeil+combDemCeil+litCeil+pfCeil};
 }
 
 var _cuGen={};
@@ -1905,19 +2223,21 @@ function render(){
     var _rpIns=state.selected&&INSIGHTS[state.selected]?INSIGHTS[state.selected]:null;
     var _rpEq=EQUIP&&EQUIP[state.selected]?EQUIP[state.selected]:[];
     var _rpNames=_rpEq.slice(0,3).map(function(e){return e.name.toLowerCase();}).join(", ");
-    if(_rpIns) _rp.innerHTML="Your "+_rpIns.noun+" is losing this every year to electrical waste. The most likely culprits: <strong>"+_rpNames+"</strong>.";
+    var _rpFn=STRINGS[state.lang].resultPreamble||STRINGS.en.resultPreamble;
+    if(_rpIns) _rp.innerHTML=_rpFn(_rpIns.noun,_rpNames,state.selected||"");
     else _rp.textContent="";
   }
-  var _fr=document.getElementById("fac-readout"); if(_fr) _fr.textContent = "";
-  document.getElementById("spend-monthly").textContent = fmtFull(state.spend/12) + " / month";
+  var _fr2=document.getElementById("fac-readout"); if(_fr2) _fr2.textContent = "";
+  var SL2=STRINGS[state.lang]||STRINGS.en;
+  document.getElementById("spend-monthly").textContent = fmtFull(state.spend/12) + " " + (SL2.perMonth||"/ month");
   if(state.heatComp==="gas"){ document.getElementById("split-readout").textContent = "Heating on gas, electric load is all cooling"; }
   else { document.getElementById("split-readout").textContent = Math.round(state.coolShare*100) + "% cooling / " + Math.round((1-state.coolShare)*100) + "% heating"; }
   var _vng=document.getElementById("v-nego"); if(_vng) _vng.textContent=state.tNego?(fmtFull(r.negoFloor)+" to "+fmtFull(r.negoCeil)):"off";
   document.getElementById("v-harmo").textContent = fmtFull(r.harmo);
   document.getElementById("v-cool").textContent = state.tCool ? (fmtFull(r.coolFloor) + " to " + fmtFull(r.coolCeil)) : "off";
-  if(!state.tHeat){ document.getElementById("v-heat").textContent = "off"; }
-  else if(state.heatComp==="gas"){ document.getElementById("v-heat").textContent = "$0 · on gas meter"; }
-  else { document.getElementById("v-heat").textContent = "up to " + fmtFull(r.heatCeil); }
+  if(!state.tHeat){ document.getElementById("v-heat").textContent = STRINGS[state.lang].heatOff||"off"; }
+  else if(state.heatComp==="gas"){ document.getElementById("v-heat").textContent = STRINGS[state.lang].heatGas||"$0 · on gas meter"; }
+  else { document.getElementById("v-heat").textContent = (STRINGS[state.lang].heatUpTo||"up to ") + fmtFull(r.heatCeil); }
   if(!state.tDem){
     document.getElementById("v-dem").textContent = "off";
   } else if(state.demBattery){
@@ -1938,32 +2258,77 @@ function render(){
     var el=document.getElementById("s-"+k); if(el){ el.classList.toggle("on",on); el.classList.toggle("off",!on); }
   });
   var _hch=document.getElementById("heat-choice"); if(_hch) _hch.classList.toggle("hidden", !state.tHeat);
+  // ── Portfolio hero vs single-facility (low-end count; understates by design) ──
+  var _lowCount=state.count||1;
+  var _highCount=highCount();
+  var _isPortfolio=(_lowCount>1 && state.spend>0);
+  // Defensible portfolio range: fewest sites × lowest per-site savings  →  most sites × highest per-site savings.
+  var _heroFloor=_isPortfolio ? r.floor*_lowCount  : r.floor;
+  var _heroCeil =_isPortfolio ? r.ceil*_highCount : r.ceil;
   var _rf=document.getElementById("r-floor"),_rc=document.getElementById("r-ceil");
   if(state.view==="result"){
     // Set numbers silently — showResult's sequenced animateCountUp handles the animation
-    if(_rf) _rf.textContent=fmtFull(r.floor);
-    if(_rc) _rc.textContent=fmtFull(r.ceil);
+    if(_rf) _rf.textContent=fmtFull(_heroFloor);
+    if(_rc) _rc.textContent=fmtFull(_heroCeil);
   } else if(state.selected&&!state.hasAnimated){
-    state.hasAnimated=true;countUp(_rf,r.floor,800);countUp(_rc,r.ceil,1050);
+    state.hasAnimated=true;countUp(_rf,_heroFloor,800);countUp(_rc,_heroCeil,1050);
   } else {
-    if(_rf) _rf.textContent=fmtFull(r.floor);
-    if(_rc) _rc.textContent=fmtFull(r.ceil);
+    if(_rf) _rf.textContent=fmtFull(_heroFloor);
+    if(_rc) _rc.textContent=fmtFull(_heroCeil);
   }
-  document.getElementById("r-pcts").textContent = pctTxt(state.spend>0?r.floor/state.spend:0) + " to " + pctTxt(state.spend>0?r.ceil/state.spend:0) + " of your annual bill";
+  // % of annual bill is the same ratio per-facility or portfolio
+  document.getElementById("r-pcts").textContent = pctTxt(state.spend>0?r.floor/state.spend:0) + " to " + pctTxt(state.spend>0?r.ceil/state.spend:0) + " " + (STRINGS[state.lang].annualBill||STRINGS.en.annualBill);
+  // Hero tag + per-facility secondary block
+  var _heroTag=document.getElementById("hero-tag");
+  var _perfacBlock=document.getElementById("perfac-block");
+  var _pfDefer=document.getElementById("t-portfolio-defer");
+  if(_isPortfolio){
+    if(_heroTag){ _heroTag.style.display=""; _heroTag.textContent=(SL2.portfolioAcross||"Across ")+countPhrase().toLowerCase(); }
+    if(_pfDefer){ _pfDefer.style.display=""; _pfDefer.textContent=SL2.portfolioDefer||"Estimate assumes similar facilities. Multi-state portfolios get a tailored review."; }
+    if(_perfacBlock){
+      var _ptag=document.getElementById("perfac-tag"); if(_ptag) _ptag.textContent=SL2.perFacility||"Per facility";
+      var _pff=document.getElementById("pf-floor"); if(_pff) _pff.textContent=fmtFull(r.floor);
+      var _pfc=document.getElementById("pf-ceil"); if(_pfc) _pfc.textContent=fmtFull(r.ceil);
+      var _pfTo=document.getElementById("t-portfolio-to"); if(_pfTo) _pfTo.textContent=SL2.portfolioTo||"to";
+      _perfacBlock.style.display="";
+    }
+  } else {
+    if(_heroTag) _heroTag.style.display="none";
+    if(_pfDefer) _pfDefer.style.display="none";
+    if(_perfacBlock) _perfacBlock.style.display="none";
+  }
+  if(state.view==="result"){ buildResultSummary(); applyPathway(); }
+  // Mexico: show peso equivalent below savings numbers (matches hero figure)
+  var _pesoLine = document.getElementById("r-peso-line");
+  if(state.country==="mx" && _pesoLine && state.spend>0){
+    var fx = state.mxFxRate||17.50;
+    _pesoLine.textContent = "MXN $" + Math.round(_heroFloor*fx).toLocaleString("en-US") + " – MXN $" + Math.round(_heroCeil*fx).toLocaleString("en-US") + " pesos anuales";
+    _pesoLine.style.display="";
+  } else if(_pesoLine){ _pesoLine.style.display="none"; }
   var _sName=(document.getElementById("state-select")||{}).value||"";
   var _tier=(_sName&&ESC_TIER[_sName])||3;
   var _ed=ESC_DATA[_tier];
   var _e5=escalFactor(_ed.rate,5);
   var _e10=escalFactor(_ed.rate,10);
-  document.getElementById("cum-5yr").textContent=fmtBoxRange(r.floor*_e5,r.ceil*_e5);
-  document.getElementById("cum-10yr").textContent=fmtBoxRange(r.floor*_e10,r.ceil*_e10);
+  // Hero cumulative boxes (portfolio when >1 facility)
+  document.getElementById("cum-5yr").textContent=fmtBoxRange(_heroFloor*_e5,_heroCeil*_e5);
+  document.getElementById("cum-10yr").textContent=fmtBoxRange(_heroFloor*_e10,_heroCeil*_e10);
+  // Per-facility cumulative boxes (secondary, only meaningful when portfolio shown)
+  if(_isPortfolio){
+    var _pc5=document.getElementById("pf-cum-5yr"); if(_pc5) _pc5.textContent=fmtBoxRange(r.floor*_e5,r.ceil*_e5);
+    var _pc10=document.getElementById("pf-cum-10yr"); if(_pc10) _pc10.textContent=fmtBoxRange(r.floor*_e10,r.ceil*_e10);
+  }
   var _rateNote=document.getElementById("cum-rate-note");
   if(_rateNote){
     var _abbr=STATE_ABBR[_sName]||"";
-    if(_sName==="Puerto Rico"){
-      _rateNote.innerHTML="Conservative 2.5% floor used for projection<br>PR rates rose 85%+ between 2020 and 2022. A new LUMA rate case filed July 2025.";
+    var SL=STRINGS[state.lang]||STRINGS.en;
+    if(isMX()){
+      _rateNote.innerHTML=SL.mxRateNote.replace("\n","<br>");
+    } else if(_sName==="Puerto Rico"){
+      _rateNote.innerHTML=SL.prRateNote.replace("\n","<br>");
     } else {
-      _rateNote.innerHTML=_abbr?_ed.range+"% avg annual rate increase<br>"+_abbr+" state average":"Based on "+_ed.range+"% avg annual rate increase";
+      var _noteFn=SL.rateNoteFn||STRINGS.en.rateNoteFn;
+      _rateNote.innerHTML=_noteFn(_ed.range,_abbr).replace("\n","<br>");
     }
   }
   // Option card qualifying trigger
@@ -1978,7 +2343,8 @@ function render(){
   if(_dfyCta) _dfyCta.href="sms:"+EP_NUMBER+"?body="+encodeURIComponent(_dfyMsg);
 
   var impliedKW = state.demRate>0 ? (state.demPortion*state.spend)/(12*state.demRate) : 0;
-  document.getElementById("demand-implied").textContent = "Implied billing demand at this rate: about " + Math.round(impliedKW).toLocaleString("en-US") + " kW.";
+  var _dimFn=(STRINGS[state.lang].demandImplied||STRINGS.en.demandImplied);
+  document.getElementById("demand-implied").textContent = _dimFn(Math.round(impliedKW).toLocaleString("en-US"));
 }
 
 function syncSpendField(){ document.getElementById("spend").value = state.spend ? state.spend.toLocaleString("en-US") : ""; }
@@ -2021,8 +2387,10 @@ function onSqftInput(){
   var ded=document.getElementById("ded-result");
   if(v>0){
     var d=Math.round(v*5.94); var t=Math.round(d*0.21);
-    document.getElementById("ded-amount").textContent="$"+d.toLocaleString("en-US");
-    document.getElementById("ded-tax").textContent="$"+t.toLocaleString("en-US");
+    var dFmt="$"+d.toLocaleString("en-US");
+    var tFmt="$"+t.toLocaleString("en-US");
+    var dedFn=(STRINGS[state.lang].dedResult||STRINGS.en.dedResult);
+    ded.innerHTML=dedFn(dFmt,tFmt);
     ded.classList.remove("ded-hidden");
   } else { ded.classList.add("ded-hidden"); }
 }
@@ -2070,8 +2438,678 @@ function selectFac(el){
 }
 function onStateChange(){ var n=document.getElementById("state-select").value; state.stateCool=(STATE_COOL[n]||50); recomputeCool(); document.getElementById("r-cool").value=Math.round(state.coolShare*100); updateNegoStream(n); render(); }
 function isPuertoRico(stateName){ return stateName==="Puerto Rico"; }
+// ── LANGUAGE SYSTEM ──────────────────────────────────────────────────────────
+var STRINGS = {
+  en: {
+    eyebrow: "Your Energy Saver",
+    s0Title: "Slash Your Energy Cost",
+    s0Hook: "Most commercial operators are overpaying on their electric bill. Almost none of them know by how much. This tells you.",
+    s0Guarantee: "If this calculator can't find you savings in under two minutes, we'll pay our engineer to find them for you.",
+    s0GuaranteeTooltip: "Valid for commercial facilities. $2,000+/month spend. New inquiries only. One per facility. Engineer fee capped at $150.",
+    s0Transition: "Where is your facility located?",
+    s0Doe: "Our savings estimator is calibrated to your country's electricity market, utility structure, and regulatory environment. Choose where your facility is located.",
+    chooseCountry: "Choose your country",
+    usName: "United States",
+    usSub: "All 50 states + Puerto Rico",
+    mxSub: "CFE Tariff — all regions",
+    s1Doe: "According to the DOE, the average commercial building wastes <strong>30% of its energy</strong>. Facilities with newer equipment are often losing significantly more.",
+    chooseFac: "Choose your facility type",
+    backCountry: "← Change country",
+    s2Ask: "Three inputs and we will calculate exactly what this is costing your facility.",
+    s2AskMx: "Five inputs and we will calculate exactly what this is costing your facility.",
+    s2SpendLbl: "Monthly electricity spend per facility",
+    narrowIt: "Narrow it down",
+    changeRange: "Change range",
+    stateLabel: "Primary state",
+    s2Back: "Back",
+    next: "Next",
+    s3179dAsk: "Adjust your estimated square footage to calculate your Section 179D deduction",
+    s3Back: "Back",
+    calculateBtn: "Calculate my savings now",
+    calBtn: "Book Your 22-Minute Facility Review",
+    smsBtn: "Text Your Energy Strategist",
+    resultLabel: "Estimated Annual Savings",
+    cumLab5: "5-year range",
+    cumLab10: "10-year range",
+    progressLabels: ["1 / 4","2 / 4","3 / 4","4 / 4"],
+    // Facility tile labels
+    facLabels: {
+      ind:"Industrial / Mfg", datactr:"Data Center", health:"Healthcare / Hospitals",
+      cold:"Cold Storage / Refrig. Whse", research:"Research Campus / Lab",
+      super:"Supermarket / Grocery", edu:"Education (K-12 / Higher Ed)",
+      whse:"Warehouse / Distribution", hotel:"Hospitality / Hotel",
+      multi:"Multifamily / Apartments", office:"Commercial / Office",
+      fitness:"Fitness / Gym", retail:"Retail (Big-Box / Strip)",
+      qsr:"Quick-Serve Restaurant", cstore:"Convenience Store / Fuel",
+      mixed:"Mixed / Other"
+    },
+    // Result narrative
+    rnCred: "Independently verified. Built from DOE consumption data and the information you just provided. A 22-Minute Facility Review can confirm your exact number, or open the assumptions panel below and adjust the inputs yourself right now.",
+    taxHd: "You Are Not Paying One Electricity Bill. You Are Paying Three. Only One of Them Shows Up on Your Statement.",
+    tax1Lbl: "You Are Paying for Power You Never Used",
+    tax1Txt: "Every month you get a bill for electricity that entered your building and did nothing except damage your most expensive equipment.",
+    tax2Lbl: "You Are Paying Twice for Every Piece of Equipment",
+    tax2Txt: "The distorted current that does reach your equipment runs hotter and cycles harder than it should. You bought the equipment once. Dirty power makes you pay for it again in maintenance, and again when it fails early. Roughly half of those service calls are preventable by addressing power quality.",
+    tax3Lbl: "You Are Replacing Equipment Years Before You Should",
+    tax3Txt: "Equipment that should run fifteen years fails in eight. That cost does not show up on your energy bill. It shows up as a capital expense that nobody in your organization connects back to power quality. Until now.",
+    proofLbl: "Verified Client Results",
+    proof1: "energy savings — <strong class=\"rn-proof-name\">Arizona Ford Dealership</strong>",
+    proof2: "energy savings — <strong class=\"rn-proof-name\">Midwest Bottling Facility</strong>",
+    proof3Attr: "360 Energy Solutions documented",
+    proof3Stat: "1,387,172 kWh of verified annual savings. <span class=\"rn-proof-featured-dollars\">$112,360 in annual energy savings when installed in 2012.</span> Today saving approximately <span class=\"rn-proof-featured-now\">$180,000 per year.</span>",
+    proof3Close: "Same work. Compounding returns.",
+    bridge1: "<strong>We address this in two steps:</strong> (1) cleaning the power at the source, and (2) retrofitting your equipment so it runs intelligently.",
+    bridge2: "We almost never recommend replacement. Every other energy company leads with new equipment because that is how they make money. We lead with retrofits because the ROI is almost always better and your existing equipment is usually worth saving.",
+    bridge3: "If you find a better solution, we will pay you a finder's fee for the introduction.",
+    bridge4: "Our process is designed to ISO standards and is fully third-party auditable. We are required by our own process to recommend the highest ROI solution on our platform for your facility. Not because it sounds good. Because our process does not allow anything else.",
+    bridge5: "We do not have customers. We have clients: people under our protection and care. The 22-Minute Facility Review is where that relationship starts.",
+    guarantee: "Your session with an energy strategist is on us. If our engineer cannot find at least one of these three taxes running in your building, we cover their $150 diagnostic fee as well. You pay nothing unless you decide to move forward. No card required.",
+    smsSendNow: "Or send a text to get started now",
+    smsVideoBtn: "Request Your Video Walkthrough",
+    // Facility count chips
+    facCountLbl: "Roughly how many similar facilities do you operate?",
+    facCountSub: "An estimate is fine. We'll confirm the details later.",
+    facCountOne: "Just one for now",
+    facCount2: "2 to 4",
+    facCount5: "5 to 9",
+    facCount10: "10 to 19",
+    facCount20: "20 or more",
+    facCountPhrase: {
+      one:"A single facility", "2to4":"Two to four facilities", "5to9":"Five to nine facilities",
+      "10to19":"Ten to nineteen facilities", "20plus":"Twenty or more facilities"
+    },
+    // Signal box
+    sigEquipLabel: "How we keep this honest",
+    sigEquipText: "Below about $1,500 a month per facility, a full done-for-you installation will not pay for itself, and we will not put you into a program that does not. The better path at this level is equipment only, with guided self-installation. You still capture the savings. You handle the install, and we stay on call for the questions.",
+    sigTurnkeyLabel: "How we structure turnkey work",
+    sigFitText: function(countPhrase,spendPhrase){ return countPhrase+" at about "+spendPhrase+" a month per facility. That's the scale our full done-for-you program is built for — we handle the entire install, start to finish. This one looks built for you."; },
+    sigFitSingleText: "A single facility at $5,000 a month or more justifies full turnkey on its own. No portfolio required.",
+    sigWarmText: function(tierMin){ return "We can absolutely start where you are. Worth knowing that our full turnkey economics get strongest across roughly "+tierMin+" or more facilities at your spend level, or on a single site above $5,000 a month. We'll find the right structure on the call."; },
+    // Portfolio result
+    perFacility: "Per facility",
+    portfolioAcross: "Across ",
+    portfolioTo: "to",
+    portfolioDefer: "Estimate assumes similar facilities. Multi-state portfolios get a tailored review.",
+    // Equipment-only narrative (DRAFT — pending client approval)
+    rnCredEquip: "Independently verified. Built from DOE consumption data and the information you just provided. Open the assumptions panel below and adjust the inputs yourself right now.",
+    equip1: "At your spend level, the honest move is equipment only. A full done-for-you installation would not pay for itself here, and we will not put you into a program that does not.",
+    equip2: "Here is what that means in practice: we identify the exact equipment that addresses these three taxes in your building, and you install it yourself with our guided support. You capture the same savings. You handle the install, and we stay on call for the questions.",
+    equip3: "We almost never recommend wholesale replacement. The ROI on a targeted retrofit is almost always better, and your existing equipment is usually worth saving.",
+    equip4: "If you find a better solution, we will pay you a finder's fee for the introduction.",
+    equipGuarantee: "The savings estimate above is yours to keep, no card required. When you are ready to spec the equipment, we will help you get it right.",
+    equipCtaNote: "Ask us about the equipment-only path and we'll help you spec the right hardware for your facility.",
+    equipCtaAction: "Ask about equipment-only",
+    // Dynamic render strings
+    resultPreamble: function(noun,names){ return "Your "+noun+" is losing this every year to electrical waste. The most likely culprits: <strong>"+names+"</strong>."; },
+    annualBill: "of your annual bill",
+    prRateNote: "Conservative 2.5% floor used for projection\nPR rates rose 85%+ between 2020 and 2022. A new LUMA rate case filed July 2025.",
+    mxRateNote: "Piso conservador del 3.5% usado para proyección\nTarifas CFE subieron ~15%/año 2020–2023. Reforma energética 2025 añade presión alcista.",
+    rateNoteFn: function(range,abbr){ return abbr ? range+"% avg annual rate increase\n"+abbr+" state average" : "Based on "+range+"% avg annual rate increase"; },
+    costOfWaiting: function(lo,hi){ return "Based on your inputs, "+lo+" to "+hi+" is leaving your building every single month, and that number grows automatically as electricity rates rise."; },
+    demandImplied: function(kw){ return "Implied billing demand at this rate: about "+kw+" kW."; },
+    heatOff: "off", heatGas: "$0 · on gas meter", heatUpTo: "up to ",
+    streamIncluded: "Included", streamNotIncluded: "Not included", streamAlways: "Always included",
+    // Typewriter
+    twLine1: function(noun){ return "Your "+noun+" Has Been Running Three Electricity Bills Since Day One."; },
+    twLine2: "Now You Have the Number.",
+    // SMS bodies
+    smsFacMsg: function(facLabel,spendAmt){ return "Hi, I have a "+facLabel+(spendAmt?" spending "+spendAmt:"")+"\nand just ran the Energy Plus savings calculator. What's the fastest way to know if these numbers hold for my operation?"; },
+    smsVideoMsg: function(noun,stateStr,spendAmt){ return "Hi, I have a "+noun+stateStr+spendAmt+" and I'd like to request a video walkthrough showing how you can help a facility like mine dial in its real numbers."; },
+    // Adjust / streams / footer
+    adjustOur: "Adjust our assumptions",
+    adjustThe: "Adjust the assumptions",
+    programsLabel: "Programs included in your estimate",
+    editBtn: "Edit",
+    aboutTag: "About this estimate",
+    aboutP1: "This estimator returns a conservative range, not a projection of peak performance. Savings across each program are achieved through a combination of retrofits and replacements, whichever delivers the best return on investment for your specific facility. The approach is performance-based, not vendor-driven.",
+    aboutP2: "Actual verified savings depend on a site assessment of equipment, load profile, rate structure, and condition. Energy Plus is an Independent Energy Solutions Partner with no vendor incentive to inflate these figures. Every assumption is editable above.",
+    adjustNote: "Consumption shares are DOE and EIA CBECS averages by building type. Harmonization floors are Energy Plus verified results where data exists. The newer types currently use estimated floors pending verified figures. Every field is editable.",
+    adjustSec1: "Consumption and HVAC",
+    adjustSec2: "Peak demand (demand-tariff sites)",
+    // Mexico Stage 2 UI
+    mxRegionLabel: "CFE Region",
+    mxRegionPlaceholder: "Select your region",
+    mxChipAssumed: "Auto-generated assumption:",
+    mxChipEdit: "Edit ▾",
+    mxTariffChipLabel: "Estimated tariff:",
+    mxCoolLabel: "Cooling load",
+    mxHeatLabel: "Electric heating",
+    mxHeatNo: "No", mxHeatYes: "Yes",
+    mxTariffLabel: "CFE tariff class",
+    mxDemLabel: "Demand charge (% of bill)",
+    mxPFLabel: "Power factor (already corrected?)",
+    mxPFYes: "Yes, already corrected", mxPFNo: "No / unknown",
+    mxPFPctLabel: "P.F. surcharge (% of bill)",
+    mxFxLabel: "Exchange rate",
+    mxTariffTopLabel: "CFE tariff class",
+    // Adjust panel labels
+    lblHarmo: "Harmonization floor",
+    lblHvac: "HVAC share of bill",
+    lblCool: "Cooling share of HVAC",
+    lblDemRate: "Demand charge",
+    lblDemPortion: "Demand share of bill",
+    lblDemRed: "Demand reduction",
+    // Units
+    perYear: "per year",
+    perMonth: "/ month",
+    sqFt: "sq ft",
+    yr: "/ yr",
+    dedResult: function(d,t){ return "Up to <span class=\"ded-num\" id=\"ded-amount\">"+d+"</span> in deductions. About <span class=\"ded-num\" id=\"ded-tax\">"+t+"</span> in real tax at 21%."; },
+    dedConsult: function(d,t){ return "Up to <strong>"+d+"</strong> in deductions, about <strong>"+t+"</strong> in real tax savings at 21%."; },
+    // Stream section labels
+    ss: {
+      nego: { name:"Energy Rate Negotiation", tag:"Deregulated market", desc:"Your state has a deregulated electricity market, meaning you can shop your supply rate. We negotiate directly with generators on your behalf to lower the supply portion of your bill without changing your utility relationship." },
+      harmo: { name:"Power Harmonization", tag:"Always included", desc:"Cleans the electrical noise that quietly inflates your bill on every circuit, every hour, while also damaging your equipment. Independently verified across facility types." },
+      cool: { name:"Cooling & Refrigeration", desc:"Your single largest energy load. We optimize the equipment you have and, where it makes sense, upgrade it, targeting inefficiency before it shortens equipment life." },
+      heat: { name:"Heating", desc:"For buildings running electric heat, replacing it with a high-efficiency heat pump removes a significant share of your bill and eliminates a major source of wasted spend." },
+      dem: { name:"Peak Demand Reduction", desc:"Demand charges can make up 30 to 40 percent of a commercial electric bill. We reduce the peak draw that sets your monthly demand reading." },
+      lit: { name:"Outdoor Lighting", desc:"Solar and battery replacement of exterior fixtures. Off-grid means this load disappears from your meter entirely — and the equipment lasts 25 years or more." },
+      mot: { name:"Motor & Compressor Smart Start", desc:"Eliminates the hard-start inrush that drives peak demand readings and shortens equipment life. One of the fastest-payback improvements in the program." },
+      pf: { name:"Power Factor Correction", tag:"CFE regulated", desc:"CFE applies direct surcharges for power factor below 0.90, and the minimum threshold tightens to 0.97 in 2026. Correction eliminates this line-item penalty and reduces demand charges simultaneously." },
+      seeHow: "See how we address this"
+    }
+  },
+  es: {
+    eyebrow: "Su Ahorrador de Energía",
+    s0Title: "Reduzca Su Costo de Energía",
+    s0Hook: "La mayoría de los operadores comerciales están pagando de más en su factura eléctrica. Casi ninguno sabe cuánto. Esto se lo dice.",
+    s0Guarantee: "Si esta calculadora no puede encontrarle ahorros en menos de dos minutos, pagaremos a nuestro ingeniero para encontrarlos por usted.",
+    s0GuaranteeTooltip: "Válido para instalaciones comerciales. Gasto de $2,000+/mes. Solo nuevas consultas. Una por instalación. Honorario del ingeniero limitado a $150.",
+    s0Transition: "¿Dónde se encuentra su instalación?",
+    s0Doe: "Nuestro estimador está calibrado al mercado eléctrico, estructura tarifaria y entorno regulatorio de su país. Elija dónde se encuentra su instalación.",
+    chooseCountry: "Elija su país",
+    usName: "Estados Unidos",
+    usSub: "Los 50 estados + Puerto Rico",
+    mxSub: "Tarifa CFE — todas las regiones",
+    s1Doe: "Según la CONUEE, el edificio comercial promedio desperdicia <strong>30% de su energía</strong>. Las instalaciones con equipos más modernos suelen perder significativamente más.",
+    chooseFac: "Elija el tipo de instalación",
+    backCountry: "← Cambiar país",
+    s2Ask: "Tres datos y calcularemos exactamente cuánto le está costando esto a su instalación.",
+    s2AskMx: "Cinco datos y calcularemos exactamente cuánto le está costando esto a su instalación.",
+    s2SpendLbl: "Gasto mensual en electricidad por instalación",
+    narrowIt: "Afinar el rango",
+    changeRange: "Cambiar rango",
+    stateLabel: "Estado principal",
+    s2Back: "Atrás",
+    next: "Siguiente",
+    s3179dAsk: "Ajuste los metros cuadrados estimados para calcular su deducción del Artículo 179D",
+    s3Back: "Atrás",
+    calculateBtn: "Calcular mis ahorros ahora",
+    calBtn: "Reserve su Revisión de Instalación de 22 Minutos",
+    smsBtn: "Envíe un mensaje a su Estratega de Energía",
+    resultLabel: "Ahorro Anual Estimado",
+    cumLab5: "Rango a 5 años",
+    cumLab10: "Rango a 10 años",
+    progressLabels: ["1 / 4","2 / 4","3 / 4","4 / 4"],
+    // Facility tile labels
+    facLabels: {
+      ind:"Industrial / Manufactura", datactr:"Centro de Datos", health:"Salud / Hospitales",
+      cold:"Almacenamiento en Frío / Bodega Refrigerada", research:"Campus de Investigación / Laboratorio",
+      super:"Supermercado / Abarrotes", edu:"Educación (K-12 / Educación Superior)",
+      whse:"Almacén / Distribución", hotel:"Hospitalidad / Hotel",
+      multi:"Multifamiliar / Apartamentos", office:"Comercial / Oficinas",
+      fitness:"Gimnasio / Fitness", retail:"Retail (Gran Superficie / Plaza Comercial)",
+      qsr:"Restaurante de Servicio Rápido", cstore:"Tienda de Conveniencia / Gasolinera",
+      mixed:"Mixto / Otro"
+    },
+    // Result narrative
+    rnCred: "Verificado de forma independiente. Construido con datos de consumo de la CONUEE y la información que acaba de proporcionar. Una Revisión de Instalación de 22 Minutos puede confirmar su número exacto, o abra el panel de supuestos a continuación y ajuste los datos usted mismo ahora.",
+    taxHd: "Usted No Está Pagando Una Factura de Electricidad. Está Pagando Tres. Solo Una Aparece en Su Estado de Cuenta.",
+    tax1Lbl: "Está Pagando por Energía que Nunca Utilizó",
+    tax1Txt: "Cada mes recibe una factura por electricidad que entró a su edificio y no hizo nada más que dañar su equipo más costoso.",
+    tax2Lbl: "Está Pagando Dos Veces por Cada Pieza de Equipo",
+    tax2Txt: "La corriente distorsionada que sí llega a su equipo funciona más caliente y trabaja más duro de lo que debería. Compró el equipo una vez. La energía sucia lo hace pagar de nuevo en mantenimiento, y otra vez cuando falla antes de tiempo.",
+    tax3Lbl: "Está Reemplazando Equipo Años Antes de lo que Debería",
+    tax3Txt: "El equipo que debería funcionar quince años falla en ocho. Ese costo no aparece en su factura de energía. Aparece como un gasto de capital que nadie en su organización relaciona con la calidad de la energía. Hasta ahora.",
+    proofLbl: "Resultados Verificados de Clientes",
+    proof1: "ahorro de energía — <strong class=\"rn-proof-name\">Concesionario Ford en Arizona</strong>",
+    proof2: "ahorro de energía — <strong class=\"rn-proof-name\">Planta Embotelladora en el Medio Oeste</strong>",
+    proof3Attr: "Documentado por 360 Energy Solutions",
+    proof3Stat: "1,387,172 kWh de ahorro anual verificado. <span class=\"rn-proof-featured-dollars\">$112,360 en ahorros anuales cuando se instaló en 2012.</span> Hoy ahorrando aproximadamente <span class=\"rn-proof-featured-now\">$180,000 por año.</span>",
+    proof3Close: "El mismo trabajo. Rendimientos compuestos.",
+    bridge1: "<strong>Abordamos esto en dos pasos:</strong> (1) limpiar la energía en la fuente, y (2) modernizar su equipo para que funcione de manera inteligente.",
+    bridge2: "Casi nunca recomendamos el reemplazo. Todas las demás empresas de energía empiezan con equipo nuevo porque así es como ganan dinero. Nosotros empezamos con modernizaciones porque el ROI casi siempre es mejor y su equipo existente generalmente vale la pena conservarlo.",
+    bridge3: "Si encuentra una mejor solución, le pagaremos una comisión por la presentación.",
+    bridge4: "Nuestro proceso está diseñado bajo estándares ISO y es completamente auditable por terceros. Estamos obligados por nuestro propio proceso a recomendar la solución de mayor ROI en nuestra plataforma para su instalación.",
+    bridge5: "No tenemos clientes transaccionales. Tenemos clientes bajo nuestra protección y cuidado. La Revisión de Instalación de 22 Minutos es donde comienza esa relación.",
+    guarantee: "Su sesión con un estratega de energía corre por nuestra cuenta. Si nuestro ingeniero no puede encontrar al menos uno de estos tres cargos en su edificio, también cubrimos su tarifa de diagnóstico de $150. No paga nada a menos que decida seguir adelante. No se requiere tarjeta.",
+    smsSendNow: "O envíe un mensaje de texto para comenzar ahora",
+    smsVideoBtn: "Solicite su Recorrido en Video",
+    // Facility count chips
+    facCountLbl: "¿Aproximadamente cuántas instalaciones similares opera?",
+    facCountSub: "Una estimación está bien. Confirmaremos los detalles más adelante.",
+    facCountOne: "Solo una por ahora",
+    facCount2: "2 a 4",
+    facCount5: "5 a 9",
+    facCount10: "10 a 19",
+    facCount20: "20 o más",
+    facCountPhrase: {
+      one:"Una sola instalación", "2to4":"Dos a cuatro instalaciones", "5to9":"Cinco a nueve instalaciones",
+      "10to19":"Diez a diecinueve instalaciones", "20plus":"Veinte o más instalaciones"
+    },
+    // Signal box
+    sigEquipLabel: "Cómo mantenemos esto honesto",
+    sigEquipText: "Por debajo de unos $1,500 al mes por instalación, una instalación completa llave en mano no se paga sola, y no lo pondremos en un programa que no lo haga. El mejor camino a este nivel es solo equipo, con autoinstalación guiada. Usted captura los ahorros igual. Usted maneja la instalación, y nosotros quedamos disponibles para las preguntas.",
+    sigTurnkeyLabel: "Cómo estructuramos el trabajo llave en mano",
+    sigFitText: function(countPhrase,spendPhrase){ return countPhrase+" a unos "+spendPhrase+" al mes por instalación. Esa es la escala para la que está hecho nuestro programa completo llave en mano — nos encargamos de toda la instalación, de principio a fin. Esto parece hecho para usted."; },
+    sigFitSingleText: "Una sola instalación a $5,000 al mes o más justifica el programa completo llave en mano por sí sola. No se requiere portafolio.",
+    sigWarmText: function(tierMin){ return "Por supuesto podemos empezar donde usted está. Vale la pena saber que la economía de nuestro programa completo llave en mano es más fuerte a partir de aproximadamente "+tierMin+" o más instalaciones a su nivel de gasto, o en una sola instalación por encima de $5,000 al mes. Encontraremos la estructura correcta en la llamada."; },
+    // Portfolio result
+    perFacility: "Por instalación",
+    portfolioAcross: "En ",
+    portfolioTo: "a",
+    portfolioDefer: "La estimación asume instalaciones similares. Los portafolios en varios estados reciben una revisión personalizada.",
+    // Equipment-only narrative (BORRADOR — pendiente de aprobación del cliente)
+    rnCredEquip: "Verificado de forma independiente. Construido con datos de consumo del DOE y la información que acaba de proporcionar. Abra el panel de supuestos a continuación y ajuste los datos usted mismo ahora.",
+    equip1: "A su nivel de gasto, lo honesto es solo equipo. Una instalación completa llave en mano no se pagaría sola aquí, y no lo pondremos en un programa que no lo haga.",
+    equip2: "Esto significa en la práctica: identificamos el equipo exacto que aborda estos tres cargos en su edificio, y usted lo instala con nuestro apoyo guiado. Captura los mismos ahorros. Usted maneja la instalación, y nosotros quedamos disponibles para las preguntas.",
+    equip3: "Casi nunca recomendamos el reemplazo total. El ROI de una modernización dirigida casi siempre es mejor, y su equipo existente generalmente vale la pena conservarlo.",
+    equip4: "Si encuentra una mejor solución, le pagaremos una comisión por la presentación.",
+    equipGuarantee: "La estimación de ahorro de arriba es suya, sin tarjeta requerida. Cuando esté listo para especificar el equipo, le ayudaremos a hacerlo bien.",
+    equipCtaNote: "Pregúntenos sobre el camino de solo equipo y le ayudaremos a especificar el hardware correcto para su instalación.",
+    equipCtaAction: "Preguntar sobre solo equipo",
+    // Dynamic render strings
+    resultPreamble: function(noun,names,facKey){
+      var SL=STRINGS.es;
+      var translatedNoun=(SL.facNouns&&SL.facNouns[facKey])||noun;
+      // Translate equipment names
+      var nameList=names.split(", ");
+      var translated=nameList.map(function(n){
+        return SL.equipNames&&SL.equipNames[n]?SL.equipNames[n]:n;
+      }).join(", ");
+      return "Su "+translatedNoun+" está perdiendo esto cada año en desperdicio eléctrico. Los culpables más probables: <strong>"+translated+"</strong>.";
+    },
+    annualBill: "de su factura anual",
+    prRateNote: "Piso conservador del 2.5% usado para proyección\nTarifas de PR subieron +85% entre 2020 y 2022. Nuevo caso tarifario LUMA presentado julio 2025.",
+    mxRateNote: "Piso conservador del 3.5% usado para proyección\nTarifas CFE subieron ~15%/año 2020–2023. Reforma energética 2025 añade presión alcista.",
+    rateNoteFn: function(range,abbr){ return abbr ? range+"% aumento anual promedio\npromedio del estado "+abbr : "Basado en "+range+"% aumento anual promedio"; },
+    costOfWaiting: function(lo,hi){ return "Según sus datos, entre "+lo+" y "+hi+" está saliendo de su edificio cada mes, y ese número crece automáticamente conforme suben las tarifas eléctricas."; },
+    demandImplied: function(kw){ return "Demanda de facturación implícita a esta tarifa: aproximadamente "+kw+" kW."; },
+    heatOff: "no incluido", heatGas: "$0 · en medidor de gas", heatUpTo: "hasta ",
+    streamIncluded: "Incluido", streamNotIncluded: "No incluido", streamAlways: "Siempre incluido",
+    twLine1: function(noun, facKey){
+      var SL=STRINGS.es;
+      var translatedNoun=(SL.facNouns&&SL.facNouns[facKey])?
+        (SL.facNouns[facKey].charAt(0).toUpperCase()+SL.facNouns[facKey].slice(1)):noun;
+      return translatedNoun+" ha estado pagando tres facturas eléctricas desde el primer día.";
+    },
+    twLine2: "Ahora tiene el número.",
+    smsFacMsg: function(facLabel,spendAmt){ return "Hola, tengo un "+facLabel+(spendAmt?" con gasto de "+spendAmt:"")+"\ny acabo de usar la calculadora de ahorros de Energy Plus. ¿Cuál es la forma más rápida de saber si estos números aplican para mi operación?"; },
+    smsVideoMsg: function(noun,stateStr,spendAmt){ return "Hola, tengo un "+noun+stateStr+spendAmt+" y me gustaría solicitar un recorrido en video mostrando cómo pueden ayudar a una instalación como la mía a determinar sus números reales."; },
+    adjustOur: "Ajustar nuestros supuestos",
+    adjustThe: "Ajustar los supuestos",
+    programsLabel: "Programas incluidos en su estimación",
+    editBtn: "Editar",
+    aboutTag: "Acerca de esta estimación",
+    aboutP1: "Este estimador devuelve un rango conservador, no una proyección del rendimiento máximo. Los ahorros en cada programa se logran mediante una combinación de modernizaciones y reemplazos, lo que ofrezca el mejor retorno de inversión para su instalación específica.",
+    aboutP2: "Los ahorros verificados reales dependen de una evaluación en sitio del equipo, perfil de carga, estructura tarifaria y condición. Energy Plus es un Socio Independiente de Soluciones Energéticas sin incentivo de proveedor para inflar estas cifras. Cada supuesto es editable arriba.",
+    adjustNote: "Las participaciones de consumo son promedios del DOE, EIA y CONUEE por tipo de edificio. Todos los campos son editables.",
+    adjustSec1: "Consumo y HVAC",
+    adjustSec2: "Demanda máxima (sitios con tarifa por demanda)",
+    // Mexico Stage 2 UI
+    mxRegionLabel: "Región CFE",
+    mxRegionPlaceholder: "Seleccione su región",
+    mxChipAssumed: "Supuesto generado:",
+    mxChipEdit: "Editar ▾",
+    mxTariffChipLabel: "Tarifa estimada:",
+    mxCoolLabel: "Carga de enfriamiento (cooling load)",
+    mxHeatLabel: "Calefacción eléctrica",
+    mxHeatNo: "No", mxHeatYes: "Sí",
+    mxTariffLabel: "Clase de tarifa CFE",
+    mxDemLabel: "Cargo por demanda (% del recibo)",
+    mxPFLabel: "Factor de potencia (¿ya corregido?)",
+    mxPFYes: "Sí, ya corregido", mxPFNo: "No / desconocido",
+    mxPFPctLabel: "Recargo por F.P. (% del recibo)",
+    mxFxLabel: "Tipo de cambio (exchange rate)",
+    mxTariffTopLabel: "Clase de tarifa CFE",
+    // Adjust panel labels
+    lblHarmo: "Piso de armonización",
+    lblHvac: "Participación de HVAC en la factura",
+    lblCool: "Enfriamiento como % del HVAC",
+    lblDemRate: "Cargo por demanda",
+    lblDemPortion: "Participación de demanda en la factura",
+    lblDemRed: "Reducción de demanda",
+    // Units
+    perYear: "por año",
+    perMonth: "/ mes",
+    sqFt: "m² / pie²",
+    yr: "/ año",
+    dedResult: function(d,t){ return "Hasta <span class=\"ded-num\" id=\"ded-amount\">"+d+"</span> en deducciones. Aproximadamente <span class=\"ded-num\" id=\"ded-tax\">"+t+"</span> en ahorro fiscal real al 21%."; },
+    dedConsult: function(d,t){ return "Hasta <strong>"+d+"</strong> en deducciones, aproximadamente <strong>"+t+"</strong> en ahorro fiscal real al 21%."; },
+    // Facility nouns in Spanish (for typewriter headline and result preamble)
+    facNouns: {
+      ind:"instalación industrial", datactr:"centro de datos", health:"instalación de salud",
+      cold:"almacén refrigerado", research:"campus de investigación", super:"supermercado",
+      edu:"escuela", whse:"almacén", hotel:"propiedad hotelera", multi:"propiedad multifamiliar",
+      office:"oficina comercial", fitness:"gimnasio", retail:"tienda",
+      qsr:"restaurante de servicio rápido", cstore:"tienda de conveniencia", mixed:"instalación mixta"
+    },
+    // Equipment names in Spanish (for result preamble culprits list)
+    equipNames: {
+      "rooftop units":"unidades de techo","compressor racks":"racks de compresores",
+      "refrigeration motors":"motores de refrigeración","HVAC units":"unidades HVAC",
+      "chillers":"enfriadores","elevators":"elevadores","boiler":"caldera",
+      "water pumps":"bombas de agua","imaging equipment":"equipo de imagen",
+      "LED drivers":"drivers LED","VFDs":"variadores de frecuencia",
+      "motor drives":"variadores de motor","lighting controls":"controles de iluminación",
+      "cardio equipment":"equipo cardiovascular","treadmill drives":"variadores de caminadora",
+      "reach-in coolers":"enfriadores de mostrador","walk-in compressors":"compresores de cámara fría",
+      "fuel management electronics":"electrónica de gestión de combustible",
+      "point-of-sale systems":"sistemas de punto de venta",
+      "PTAC units":"unidades PTAC","server cooling":"enfriamiento de servidores",
+      "UPS systems":"sistemas UPS","power distribution units":"unidades de distribución de energía",
+      "conveyors":"bandas transportadoras","welding equipment":"equipo de soldadura",
+      "CNC machines":"máquinas CNC","pneumatic systems":"sistemas neumáticos"
+    },
+    ss: {
+      nego: { name:"Negociación de Tarifa Eléctrica", tag:"Mercado desregulado", desc:"Su estado tiene un mercado eléctrico desregulado, lo que significa que puede elegir su tarifa de suministro. Negociamos directamente con generadores en su nombre para reducir la porción de suministro de su factura." },
+      harmo: { name:"Armonización de Potencia", tag:"Siempre incluido", desc:"Limpia el ruido eléctrico que silenciosamente infla su factura en cada circuito, cada hora, mientras también daña su equipo. Verificado de forma independiente en todos los tipos de instalación." },
+      cool: { name:"Enfriamiento y Refrigeración", desc:"Su carga de energía más grande. Optimizamos el equipo que tiene y, donde tiene sentido, lo actualizamos, atacando la ineficiencia antes de que acorte la vida del equipo." },
+      heat: { name:"Calefacción", desc:"Para edificios con calefacción eléctrica, reemplazarla con una bomba de calor de alta eficiencia elimina una parte significativa de su factura." },
+      dem: { name:"Reducción de Demanda Máxima", desc:"Los cargos por demanda pueden representar del 30 al 45% de una factura eléctrica comercial en México. Reducimos el pico de consumo que establece su lectura de demanda mensual." },
+      lit: { name:"Iluminación Exterior", desc:"Reemplazo solar y con batería de luminarias exteriores. Sin conexión a la red significa que esta carga desaparece de su medidor por completo." },
+      mot: { name:"Arranque Inteligente de Motores y Compresores", desc:"Elimina la corriente de arranque que eleva las lecturas de demanda máxima y acorta la vida del equipo. Una de las mejoras de recuperación más rápida en el programa." },
+      pf: { name:"Corrección de Factor de Potencia", tag:"Tarifa CFE regulada", desc:"La CFE aplica recargos directos por factor de potencia por debajo de 0.90, y el umbral mínimo se ajusta a 0.97 en 2026. La corrección elimina esta penalización y reduce los cargos por demanda simultáneamente." },
+      seeHow: "Ver cómo abordamos esto"
+    }
+  }
+};
+
+function t(key){ return (STRINGS[state.lang]||STRINGS.en)[key]||key; }
+
+function setLang(lang){
+  state.lang=lang;
+  // Toggle button active state
+  document.getElementById("lang-en").classList.toggle("active",lang==="en");
+  document.getElementById("lang-es").classList.toggle("active",lang==="es");
+  applyStrings();
+}
+
+function applyStrings(){
+  var S=STRINGS[state.lang]||STRINGS.en;
+  // Header
+  var ey=document.getElementById("calc-eyebrow"); if(ey) ey.textContent=S.eyebrow;
+  // Stage 0 hero
+  var s0t=document.getElementById("t-s0-title"); if(s0t) s0t.innerHTML="<em>"+S.s0Title+"</em>";
+  var s0h=document.getElementById("t-s0-hook"); if(s0h) s0h.textContent=S.s0Hook;
+  var s0g=document.getElementById("t-s0-guarantee"); if(s0g){ var ast=s0g.querySelector(".guarantee-wrap"); s0g.childNodes[0].textContent=S.s0Guarantee+" "; if(ast) ast.style.display="inline"; }
+  var s0tt=document.getElementById("guarantee-tooltip"); if(s0tt) s0tt.textContent=S.s0GuaranteeTooltip||"Valid for commercial facilities. $2,000+/month spend. New inquiries only. One per facility. Engineer fee capped at $150.";
+  var s0tr=document.getElementById("t-s0-transition"); if(s0tr) s0tr.textContent=S.s0Transition;
+  // Stage 0
+  var s0d=document.getElementById("t-s0-doe"); if(s0d) s0d.innerHTML=S.s0Doe;
+  var cc=document.getElementById("t-choose-country"); if(cc) cc.textContent=S.chooseCountry;
+  var usn=document.getElementById("t-us-name"); if(usn) usn.textContent=S.usName;
+  var uss=document.getElementById("t-us-sub"); if(uss) uss.textContent=S.usSub;
+  // Stage 1
+  var s1d=document.getElementById("t-s1-doe"); if(s1d) s1d.innerHTML=S.s1Doe;
+  var cf=document.getElementById("t-choose-fac"); if(cf) cf.textContent=S.chooseFac;
+  var bc=document.getElementById("t-back-country"); if(bc) bc.textContent=S.backCountry;
+  // Update facility tile text
+  document.querySelectorAll(".fac-opt").forEach(function(el){
+    var key=el.getAttribute("data-key");
+    if(key&&S.facLabels&&S.facLabels[key]){
+      // Replace the text node (last child or direct text) keeping the SVG
+      var nodes=el.childNodes;
+      for(var i=nodes.length-1;i>=0;i--){
+        if(nodes[i].nodeType===3&&nodes[i].textContent.trim()){
+          nodes[i].textContent=S.facLabels[key]; break;
+        }
+      }
+    }
+  });
+  // Stage 2
+  var s2a=document.getElementById("t-s2-ask"); if(s2a) s2a.textContent=S.s2Ask;
+  var s2sl=document.getElementById("t-s2-spend-lbl");
+  if(s2sl){ var mo=document.getElementById("c2-mo"); s2sl.innerHTML=S.s2SpendLbl+(mo?" <span id='c2-mo' class='c-field-aside'>"+mo.textContent+"</span>":""); }
+  var nb=document.getElementById("t-narrow");
+  if(nb){ var rr=document.getElementById("band-refine-range"); nb.innerHTML=S.narrowIt+(rr?" <span id='band-refine-range' class='band-refine-range'>"+rr.textContent+"</span>":""); }
+  var cr=document.getElementById("t-change-range"); if(cr) cr.textContent=S.changeRange;
+  // Facility count block
+  var fcl=document.getElementById("t-faccount-lbl"); if(fcl) fcl.textContent=S.facCountLbl;
+  var fcs=document.getElementById("t-faccount-sub"); if(fcs) fcs.textContent=S.facCountSub;
+  renderFacCounts(); updateSignalBox();
+  var s2b=document.getElementById("t-s2-back"); if(s2b) s2b.textContent=S.s2Back;
+  var s2n=document.getElementById("s2-next-btn"); if(s2n) s2n.childNodes[0]&&(s2n.childNodes[0].textContent=S.next);
+  // US state label
+  var usl=document.querySelector("#s2-us-location .c-field-lbl");
+  if(usl){ var sp=document.getElementById("c2-split"); usl.innerHTML=S.stateLabel+(sp?" <span id='c2-split' class='c-field-aside'>"+sp.textContent+"</span>":""); }
+  // Stage 3
+  var s3a=document.getElementById("t-s3-179d-ask"); if(s3a) s3a.textContent=S["s3179dAsk"];
+  var s3b=document.getElementById("t-s3-back"); if(s3b) s3b.textContent=S.s3Back;
+  var cb2=document.getElementById("t-calculate-btn"); if(cb2) cb2.childNodes[0]&&(cb2.childNodes[0].textContent=S.calculateBtn);
+  // Result
+  var calb=document.getElementById("t-cal-btn"); if(calb) calb.textContent=S.calBtn;
+  var smsb=document.getElementById("t-sms-btn"); if(smsb) smsb.textContent=S.smsBtn;
+  // Cum labels
+  document.querySelectorAll(".cum-lab").forEach(function(el,i){ el.textContent=(i%2===0)?S.cumLab5:S.cumLab10; });
+  // Result narrative
+  var rnc=document.getElementById("t-rn-cred"); if(rnc) rnc.textContent=S.rnCred;
+  var thd=document.getElementById("t-tax-hd"); if(thd) thd.textContent=S.taxHd;
+  var t1l=document.getElementById("t-tax1-lbl"); if(t1l) t1l.textContent=S.tax1Lbl;
+  var t1t=document.getElementById("t-tax1-txt"); if(t1t) t1t.textContent=S.tax1Txt;
+  var t2l=document.getElementById("t-tax2-lbl"); if(t2l) t2l.textContent=S.tax2Lbl;
+  var t2t=document.getElementById("t-tax2-txt"); if(t2t) t2t.textContent=S.tax2Txt;
+  var t3l=document.getElementById("t-tax3-lbl"); if(t3l) t3l.textContent=S.tax3Lbl;
+  var t3t=document.getElementById("t-tax3-txt"); if(t3t) t3t.textContent=S.tax3Txt;
+  var pl=document.getElementById("t-proof-lbl"); if(pl) pl.textContent=S.proofLbl;
+  var p1=document.getElementById("t-proof1"); if(p1) p1.innerHTML=S.proof1;
+  var p2=document.getElementById("t-proof2"); if(p2) p2.innerHTML=S.proof2;
+  var p3a=document.getElementById("t-proof3-attr"); if(p3a) p3a.textContent=S.proof3Attr;
+  var p3s=document.getElementById("t-proof3-stat"); if(p3s) p3s.innerHTML=S.proof3Stat;
+  var p3c=document.getElementById("t-proof3-close"); if(p3c) p3c.textContent=S.proof3Close;
+  var br1=document.getElementById("t-bridge1"); if(br1) br1.innerHTML=S.bridge1;
+  var br2=document.getElementById("t-bridge2"); if(br2) br2.textContent=S.bridge2;
+  var br3=document.getElementById("t-bridge3"); if(br3) br3.textContent=S.bridge3;
+  var br4=document.getElementById("t-bridge4"); if(br4) br4.textContent=S.bridge4;
+  var br5=document.getElementById("t-bridge5"); if(br5) br5.textContent=S.bridge5;
+  var gu=document.getElementById("t-guarantee"); if(gu) gu.textContent=S.guarantee;
+  var sn=document.querySelector(".rn-sms-label"); if(sn&&S.smsSendNow) sn.textContent=S.smsSendNow;
+  var svb=document.querySelector("#sms-link-primary .txt-cta-ico+*,#sms-link-primary"); 
+  var svbEl=document.querySelector("#sms-link-primary"); 
+  if(svbEl&&S.smsVideoBtn){
+    var ico=svbEl.querySelector(".txt-cta-ico");
+    svbEl.innerHTML=(ico?ico.outerHTML:"")+" "+S.smsVideoBtn;
+  }
+  // Also re-apply to any dynamic content that's already rendered
+  if(state.selected&&(state.view==="s2"||state.view==="s3"||state.view==="result")){
+    updateClaimS2();
+    if(state.view==="s3"||state.view==="result") updateClaimS3();
+  }
+  if(state.view==="result"){ render(); }
+  var mxttl=document.getElementById("t-mx-tariff-top-lbl"); if(mxttl) mxttl.textContent=S.mxTariffTopLabel||S.mxTariffLabel;
+  // Adjust panel rate-row labels
+  var ll=[["t-lbl-harmo","lblHarmo"],["t-lbl-hvac","lblHvac"],["t-lbl-cool","lblCool"],
+          ["t-lbl-demrate","lblDemRate"],["t-lbl-demportion","lblDemPortion"],["t-lbl-demred","lblDemRed"]];
+  ll.forEach(function(pair){ var el=document.getElementById(pair[0]); if(el&&S[pair[1]]) el.textContent=S[pair[1]]; });
+  // Units
+  var py=document.getElementById("t-per-year"); if(py) py.textContent=S.perYear||"per year";
+  var sf=document.getElementById("t-sqft-suf"); if(sf) sf.textContent=S.sqFt||"sq ft";
+  // Update s2 ask copy based on country context
+  var askEl=document.getElementById("t-s2-ask");
+  if(askEl) askEl.textContent=isMX()?(S.s2AskMx||S.s2Ask):S.s2Ask;
+  // Mexico Stage 2 UI elements
+  var mxrl=document.getElementById("t-mx-region-lbl");
+  if(mxrl){ var sp2=document.getElementById("c2-mx-split"); mxrl.innerHTML=S.mxRegionLabel+(sp2?" <span id='c2-mx-split' class='c-field-aside'>"+sp2.textContent+"</span>":""); }
+  var mxrp=document.getElementById("t-mx-region-placeholder"); if(mxrp) mxrp.textContent=S.mxRegionPlaceholder;
+  var mxrcl=document.getElementById("t-mx-region-chip-lbl"); if(mxrcl) mxrcl.textContent=S.mxChipAssumed;
+  var mxreb=document.getElementById("t-mx-region-edit-btn"); if(mxreb) mxreb.textContent=S.mxChipEdit;
+  var mxcl=document.getElementById("t-mx-cool-lbl"); if(mxcl) mxcl.textContent=S.mxCoolLabel;
+  var mxhl=document.getElementById("t-mx-heat-lbl"); if(mxhl) mxhl.textContent=S.mxHeatLabel;
+  var mxhn=document.getElementById("t-mx-heat-no"); if(mxhn) mxhn.childNodes[0]&&(mxhn.childNodes[0].textContent=S.mxHeatNo);
+  var mxhy=document.getElementById("t-mx-heat-yes"); if(mxhy) mxhy.childNodes[0]&&(mxhy.childNodes[0].textContent=S.mxHeatYes);
+  var mxfl=document.getElementById("t-mx-fx-lbl"); if(mxfl) mxfl.innerHTML=S.mxFxLabel+" <span class='c-field-aside'>USD / MXN</span>";
+  var mxtcl=document.getElementById("t-mx-tariff-chip-lbl"); if(mxtcl) mxtcl.textContent=S.mxTariffChipLabel;
+  var mxteb=document.getElementById("t-mx-tariff-edit-btn"); if(mxteb) mxteb.textContent=S.mxChipEdit;
+  var mxtl=document.getElementById("t-mx-tariff-lbl"); if(mxtl) mxtl.textContent=S.mxTariffLabel;
+  var mxdl=document.getElementById("t-mx-dem-lbl"); if(mxdl) mxdl.textContent=S.mxDemLabel;
+  var mxpfl=document.getElementById("t-mx-pf-lbl"); if(mxpfl) mxpfl.textContent=S.mxPFLabel;
+  var mxpfy=document.getElementById("t-mx-pf-yes"); if(mxpfy) mxpfy.textContent=S.mxPFYes;
+  var mxpfn=document.getElementById("t-mx-pf-no"); if(mxpfn) mxpfn.textContent=S.mxPFNo;
+  var mxppl=document.getElementById("t-mx-pf-pct-lbl"); if(mxppl) mxppl.textContent=S.mxPFPctLabel;
+  var ao=document.getElementById("t-adjust-our"); if(ao){ var chev=ao.querySelector(".assump-chev"); ao.innerHTML=(chev?chev.outerHTML:"")+" "+S.adjustOur; }
+  var at=document.getElementById("t-adjust-the"); if(at) at.textContent=S.adjustThe;
+  var pl2=document.getElementById("t-programs-lbl"); if(pl2) pl2.textContent=S.programsLabel;
+  var eb=document.getElementById("t-edit-btn"); if(eb) eb.textContent=S.editBtn;
+  var atag=document.getElementById("t-about-tag"); if(atag) atag.textContent=S.aboutTag;
+  var ap1=document.getElementById("t-about-p1"); if(ap1) ap1.textContent=S.aboutP1;
+  var ap2=document.getElementById("t-about-p2"); if(ap2) ap2.textContent=S.aboutP2;
+  var an=document.getElementById("t-adj-note"); if(an) an.textContent=S.adjustNote;
+  var as1=document.getElementById("t-adj-sec1"); if(as1) as1.textContent=S.adjustSec1;
+  var as2=document.getElementById("t-adj-sec2"); if(as2) as2.textContent=S.adjustSec2;
+  // Stream sections
+  if(S.ss){
+    var ssMap={nego:"ss-nego",harmo:"ss-harmo",cool:"ss-cool",heat:"ss-heat",dem:"ss-dem",lit:"ss-lit",mot:"ss-mot",pf:"ss-pf"};
+    Object.keys(ssMap).forEach(function(key){
+      var sd=S.ss[key]; if(!sd) return;
+      var sec=document.getElementById(ssMap[key]); if(!sec) return;
+      var nameEl=sec.querySelector(".ss-name"); 
+      if(nameEl){
+        var lockTag=nameEl.querySelector(".lock-tag");
+        nameEl.textContent=sd.name;
+        if(sd.tag&&lockTag){ var lt=document.createElement("span"); lt.className="lock-tag"; lt.textContent=sd.tag; nameEl.appendChild(lt); }
+        else if(sd.tag){ var lt2=document.createElement("span"); lt2.className="lock-tag"; lt2.textContent=sd.tag; nameEl.appendChild(lt2); }
+      }
+      var descEl=sec.querySelector(".ss-desc"); if(descEl) descEl.textContent=sd.desc;
+      var vidBtn=sec.querySelector(".stream-vid-link"); if(vidBtn) vidBtn.textContent=sd.seeHow||S.ss.seeHow||"See how we address this";
+    });
+  }
+  // Stream status labels
+  document.querySelectorAll(".ss-status").forEach(function(el){
+    var stream=el.closest(".stream");
+    if(!stream) return;
+    if(stream.classList.contains("locked")) el.textContent=S.streamAlways||"Always included";
+    else if(stream.classList.contains("on")) el.textContent=S.streamIncluded||"Included";
+    else el.textContent=S.streamNotIncluded||"Not included";
+  });
+  // Re-run dynamic renders that depend on language
+  if(state.view==="result"){ updateCostOfWaiting(); buildSmsLinks(); buildPrimaryCta(); render(); updateSummaryBar(); }
+}
+// ─────────────────────────────────────────────────────────────────────────────
+
+function isMX(){ return state.country==="mx"; }
+
+function selectCountry(c){
+  state.country=c;
+  // Auto-switch language
+  if(c==="mx") setLang("es");
+  else setLang("en");
+  document.querySelectorAll(".country-opt").forEach(function(el){
+    el.classList.toggle("active", el.getAttribute("data-country")===c);
+  });
+  setTimeout(function(){ goStage("s1"); }, 220);
+}
+
+function c2MxRegion(){
+  var sel=document.getElementById("c2-mx-region");
+  var regionKey=sel.value;
+  if(!regionKey) return;
+  state.mxRegion=regionKey;
+  var rd=MX_REGIONS[regionKey];
+  if(rd){
+    state.stateCool=rd.cool; recomputeCool();
+    state.tHeat=rd.heat; state.hasElecHeat=rd.heat;
+    state.demPortion=rd.demPortion;
+    var coolEl=document.getElementById("r-cool"); if(coolEl) coolEl.value=Math.round(state.coolShare*100);
+    var cs=document.getElementById("mx-cool-slider"); if(cs){ cs.value=rd.cool; cs.style.setProperty("--pct",((rd.cool-30)/(95-30)*100)+"%"); }
+    var cp=document.getElementById("mx-cool-pct"); if(cp) cp.textContent=rd.cool+"%";
+    var hr=document.getElementById("mx-heat-row"); if(hr) hr.style.display=rd.heat?"":"none";
+    var chip=document.getElementById("mx-region-chip");
+    var chipText=document.getElementById("mx-region-chip-text");
+    if(chip&&chipText){ chipText.textContent=rd.desc; chip.style.display="flex"; }
+    var sp=document.getElementById("c2-mx-split"); if(sp) sp.textContent=rd.cool+"% cooling";
+  }
+  mxAutoUpdateTariff();
+  render(); checkS2Ready();
+}
+
+function mxAutoUpdateTariff(){
+  if(!state.selected||!state.spend) return;
+  var t=mxAutoTariff(state.spend, state.selected);
+  setMxTariff(t, true);
+}
+
+function setMxTariff(t, silent){
+  state.mxTariff=t;
+  var td=MX_TARIFF_DEFAULTS[t];
+  if(td){
+    state.demPortion=td.demPortion;
+    // Update all tariff buttons (both the new top block and any legacy elements)
+    document.querySelectorAll("[data-tariff]").forEach(function(b){ b.classList.toggle("active", b.getAttribute("data-tariff")===t); });
+    var ds=document.getElementById("mx-dem-slider"); if(ds){ var dv=Math.round(td.demPortion*100); ds.value=dv; ds.style.setProperty("--pct",((dv-15)/(55-15)*100)+"%"); }
+    var dp=document.getElementById("mx-dem-pct"); if(dp) dp.textContent=Math.round(td.demPortion*100)+"%";
+  }
+  var rdp=document.getElementById("r-demportion"); if(rdp) rdp.value=Math.round(state.demPortion*100);
+  render();
+}
+
+function setMxPF(active){
+  state.mxPFActive=active;
+  document.querySelectorAll("[data-pf]").forEach(function(b){ b.classList.toggle("active",(b.getAttribute("data-pf")==="no")===active); });
+  var pfRow=document.getElementById("mx-pf-pct-row"); if(pfRow) pfRow.style.display=active?"":"none";
+  render();
+}
+
+function onMxCoolSlider(){
+  var sl=document.getElementById("mx-cool-slider"); if(!sl) return;
+  var v=parseInt(sl.value);
+  state.stateCool=v; recomputeCool();
+  var coolEl=document.getElementById("r-cool"); if(coolEl) coolEl.value=Math.round(state.coolShare*100);
+  var cp=document.getElementById("mx-cool-pct"); if(cp) cp.textContent=v+"%";
+  var chipText=document.getElementById("mx-region-chip-text");
+  if(chipText) chipText.textContent=v+"% cooling"+(state.tHeat?" · heating activo":"");
+  render();
+}
+
+function onMxDemSlider(){
+  var sl=document.getElementById("mx-dem-slider"); if(!sl) return;
+  var v=parseInt(sl.value);
+  state.demPortion=v/100;
+  var rdp=document.getElementById("r-demportion"); if(rdp) rdp.value=v;
+  var dp=document.getElementById("mx-dem-pct"); if(dp) dp.textContent=v+"%";
+  render();
+}
+
+function onMxPFSlider(){
+  var sl=document.getElementById("mx-pf-slider"); if(!sl) return;
+  var v=parseInt(sl.value);
+  state.mxPFShare=v/100;
+  var pp=document.getElementById("mx-pf-pct"); if(pp) pp.textContent=v+"%";
+  render();
+}
+
+function onMxFxRate(){
+  var el=document.getElementById("mx-fx-rate"); if(!el) return;
+  var v=parseFloat(el.value.replace(/[^0-9.]/g,""))||17.50;
+  state.mxFxRate=v; MX_FX_RATE=v;
+  render();
+}
+
+function toggleMxRegionEdit(){
+  var ed=document.getElementById("mx-region-edit");
+  if(ed) ed.style.display=(ed.style.display===""||ed.style.display==="block")?"none":"";
+}
+
+function toggleMxTariffEdit(){
+  var ed=document.getElementById("mx-tariff-edit");
+  if(ed) ed.style.display=(ed.style.display===""||ed.style.display==="block")?"none":"";
+}
+
+function setMxHeat(active){
+  state.tHeat=active; state.hasElecHeat=active;
+  document.querySelectorAll("#mx-heat-row [data-v]").forEach(function(b){
+    b.classList.toggle("active",(b.getAttribute("data-v")==="yes")===active);
+  });
+  var hs=document.getElementById("ss-heat"); if(hs) hs.style.display=active?"":"none";
+  render();
+}
 
 function updateNegoStream(stateName){
+  // Mexico: always hide — CFE is sole supplier, no deregulated market
+  if(isMX()){
+    state.tNego=false;
+    var ns=document.getElementById("ss-nego"); if(ns) ns.style.display="none";
+    return;
+  }
   var isPR=isPuertoRico(stateName);
   var isDereg=!!(DEREG_STATES&&DEREG_STATES[stateName]);
   // Puerto Rico: hide nego entirely — fully regulated, no deregulated option, no tariff negotiation framing applies
@@ -2225,6 +3263,21 @@ function createSparks(){
   }
 }
 /* ─────────────────────────────────────────────────────────────────────── */
+function toggleGuaranteeTooltip(e){
+  e.stopPropagation();
+  var tt=document.getElementById("guarantee-tooltip");
+  if(!tt) return;
+  var isVisible=tt.classList.contains("visible");
+  tt.classList.toggle("visible",!isVisible);
+  if(!isVisible){
+    setTimeout(function(){
+      document.addEventListener("click",function dismiss(){
+        tt.classList.remove("visible");
+        document.removeEventListener("click",dismiss);
+      });
+    },0);
+  }
+}
 function toggleAdjust(){ document.getElementById("adjust").classList.toggle("open"); }
 function toggleAssumptions(){
   var aa=document.getElementById("assumptions-accordion");
@@ -2239,13 +3292,12 @@ function toggleAssumptions(){
 /* ── CONSULT STAGE MACHINE ───────────────────────────────────────────── */
 function goStage(v){
   if(v!=="result"){ var _ct=document.getElementById("calc"); if(_ct) setTimeout(function(){_ct.scrollIntoView({behavior:"smooth",block:"start"});},40); }
-  // Exit animation on outgoing card
   var prevKey=state.view;
   if(prevKey&&prevKey!=="result"){
     var prevCard=document.getElementById("c-"+prevKey);
     if(prevCard&&prevCard.style.display!=="none"){
       prevCard.style.animation="none"; void prevCard.offsetHeight;
-      var isBack=(prevKey==="s2"&&v==="s1")||(prevKey==="s3"&&v==="s2");
+      var isBack=(prevKey==="s1"&&v==="s0")||(prevKey==="s2"&&v==="s1")||(prevKey==="s3"&&v==="s2");
       prevCard.style.animation=isBack?"slideIn 0.38s cubic-bezier(0.22,1,0.36,1) reverse both":"slideOut 0.38s cubic-bezier(0.22,1,0.36,1) both";
     }
   }
@@ -2253,12 +3305,16 @@ function goStage(v){
   if(v!=='result') stopWaitingTicker();
   var isR=(v==="result");
   document.getElementById("calc").classList.add("c-mode-dark");
-  // consult wrap
   var cw=document.getElementById("c-wrap"); if(cw) cw.style.display=isR?"none":"";
-  ["c-s1","c-s2","c-s3"].forEach(function(id){
+  ["c-s0","c-s1","c-s2","c-s3"].forEach(function(id){
     var el=document.getElementById(id);
     if(el) el.style.display=(id==="c-"+v)?"":"none";
   });
+  // Country-aware location fields in Stage 2
+  var usLoc=document.getElementById("s2-us-location");
+  var mxLoc=document.getElementById("s2-mx-location");
+  if(usLoc) usLoc.style.display=isMX()?"none":"";
+  if(mxLoc) mxLoc.style.display=isMX()?"":"none";
   // summary + title
   var cs=document.getElementById("c-summary"); if(cs) cs.style.display=isR?"":"none";
   var ctt=document.getElementById("calc-title");
@@ -2266,15 +3322,15 @@ function goStage(v){
     if(isR){
       var _twIns=state.selected&&INSIGHTS[state.selected]?INSIGHTS[state.selected]:null;
       var _twNoun=_twIns?_twIns.noun.charAt(0).toUpperCase()+_twIns.noun.slice(1):"Your facility";
-      var _twLine1="Your "+_twNoun+" Has Been Running Three Electricity Bills Since Day One.";
-      ctt.style.display=""; typeWriter(ctt,_twLine1,"Now You Have the Number.");
+      var _twFn=(STRINGS[state.lang].twLine1||STRINGS.en.twLine1);
+      var _twLine1=_twFn(_twNoun, state.selected||"");
+      var _twLine2=(STRINGS[state.lang].twLine2||STRINGS.en.twLine2);
+      ctt.style.display=""; typeWriter(ctt,_twLine1,_twLine2);
     } else { _twRunning=false; ctt.style.display="none"; }
   }
   var cst=document.getElementById("calc-sub");
   if(cst){ cst.style.display="none"; cst.style.color=""; cst.style.opacity=""; cst.style.transition=""; }
-  // calc-body: only in result
   var cb=document.getElementById("calc-body-main"); if(cb) cb.style.display=isR?"block":"none";
-  // gated sections: only in result
   var gated=["result-block"];
   gated.forEach(function(id){var el=document.getElementById(id);if(el)el.style.display=isR?"block":"none";});
   ["asset-section","ded-section","fin-section"].forEach(function(id){var el=document.getElementById(id);if(el)el.style.display="none";});
@@ -2284,32 +3340,52 @@ function goStage(v){
   var cta=document.querySelector(".cta.gated"); if(cta) cta.style.display=isR?"":"none";
   var foot=document.querySelector(".calc-foot.gated"); if(foot) foot.style.display=isR?"block":"none";
   var tcT=document.getElementById("txt-cta-top"); if(tcT) tcT.style.display="none";
-
   var rn=document.getElementById("result-narrative"); if(rn) rn.style.display=isR?"block":"none";
   var aa=document.getElementById("assumptions-accordion"); if(aa){ aa.style.display=isR?"block":"none"; aa.classList.remove("assumptions-open"); }
   var ins=document.querySelector(".insight.gated"); if(ins) ins.style.cssText="display:none!important";
-  // breadcrumbs
   var crumbs=document.getElementById("c-crumbs");
   if(crumbs) crumbs.style.display="none";
   updateCrumbs();
-  // stage content
-  if(v==="s2"){ updateClaimS2(); bandReset(); renderBands(); checkS2Ready(); }
-  if(v==="s3"){ state.sqft=0; state._sqftEst=0; var _sl=document.getElementById("c-sqft"); if(_sl){ _sl.value=50; _sl.style.setProperty("--pct","50%"); } var _ded=document.getElementById("c-ded-result"); if(_ded) _ded.style.display="none"; updateClaimS3(); }
+  if(v==="s2"){
+    updateClaimS2(); bandReset(); renderBands(); renderFacCounts(); updateSignalBox(); updateS2Disclosure(); checkS2Ready();
+    // Show/hide Mexico-specific blocks
+    var tb=document.getElementById("s2-mx-tariff-block"); if(tb) tb.style.display=isMX()?"":"none";
+    var tc=document.getElementById("mx-tariff-chip"); if(tc) tc.style.display="none";
+    var te=document.getElementById("mx-tariff-edit"); if(te) te.style.display="none";
+    if(isMX()) mxAutoUpdateTariff();
+    // Update intro copy: "Two inputs" vs "Four inputs"
+    var askEl=document.getElementById("t-s2-ask");
+    if(askEl){
+      var SL=STRINGS[state.lang]||STRINGS.en;
+      askEl.textContent=isMX()?(SL.s2AskMx||SL.s2Ask):SL.s2Ask;
+    }
+  }
+  if(v==="s3"){
+    state.sqft=0; state._sqftEst=0;
+    var _sl=document.getElementById("c-sqft"); if(_sl){ _sl.value=50; _sl.style.setProperty("--pct","50%"); }
+    var _ded=document.getElementById("c-ded-result"); if(_ded) _ded.style.display="none";
+    // Hide 179D for Mexico
+    var sqftWrap=document.getElementById("c-sqft-wrap");
+    if(sqftWrap) sqftWrap.style.display=isMX()?"none":"";
+    updateClaimS3();
+  }
   if(isR){
     document.getElementById("calc").classList.add("revealed");
     window.scrollTo({top:0,behavior:"smooth"});
-    // Hide inputs already captured in consult — user edits via Edit button
     ["field-spend","field-state","field-fac-adj"].forEach(function(id){
       var el=document.getElementById(id); if(el) el.style.display="none";
     });
-    // Check deregulated state
     var _sn=document.getElementById("state-select"); if(_sn) updateNegoStream(_sn.value);
+    // For Mexico: hide nego, show PF stream
+    if(isMX()){
+      var negoEl=document.getElementById("ss-nego"); if(negoEl) negoEl.style.display="none";
+      state.tNego=false;
+    }
     buildPrimaryCta(); updateCostOfWaiting();
     render(); updateSummaryBar();
   }
-  // animate
   var ac=document.getElementById("c-"+v);
-  if(ac&&ac.style.display!=="none"){ ac.style.animation="none"; void ac.offsetHeight; var goingBack=(v==="s1"&&prevKey==="s2")||(v==="s2"&&prevKey==="s3"); ac.style.animation=(goingBack?"slideInLeft":"slideIn")+" 0.38s ease-out both"; }
+  if(ac&&ac.style.display!=="none"){ ac.style.animation="none"; void ac.offsetHeight; var goingBack=(v==="s0"&&prevKey==="s1")||(v==="s1"&&prevKey==="s2")||(v==="s2"&&prevKey==="s3"); ac.style.animation=(goingBack?"slideInLeft":"slideIn")+" 0.38s ease-out both"; }
 }
 
 function showResult(){
@@ -2478,6 +3554,8 @@ function bandStep2Select(nb, label, selectedBtn){
   if(mo) mo.textContent=fmtBand(nb.lo)+' to '+fmtBand(nb.hi)+'/mo';
   syncSpendField();
   render();
+  updateSignalBox();
+  updateS2Disclosure();
   checkS2Ready();
 }
 function bandReset(){
@@ -2487,7 +3565,7 @@ function bandReset(){
   document.getElementById('band-step2-wrap').style.display='none';
   document.querySelectorAll('#band-step1 .band-btn').forEach(function(b){ b.classList.remove('active'); });
   var mo=document.getElementById('c2-mo'); if(mo) mo.textContent='';
-  syncSpendField(); checkS2Ready();
+  syncSpendField(); updateSignalBox(); updateS2Disclosure(); checkS2Ready();
 }
 function c2Spend(){ /* bands own spend now */ }
 function c2Rng(){ /* bands own spend now */ }
@@ -2504,12 +3582,128 @@ function buildChips(){ return []; }
 function niceRound(v){ return v; }
 function setSpend(v){ state.spend=v; syncSpendField(); render(); checkS2Ready(); }
 function updateChipActive(){ /* no-op */ }
+// ── FACILITY COUNT CHIPS ──────────────────────────────────────────────────
+function renderFacCounts(){
+  var g=document.getElementById('fac-count-chips'); if(!g) return;
+  var S=STRINGS[state.lang]||STRINGS.en;
+  g.innerHTML='';
+  FAC_COUNTS.forEach(function(fc){
+    var btn=document.createElement('button');
+    btn.className='fc-chip'+(state.countKey===fc.key?' active':'');
+    btn.type='button';
+    btn.textContent=S[fc.t]||fc.key;
+    btn.addEventListener('click',function(){ selectFacCount(fc); });
+    g.appendChild(btn);
+  });
+}
+function selectFacCount(fc){
+  state.count=fc.low; state.countKey=fc.key;
+  var S=STRINGS[state.lang]||STRINGS.en;
+  state.countLabel=S[fc.t]||fc.key;
+  renderFacCounts();
+  updateSignalBox();
+  updateS2Disclosure();
+  checkS2Ready();
+}
+// Progressive reveal in Stage 2: count appears after spend, location after count.
+function updateS2Disclosure(){
+  var fcb=document.getElementById('fac-count-block');
+  var loc=document.getElementById('s2-location-block');
+  var spendDone=state.spend>0;
+  var countDone=state.count>0;
+  if(fcb) fcb.style.display=spendDone?'':'none';
+  if(loc) loc.style.display=(spendDone&&countDone)?'':'none';
+}
+function countPhrase(){
+  var S=STRINGS[state.lang]||STRINGS.en;
+  return (S.facCountPhrase && S.facCountPhrase[state.countKey]) ? S.facCountPhrase[state.countKey] : (state.countLabel||"");
+}
+function updateSignalBox(){
+  var box=document.getElementById('signal-box');
+  var lbl=document.getElementById('signal-box-label');
+  var txt=document.getElementById('signal-box-text');
+  if(!box||!lbl||!txt) return;
+  var fs=facilityState();
+  if(!fs){ box.style.display='none'; return; }
+  var S=STRINGS[state.lang]||STRINGS.en;
+  var spendPhrase=fmtFull(Math.round(state.spend/12));
+  if(fs.state==='equipment_only'){
+    lbl.textContent=S.sigEquipLabel; txt.textContent=S.sigEquipText;
+  } else if(fs.state==='turnkey_fit'){
+    lbl.textContent=S.sigTurnkeyLabel;
+    if(fs.tier.key==='5000plus' && state.count===1){ txt.textContent=S.sigFitSingleText; }
+    else { txt.textContent=S.sigFitText(countPhrase(), spendPhrase); }
+  } else {
+    lbl.textContent=S.sigTurnkeyLabel;
+    txt.textContent=S.sigWarmText(fs.tier.min);
+  }
+  box.style.display='';
+}
+// ── RESULT PATHWAY (turnkey vs equipment-only) ────────────────────────────
+function renderEquipCta(){
+  var el=document.getElementById('rn-equip-cta'); if(!el) return;
+  var S=STRINGS[state.lang]||STRINGS.en;
+  if(EQUIP_ONLY_CTA.mode==='sms' && EQUIP_ONLY_CTA.smsBody){
+    el.innerHTML=(S.equipCtaNote||"")+' <a href="sms:'+EP_NUMBER+'?body='+encodeURIComponent(EQUIP_ONLY_CTA.smsBody)+'">'+(S.equipCtaAction||"")+'</a>';
+  } else if(EQUIP_ONLY_CTA.mode==='link' && EQUIP_ONLY_CTA.link){
+    el.innerHTML=(S.equipCtaNote||"")+' <a href="'+EQUIP_ONLY_CTA.link+'" target="_blank">'+(S.equipCtaAction||"")+'</a>';
+  } else {
+    el.textContent=S.equipCtaNote||"";
+  }
+}
+function applyPathway(){
+  var fs=facilityState();
+  var isEquip=(fs && fs.state==='equipment_only');
+  var S=STRINGS[state.lang]||STRINGS.en;
+  var turnkeyBridge=document.getElementById('rn-bridge-turnkey');
+  var equipBlock=document.getElementById('rn-equip');
+  var guarantee=document.getElementById('t-guarantee');
+  var calBtn=document.getElementById('cal-btn-primary');
+  var smsWrap=document.getElementById('rn-sms-wrap');
+  var cred=document.getElementById('t-rn-cred');
+  if(turnkeyBridge) turnkeyBridge.style.display=isEquip?'none':'';
+  if(guarantee) guarantee.style.display=isEquip?'none':'';
+  if(calBtn) calBtn.style.display=isEquip?'none':'';
+  if(smsWrap) smsWrap.style.display=isEquip?'none':'';
+  if(equipBlock) equipBlock.style.display=isEquip?'':'none';
+  if(cred) cred.textContent=isEquip?(S.rnCredEquip||S.rnCred):S.rnCred;
+  if(isEquip){
+    var e1=document.getElementById('t-equip1'); if(e1) e1.textContent=S.equip1;
+    var e2=document.getElementById('t-equip2'); if(e2) e2.textContent=S.equip2;
+    var e3=document.getElementById('t-equip3'); if(e3) e3.textContent=S.equip3;
+    var e4=document.getElementById('t-equip4'); if(e4) e4.textContent=S.equip4;
+    var eg=document.getElementById('t-equip-guarantee'); if(eg) eg.textContent=S.equipGuarantee;
+    renderEquipCta();
+  }
+}
+function buildResultSummary(){
+  var r=compute();
+  var fs=facilityState();
+  var lowCount=state.count||1;
+  var hiCount=highCount();
+  state.resultSummary={
+    state: fs?fs.state:null,
+    countLabel: state.countLabel||null,
+    lowEndCount: state.count||null,
+    highEndCount: hiCount,
+    spendTier: fs?fs.tier.key:null,
+    perFacilityMonthly: state.spend?Math.round(state.spend/12):null,
+    singleFacilityFloor: Math.round(r.floor),
+    singleFacilityCeil: Math.round(r.ceil),
+    portfolioFloor: Math.round(r.floor*lowCount),
+    portfolioCeil: Math.round(r.ceil*hiCount)
+  };
+  return state.resultSummary;
+}
 // ─────────────────────────────────────────────────────────────────────────
 function checkS2Ready(){
-  var stateVal=(document.getElementById("c2-state")||{}).value||"";
-  var hasState=stateVal.length>0;
-  var hasSpend=state.spend>0;
-  var ready=hasState&&hasSpend;
+  var ready=false;
+  if(isMX()){
+    ready=state.mxRegion.length>0 && state.spend>0 && state.count>0;
+  } else {
+    var stateVal=(document.getElementById("c2-state")||{}).value||"";
+    ready=stateVal.length>0 && state.spend>0 && state.count>0;
+  }
   var btn=document.getElementById("s2-next-btn");
   if(btn){
     if(ready){ btn.removeAttribute("disabled"); }
@@ -2639,27 +3833,38 @@ function updateClaimS2(){
   var ins=INSIGHTS[state.selected];
   var eq=EQUIP&&EQUIP[state.selected]?EQUIP[state.selected]:[];
   var el=document.getElementById("c-claim-s2"); if(!el) return;
+  var isES=(state.lang==="es");
+  var isMx=isMX();
+  var namesBold=eq.map(function(e){return "<strong>"+e.name.toLowerCase()+"</strong>";}).join(", ");
   var label=ins.noun.charAt(0).toUpperCase()+ins.noun.slice(1);
   var eqHtml="<div class='s2-equip-strip'>";
   eq.forEach(function(e){
     eqHtml+="<div class='s2-equip-item'><div class='s2-equip-ico'>"+(ICONS&&ICONS[e.ico]?ICONS[e.ico]:"")+"</div><span class='s2-equip-name'>"+e.name+"</span></div>";
   });
   eqHtml+="</div>";
-  var names=eq.map(function(e){return e.name.toLowerCase();}).join(", ");
-  var b1="<p class='c-copy'>What the DOE number does not explain is where the waste comes from. <strong>In "+ins.cat+", 80% of electrical distortion is generated inside the building by your own equipment.</strong></p>";
-  var namesBold=eq.map(function(e){return "<strong>"+e.name.toLowerCase()+"</strong>";}).join(", ");
-  var b2a="<p class='c-copy'>Thirty years ago, the electrical equipment in buildings like yours drew power in a smooth, continuous wave.</p><p class='c-copy'>Your "+namesBold+" no longer work that way. Modern equipment \u2014 anything with a digital controller or an inverter \u2014 draws power in irregular pulses instead. Nobody mentioned this when you upgraded.</p><p class='c-copy'>Those irregular pulses create distortion. Think of it like air bubbles in a water pipe.</p>";
-  var b2c="<p class='c-copy'>When air bubbles get into a pipe, the pipe still runs, but the meter counts the bubbles as flow. You pay for water that never did any work. The current reaches your equipment, but instead of performing useful work it becomes heat, vibration, and stress on every motor and circuit it touches. Your meter bills you for all of it.</p>";
-  var b3="<p class='c-copy'>The distorted current that does reach your equipment runs hotter than designed. Equipment that should last fifteen years starts failing in eight.</p>";
   var floorPct=parseFloat(ins.range)||15;
   var inflated=Math.round(100*(1+floorPct/100));
   var illus=buildIllustration(eq,inflated);
   var facTile=document.querySelector('.fac-opt[data-key="'+state.selected+'"]');
   var facIcoEl=facTile?facTile.querySelector('.fac-ico'):null;
   var icoSvg=facIcoEl?'<svg style="width:22px;height:22px;flex-shrink:0;stroke:rgba(255,255,255,0.82);stroke-width:1.75;fill:none;stroke-linecap:round;stroke-linejoin:round;" viewBox="0 0 24 24">'+facIcoEl.innerHTML+'</svg>':'';
-  var label=ins.noun.charAt(0).toUpperCase()+ins.noun.slice(1);
+  // Language + country aware copy
+  var b1,b2a,b2c,b3;
+  if(isES){
+    var catES=isMx?"su instalación":"su tipo de instalación";
+    b1="<p class='c-copy'>Lo que el número de la CONUEE no explica es de dónde viene el desperdicio. <strong>En "+ins.cat+", el 80% de la distorsión eléctrica se genera dentro del edificio por su propio equipo.</strong></p>";
+    b2a="<p class='c-copy'>Hace treinta años, los equipos eléctricos en edificios como el suyo consumían energía en una onda suave y continua.</p><p class='c-copy'>Sus "+namesBold+" ya no funcionan así. Los equipos modernos — todo lo que tiene un controlador digital o un inversor — consumen energía en pulsos irregulares. Nadie mencionó esto cuando actualizó su instalación.</p><p class='c-copy'>Esos pulsos irregulares crean distorsión. Piénselo como burbujas de aire en una tubería de agua.</p>";
+    b2c="<p class='c-copy'>Cuando entran burbujas de aire en una tubería, el agua sigue corriendo, pero el medidor cuenta las burbujas como flujo. Usted paga por agua que nunca hizo ningún trabajo. La corriente llega a su equipo, pero en lugar de realizar trabajo útil se convierte en calor, vibración y estrés en cada motor y circuito que toca. Su medidor le cobra todo eso.</p>";
+    b3="<p class='c-copy'>La corriente distorsionada que sí llega a su equipo funciona a más temperatura de la diseñada. El equipo que debería durar quince años empieza a fallar en ocho.</p>";
+    if(isMx) b3+="<p class='c-copy'>En México, la CFE además aplica recargos por bajo factor de potencia — una penalización directa en su recibo mensual por la misma distorsión que daña su equipo.</p>";
+  } else {
+    b1="<p class='c-copy'>What the "+(isMx?"CONUEE":"DOE")+" number does not explain is where the waste comes from. <strong>In "+ins.cat+", 80% of electrical distortion is generated inside the building by your own equipment.</strong></p>";
+    b2a="<p class='c-copy'>Thirty years ago, the electrical equipment in buildings like yours drew power in a smooth, continuous wave.</p><p class='c-copy'>Your "+namesBold+" no longer work that way. Modern equipment \u2014 anything with a digital controller or an inverter \u2014 draws power in irregular pulses instead. Nobody mentioned this when you upgraded.</p><p class='c-copy'>Those irregular pulses create distortion. Think of it like air bubbles in a water pipe.</p>";
+    b2c="<p class='c-copy'>When air bubbles get into a pipe, the pipe still runs, but the meter counts the bubbles as flow. You pay for water that never did any work. The current reaches your equipment, but instead of performing useful work it becomes heat, vibration, and stress on every motor and circuit it touches. Your meter bills you for all of it.</p>";
+    b3="<p class='c-copy'>The distorted current that does reach your equipment runs hotter than designed. Equipment that should last fifteen years starts failing in eight.</p>";
+    if(isMx) b3+="<p class='c-copy'>In Mexico, CFE also applies power factor surcharges — a direct line-item penalty on your monthly bill for the same distortion that is wearing out your equipment. The threshold tightens again in 2026.</p>";
+  }
   el.innerHTML="<h2 class='c-hed' style='justify-content:space-between;'>"+label+icoSvg+"</h2>"+b1+b2a+b2c+b3+illus;
-  // IntersectionObserver: trigger draw-on only when illustration enters view
   if('IntersectionObserver' in window){
     var illusW=el.querySelector('.s2-illus-wrap');
     if(illusW){
@@ -2678,22 +3883,48 @@ function updateClaimS3(){
   var ins=INSIGHTS[state.selected];
   var b=BOTTOM_CONTENT[state.selected];
   var el=document.getElementById("c-claim-s3"); if(!el) return;
+  var isES=(state.lang==="es");
+  var isMx=isMX();
 
   var facLabel=ins?ins.label:"Your facility";
   var noun=ins?ins.noun:"facility";
-  var _s3sn=(document.getElementById("state-select")||{}).value||"";
+  var nounES=ins?ins.noun:"instalación"; // reuse noun for now — good enough
+
+  // Location context
+  var _s3sn=isMx?state.mxRegion:((document.getElementById("c2-state")||{}).value||"");
   var _s3tier=(_s3sn&&ESC_TIER[_s3sn])||3;
   var _s3ed=ESC_DATA[_s3tier];
 
-  // Bill trajectory copy — state-specific if available
-  var billText=_s3sn
-    ?"Commercial electricity in <strong>"+_s3sn+"</strong> has risen roughly <strong>"+_s3ed.range+"</strong> per year. Experts believe rates will rise much faster this decade due to the cost of modernizing the grid — which would make these figures conservative. The number you're about to see is based on today's rates."
-    :"Commercial electricity costs have risen roughly 2 to 3% per year nationally. Experts believe rates will rise much faster this decade due to the cost of modernizing the grid — which would make these figures conservative. The number you're about to see is based on today's rates.";
+  // Bill trajectory copy
+  var billText="";
+  if(isMx){
+    if(isES){
+      billText="Las tarifas comerciales de <strong>CFE</strong> subieron aproximadamente <strong>15% anual</strong> entre 2020 y 2023, moderando a cerca de "+_s3ed.range+"% actualmente. La reforma energética de 2025 que fortalece la posición de CFE añade presión alcista estructural a largo plazo. El número que está a punto de ver está basado en las tarifas de hoy.";
+    } else {
+      billText="<strong>CFE</strong> commercial rates rose approximately <strong>15% per year</strong> from 2020 to 2023, moderating to roughly "+_s3ed.range+"% currently. The 2025 energy reform strengthening CFE's position adds structural upward pressure over the long term. The number you're about to see is based on today's rates.";
+    }
+  } else {
+    if(isES){
+      billText=_s3sn
+        ?"La electricidad comercial en <strong>"+_s3sn+"</strong> ha subido aproximadamente <strong>"+_s3ed.range+"</strong> por año. Los expertos creen que las tarifas subirán mucho más rápido esta década por el costo de modernizar la red — lo que haría estas cifras conservadoras. El número que está a punto de ver está basado en las tarifas de hoy."
+        :"Los costos de electricidad comercial han subido aproximadamente 2 a 3% por año a nivel nacional. Los expertos creen que las tarifas subirán mucho más rápido esta década. El número que está a punto de ver está basado en las tarifas de hoy.";
+    } else {
+      billText=_s3sn
+        ?"Commercial electricity in <strong>"+_s3sn+"</strong> has risen roughly <strong>"+_s3ed.range+"</strong> per year. Experts believe rates will rise much faster this decade due to the cost of modernizing the grid — which would make these figures conservative. The number you're about to see is based on today's rates."
+        :"Commercial electricity costs have risen roughly 2 to 3% per year nationally. Experts believe rates will rise much faster this decade. The number you're about to see is based on today's rates.";
+    }
+  }
 
   // Equipment risk copy
   var assetTitle=b?b.assetTitle:"your critical equipment";
-  var equipText="<strong>"+assetTitle.charAt(0).toUpperCase()+assetTitle.slice(1)+"</strong> are your highest-risk assets. Electrical distortion runs them hotter than they were designed to handle. Equipment that should last fifteen years starts failing in eight, and those replacement costs never appear on your energy bill.";
-  // Cost facts
+  var equipText="";
+  if(isES){
+    equipText="<strong>"+assetTitle.charAt(0).toUpperCase()+assetTitle.slice(1)+"</strong> son sus activos de mayor riesgo. La distorsión eléctrica los hace funcionar a más temperatura de la diseñada. El equipo que debería durar quince años empieza a fallar en ocho, y esos costos de reemplazo nunca aparecen en su factura de energía.";
+  } else {
+    equipText="<strong>"+assetTitle.charAt(0).toUpperCase()+assetTitle.slice(1)+"</strong> are your highest-risk assets. Electrical distortion runs them hotter than they were designed to handle. Equipment that should last fifteen years starts failing in eight, and those replacement costs never appear on your energy bill.";
+  }
+
+  // Cost facts (keep dollar amounts, they're universal)
   var costFacts=COSTS[state.selected]||[];
   var costsHtml="";
   if(costFacts.length){
@@ -2706,55 +3937,78 @@ function updateClaimS3(){
     costsHtml+="</ul>";
   }
 
-  // Deduction teaser — no dollar figure yet, sqft input reveals it below
-  var dedText="Most commercial operators have never heard of Section 179D. It is one of the largest and most underused incentives in commercial real estate, specifically a federal tax deduction tied directly to energy efficiency. Enter your square footage below to see what your building likely qualifies for.";
+  // Deduction copy (US only)
+  var dedText=isES
+    ?"La mayoría de los operadores comerciales nunca han escuchado del Artículo 179D. Es uno de los incentivos más grandes y subutilizados en bienes raíces comerciales — una deducción fiscal federal vinculada directamente a la eficiencia energética. Ingrese sus metros cuadrados a continuación para ver a cuánto califica su edificio."
+    :"Most commercial operators have never heard of Section 179D. It is one of the largest and most underused incentives in commercial real estate, specifically a federal tax deduction tied directly to energy efficiency. Enter your square footage below to see what your building likely qualifies for.";
 
-  // State-specific rate negotiation copy
-  var _s3sn=(document.getElementById("c2-state")||{}).value||"";
-  var _s3dereg=!!(DEREG_STATES&&DEREG_STATES[_s3sn]);
-  var stateNameBold=_s3sn?"<strong>"+_s3sn+"</strong>":"Your state";
+  // Location/market copy
+  var isPR=!isMx&&isPuertoRico(_s3sn);
+  var _s3dereg=!isMx&&!!(DEREG_STATES&&DEREG_STATES[_s3sn]);
   var stateText="";
-  if(_s3sn){
-    if(isPuertoRico(_s3sn)){
-      stateText="<strong>Puerto Rico</strong> commercial operators pay roughly double the US mainland average rate, currently between $0.28 and $0.30 per kilowatt-hour all-in. Rates on the island rose more than 85% between 2020 and 2022. A new LUMA rate case was filed in July 2025, signaling further increases are imminent. The PREPA grid carries documented voltage instability that most mainland facilities never experience. Your equipment is dealing with distortion from two directions simultaneously: the harmonics your own systems generate, and an external supply that is not clean to begin with. Every dollar of waste inside your building costs you twice what it would cost the same facility in most US states.";
-    } else if(_s3dereg){
-      stateText=stateNameBold+" is a deregulated electricity market. Your facility has the legal right to shop its rate — most operators never exercise it. A properly structured negotiation typically reduces your per-kilowatt-hour cost without changing a single piece of equipment.";
+  if(isMx){
+    if(isES){
+      stateText="La región <strong>"+_s3sn+"</strong> opera bajo tarifa CFE. El 91% de los parques industriales en México han experimentado fallas en el suministro eléctrico. El margen de reserva nacional cayó al 3% en mayo de 2024 — la mitad del mínimo recomendado. Sus equipos enfrentan distorsión desde dos ángulos: los armónicos que generan sus propios sistemas, y un suministro externo que tampoco llega limpio. Además, la CFE aplica recargos por bajo factor de potencia que aparecen directamente en su recibo.";
     } else {
-      stateText=stateNameBold+" is a regulated electricity market. You cannot switch suppliers, but regulated utilities regularly add demand programs, infrastructure surcharges, and billing riders that most operators never notice. Many can be restructured or opted out of entirely with the right knowledge of your utility's rate structure.";
+      stateText="The <strong>"+_s3sn+"</strong> region operates under CFE tariff. 91% of Mexico's industrial parks have experienced power supply failures. The national reserve margin dropped to 3% in May 2024 — half the recommended minimum. Your equipment faces distortion from two directions: the harmonics your own systems generate, and an external supply that is not clean to begin with. CFE also applies power factor surcharges that appear as a direct line item on your bill.";
+    }
+  } else if(_s3sn){
+    var stateNameBold="<strong>"+_s3sn+"</strong>";
+    if(isPR){
+      stateText=isES
+        ?"<strong>Puerto Rico</strong> los operadores comerciales pagan aproximadamente el doble de la tarifa promedio del continente estadounidense, actualmente entre $0.28 y $0.30 por kilovatio-hora. Las tarifas en la isla subieron más del 85% entre 2020 y 2022. Un nuevo caso tarifario de LUMA se presentó en julio de 2025, lo que indica que aumentos adicionales son inminentes. Su equipo enfrenta distorsión desde dos direcciones: los armónicos que generan sus propios sistemas, y un suministro externo que tampoco llega limpio."
+        :"<strong>Puerto Rico</strong> commercial operators pay roughly double the US mainland average rate, currently between $0.28 and $0.30 per kilowatt-hour all-in. Rates on the island rose more than 85% between 2020 and 2022. A new LUMA rate case was filed in July 2025, signaling further increases are imminent. Your equipment is dealing with distortion from two directions simultaneously.";
+    } else if(_s3dereg){
+      stateText=isES
+        ?stateNameBold+" tiene un mercado eléctrico desregulado. Su instalación tiene el derecho legal de negociar su tarifa — la mayoría de los operadores nunca lo ejercen."
+        :stateNameBold+" is a deregulated electricity market. Your facility has the legal right to shop its rate — most operators never exercise it.";
+    } else {
+      stateText=isES
+        ?stateNameBold+" tiene un mercado eléctrico regulado. No puede cambiar de proveedor, pero las empresas de servicios reguladas agregan regularmente cargos de demanda, sobrecargos de infraestructura y ajustes tarifarios que la mayoría de los operadores nunca notan."
+        :stateNameBold+" is a regulated electricity market. You cannot switch suppliers, but regulated utilities regularly add demand programs, infrastructure surcharges, and billing riders that most operators never notice.";
     }
   }
 
-  var isPR=isPuertoRico(_s3sn);
+  // Diag copy (health only)
+  var diagText=isES
+    ?"La distorsión eléctrica no solo daña su equipo de diagnóstico. Afecta lo que ese equipo mide. Los espectrómetros de masas requieren estabilidad de voltaje en partes por millón. Los sistemas de ultrasonido con energía sucia corrompen la señal de imagen armónica. Los microscopios electrónicos se encuentran entre los instrumentos más sensibles al EMI en cualquier edificio. Este es el único problema eléctrico que no se anuncia."
+    :"Electrical distortion does not only damage your diagnostic equipment. It affects what that equipment measures. Mass spectrometers require parts-per-million voltage stability. Ultrasound systems on dirty power corrupt the harmonic imaging signal. Electron microscopes are among the most EMI-sensitive instruments in any building. This is the one electrical problem that does not announce itself.";
+
+  var showDed=!isPR&&!isMx;
   var isHealth=(state.selected==='health');
-  var h="";
-  var diagText="Electrical distortion does not only damage your diagnostic equipment. It affects what that equipment measures. Mass spectrometers require parts-per-million voltage stability. Instability causes compound misidentification, which is a direct diagnostic error. Ultrasound systems on dirty power corrupt the harmonic imaging signal that tissue imaging depends on. Electron microscopes are among the most EMI-sensitive instruments in any building, and better instruments are more susceptible, not less. MRI, CT, DEXA, and DNA sequencers each carry documented vulnerabilities as well. This is the one electrical problem that does not announce itself.";
-  var showDed=!isPR;
+  var stateCount=(_s3sn||isMx)?1:0;
   var diagCount=isHealth?1:0;
-  var stateCount=_s3sn?1:0;
   var itemCount=stateCount+1+1+diagCount+(showDed?1:0);
 
-  h+="<div class='s3-known-hd-main'>"+itemCount+" things worth knowing about your "+noun+"</div>";
+  // Labels
+  var lbl_count=isES?(itemCount+" cosas que vale la pena saber sobre su "+nounES):(itemCount+" things worth knowing about your "+noun);
+  var lbl_state=isES?(isMx?"Su Región":"Su Estado"):"Your "+(isMx?"Region":"State");
+  var lbl_bill=isES?"Su Factura Futura":"Your Future Bill";
+  var lbl_equip=isES?"Su Equipo":"Your Equipment";
+  var lbl_diag=isES?"Sus Resultados de Diagnóstico":"Your Diagnostic Results";
+  var lbl_ded=isES?"Sus Deducciones":"Your Deductions";
+
+  var h="";
+  h+="<div class='s3-known-hd-main'>"+lbl_count+"</div>";
   h+="<div class='s3-known-wrap'>";
   var idx=1;
-  if(_s3sn){
-    h+="<div class='s3-known-item'><div class='s3-known-num'>0"+idx+"</div><div class='s3-known-body'><div class='s3-known-label'>Your State</div><div class='s3-known-text'>"+stateText+"</div></div></div>"; idx++;
+  if(_s3sn||isMx){
+    h+="<div class='s3-known-item'><div class='s3-known-num'>0"+idx+"</div><div class='s3-known-body'><div class='s3-known-label'>"+lbl_state+"</div><div class='s3-known-text'>"+stateText+"</div></div></div>"; idx++;
   }
-  h+="<div class='s3-known-item'><div class='s3-known-num'>0"+idx+"</div><div class='s3-known-body'><div class='s3-known-label'>Your Future Bill</div><div class='s3-known-text'>"+billText+"</div></div></div>"; idx++;
-  h+="<div class='s3-known-item'><div class='s3-known-num'>0"+idx+"</div><div class='s3-known-body'><div class='s3-known-label'>Your Equipment</div><div class='s3-known-text'>"+equipText+"</div>"+costsHtml+"</div></div>"; idx++;
+  h+="<div class='s3-known-item'><div class='s3-known-num'>0"+idx+"</div><div class='s3-known-body'><div class='s3-known-label'>"+lbl_bill+"</div><div class='s3-known-text'>"+billText+"</div></div></div>"; idx++;
+  h+="<div class='s3-known-item'><div class='s3-known-num'>0"+idx+"</div><div class='s3-known-body'><div class='s3-known-label'>"+lbl_equip+"</div><div class='s3-known-text'>"+equipText+"</div>"+costsHtml+"</div></div>"; idx++;
   if(isHealth){
-    h+="<div class='s3-known-item s3-known-item-alert'><div class='s3-known-num'>0"+idx+"</div><div class='s3-known-body'><div class='s3-known-label'>Your Diagnostic Results</div><div class='s3-known-text'>"+diagText+"</div></div></div>"; idx++;
+    h+="<div class='s3-known-item s3-known-item-alert'><div class='s3-known-num'>0"+idx+"</div><div class='s3-known-body'><div class='s3-known-label'>"+lbl_diag+"</div><div class='s3-known-text'>"+diagText+"</div></div></div>"; idx++;
   }
   if(showDed){
-    h+="<div class='s3-known-item'><div class='s3-known-num'>0"+idx+"</div><div class='s3-known-body'><div class='s3-known-label'>Your Deductions</div><div class='s3-known-text'>"+dedText+"</div></div></div>";
+    h+="<div class='s3-known-item'><div class='s3-known-num'>0"+idx+"</div><div class='s3-known-body'><div class='s3-known-label'>"+lbl_ded+"</div><div class='s3-known-text'>"+dedText+"</div></div></div>";
   }
   h+="</div>";
-
   el.innerHTML=h;
   buildSmsLinks();
 
-  // Auto-populate sqft slider based on spend and facility type — hidden for Puerto Rico
   var _sliderWrap=document.getElementById("c-sqft-wrap");
-  if(isPuertoRico((document.getElementById("c2-state")||{}).value||"")){
+  if(isPR||isMx){
     if(_sliderWrap) _sliderWrap.style.display="none";
     var _ded=document.getElementById("c-ded-result"); if(_ded) _ded.style.display="none";
   } else {
@@ -2805,7 +4059,10 @@ function onConsultSqft(){
   var ded=document.getElementById("c-ded-result");
   if(v>0){
     var d=Math.round(v*5.94), t=Math.round(d*0.21);
-    ded.innerHTML="Up to <strong>$"+d.toLocaleString("en-US")+"</strong> in deductions, about <strong>$"+t.toLocaleString("en-US")+"</strong> in real tax savings at 21%.";
+    var dFmt="$"+d.toLocaleString("en-US");
+    var tFmt="$"+t.toLocaleString("en-US");
+    var dedFn=(STRINGS[state.lang].dedConsult||STRINGS.en.dedConsult);
+    ded.innerHTML=dedFn(dFmt,tFmt);
     ded.style.display="block";
   } else { ded.style.display="none"; }
 }
@@ -2929,9 +4186,8 @@ function buildSmsLinks(){
   var ins=INSIGHTS[state.selected];
   var facLabel=ins?ins.label:"facility";
   var spendAmt=state.spend>0?("about $"+fmtK(state.spend).replace("$","")+" per year"):"";
-  var baseMsg="Hi, I have a "+facLabel+(spendAmt?" spending "+spendAmt:"")+
-    " and just ran the Energy Plus savings calculator. "+
-    "What's the fastest way to know if these numbers hold for my operation?";
+  var _smsFn=(STRINGS[state.lang].smsFacMsg||STRINGS.en.smsFacMsg);
+  var baseMsg=_smsFn(facLabel,spendAmt);
   var href="sms:+18647770688?body="+encodeURIComponent(baseMsg);
   ["sms-link-top","sms-link-s3"].forEach(function(id){
     var el=document.getElementById(id); if(el) el.href=href;
@@ -2942,9 +4198,10 @@ function buildPrimaryCta(){
   var ins=INSIGHTS[state.selected];
   var noun=ins.noun;
   var spendAmt=state.spend>0?(", spending about "+fmtK(state.spend)+" per year on electricity,"):"";
-  var stateName=(document.getElementById("state-select")||{}).value||"";
+  var stateName=isMX()?state.mxRegion:((document.getElementById("state-select")||{}).value||"");
   var stateStr=stateName?" in "+stateName:"";
-  var msg="Hi, I have a "+noun+stateStr+spendAmt+" and I'd like to request a video walkthrough showing how you can help a facility like mine dial in its real numbers.";
+  var _smsVFn=(STRINGS[state.lang].smsVideoMsg||STRINGS.en.smsVideoMsg);
+  var msg=_smsVFn(noun,stateStr,spendAmt);
   var el=document.getElementById("sms-link-primary");
   if(el) el.href="sms:+18647770688?body="+encodeURIComponent(msg);
   var preview=document.getElementById("sms-preview-msg");
@@ -2956,15 +4213,22 @@ function updateCostOfWaiting(){
   var r=compute();
   var monthlyFloor=Math.round(r.floor/12);
   var monthlyCeil=Math.round(r.ceil/12);
-  var rangeHtml="<span class='rn-inline-range'>"+fmtFull(monthlyFloor)+" to "+fmtFull(monthlyCeil)+"</span>";
-  el.innerHTML="Based on your inputs, "+rangeHtml+" is leaving your building every single month, and that number grows automatically as electricity rates rise.";
+  var loHtml="<span class='rn-inline-range'>"+fmtFull(monthlyFloor)+"</span>";
+  var hiHtml="<span class='rn-inline-range'>"+fmtFull(monthlyCeil)+"</span>";
+  var _cowFn=(STRINGS[state.lang].costOfWaiting||STRINGS.en.costOfWaiting);
+  el.innerHTML=_cowFn(loHtml,hiHtml);
 }
 function updateSummaryBar(){
   var el=document.getElementById("c-sum-text"); if(!el) return;
+  var SL=STRINGS[state.lang]||STRINGS.en;
   var parts=[];
-  if(state.selected&&INSIGHTS[state.selected]) parts.push(INSIGHTS[state.selected].label);
-  if(state.spend>0) parts.push(fmtFull(state.spend)+" / yr");
-  if(state.sqft>0) parts.push(state.sqft.toLocaleString("en-US")+" sq ft");
+  if(state.selected&&INSIGHTS[state.selected]){
+    // Use translated facility label if available
+    var facLabel=SL.facLabels&&SL.facLabels[state.selected]?SL.facLabels[state.selected]:INSIGHTS[state.selected].label;
+    parts.push(facLabel);
+  }
+  if(state.spend>0) parts.push(fmtFull(state.spend)+" "+(SL.yr||"/ yr"));
+  if(state.sqft>0) parts.push(state.sqft.toLocaleString("en-US")+" "+(SL.sqFt||"sq ft"));
   el.innerHTML=parts.join("<span class='c-sum-sep'> · </span>");
   buildSmsLinks();
   buildPrimaryCta(); updateCostOfWaiting();
@@ -3073,8 +4337,6 @@ function initAmbientCanvas(){
 }
 
 (function init(){
-  // Init view: hide everything except fac-grid
-  // Init: hide everything except stage 1 card
   ["result-block","asset-section","ded-section","fin-section","c-summary","field-fac-adj"].forEach(function(id){var el=document.getElementById(id);if(el)el.style.display="none";});
   document.getElementById("calc").classList.add("c-mode-dark");
   var cbMain=document.getElementById("calc-body-main"); if(cbMain) cbMain.style.display="none";
@@ -3082,6 +4344,8 @@ function initAmbientCanvas(){
   var cs=document.getElementById("calc-sub"); if(cs) cs.style.display="none";
   [".streams.gated",".insight.gated",".method.gated",".cta.gated",".calc-foot.gated",".fac-close.gated"].forEach(function(q){var el=document.querySelector(q);if(el)el.style.display="none";});
   var pp=document.getElementById("pick-prompt"); if(pp) pp.style.display="none";
+  // Hide s1, s2, s3 — start at s0
+  ["c-s1","c-s2","c-s3"].forEach(function(id){var el=document.getElementById(id);if(el)el.style.display="none";});
   var sel=document.getElementById("state-select");
   var ph=document.createElement("option"); ph.value=""; ph.textContent="Choose your primary state"; ph.disabled=true; ph.selected=true; sel.appendChild(ph);
   Object.keys(STATE_COOL).forEach(function(name){
@@ -3089,13 +4353,13 @@ function initAmbientCanvas(){
     sel.appendChild(o);
   });
   state.stateCool=50; recomputeCool();
-  // Populate consult state select from main select
   var c2s=document.getElementById("c2-state");
   if(c2s){ c2s.innerHTML=document.getElementById("state-select").innerHTML; c2s.value=""; }
   document.querySelectorAll(".fac-opt").forEach(function(el){ el.addEventListener("click",function(){ selectFac(el); }); });
   render();
   initAmbientCanvas();
   checkS2Ready();
+  applyStrings();
 })();
 
 // ── SLIDER --pct FILL ────────────────────────────────────────────────────
