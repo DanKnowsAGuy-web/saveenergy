@@ -735,6 +735,8 @@ body::before{content:'';position:fixed;inset:0;background-image:url("data:image/
 .cum-row-sm .cum-lab{font-size:11px;}
 .rn-equip-cta{margin-top:18px;padding:16px 18px;background:rgba(200,169,110,0.08);border:1px solid rgba(200,169,110,0.28);border-left:3px solid var(--copper);font-family:'Barlow',sans-serif;font-size:15px;color:rgba(255,255,255,0.9);line-height:1.6;}
 .rn-equip-cta a{color:var(--gold-bright);text-decoration:underline;text-underline-offset:3px;}
+.rn-equip-cta-note{margin-bottom:14px;}
+.rn-equip-btn{display:inline-flex;align-items:center;gap:8px;text-decoration:none!important;color:#fff!important;}
 .s3-known-item-alert{border-left:3px solid var(--gold);background:rgba(200,169,110,0.06);padding-left:14px;margin-left:-14px;}
 .s3-known-item-alert .s3-known-label{color:var(--gold-light);}
 /* ── SOCIAL PROOF STRIP ── */
@@ -2116,9 +2118,9 @@ var state = {
   count:0, countKey:"", countLabel:"", resultSummary:null
 };
 
-// ── EQUIPMENT-ONLY CTA CONFIG (parameterized; not yet finalized) ──
-// mode: "note" = static text, no link | "sms" = sms link w/ body | "link" = URL
-var EQUIP_ONLY_CTA = { mode:"note", link:"", smsBody:"" };
+// ── EQUIPMENT-ONLY CTA CONFIG ──
+// mode: "sms" = text link w/ dynamic DIY body | "link" = URL | "note" = static text
+var EQUIP_ONLY_CTA = { mode:"sms", link:"" };
 
 // ── FACILITY COUNT OPTIONS (low-end values drive all math) ──
 // low drives qualification/tier math; [low,high] span drives the defensible portfolio range.
@@ -2537,8 +2539,9 @@ var STRINGS = {
     equip3: "We almost never recommend wholesale replacement. The ROI on a targeted retrofit is almost always better, and your existing equipment is usually worth saving.",
     equip4: "If you find a better solution, we will pay you a finder's fee for the introduction.",
     equipGuarantee: "The savings estimate above is yours to keep, no card required. When you are ready to spec the equipment, we will help you get it right.",
-    equipCtaNote: "Ask us about the equipment-only path and we'll help you spec the right hardware for your facility.",
-    equipCtaAction: "Ask about equipment-only",
+    equipCtaNote: "Ready when you are — send a text and we'll help you spec the right hardware for your facility.",
+    equipCtaAction: "Text us about the do-it-yourself program",
+    smsDiyMsg: function(facLabel,countPhrase,spendMo){ return "Hi — I'm interested in your energy savings do-it-yourself program. I run a "+facLabel+(countPhrase?" — "+countPhrase:"")+(spendMo?", around "+spendMo+"/mo per facility on power":"")+". (Equipment-only / DIY)"; },
     // Dynamic render strings
     resultPreamble: function(noun,names){ return "Your "+noun+" is losing this every year to electrical waste. The most likely culprits: <strong>"+names+"</strong>."; },
     annualBill: "of your annual bill",
@@ -2706,8 +2709,9 @@ var STRINGS = {
     equip3: "Casi nunca recomendamos el reemplazo total. El ROI de una modernización dirigida casi siempre es mejor, y su equipo existente generalmente vale la pena conservarlo.",
     equip4: "Si encuentra una mejor solución, le pagaremos una comisión por la presentación.",
     equipGuarantee: "La estimación de ahorro de arriba es suya, sin tarjeta requerida. Cuando esté listo para especificar el equipo, le ayudaremos a hacerlo bien.",
-    equipCtaNote: "Pregúntenos sobre el camino de solo equipo y le ayudaremos a especificar el hardware correcto para su instalación.",
-    equipCtaAction: "Preguntar sobre solo equipo",
+    equipCtaNote: "Cuando esté listo — envíenos un mensaje y le ayudaremos a especificar el hardware correcto para su instalación.",
+    equipCtaAction: "Envíenos un mensaje sobre el programa 'hágalo usted mismo'",
+    smsDiyMsg: function(facLabel,countPhrase,spendMo){ return "Hola — me interesa su programa de ahorro de energía 'hágalo usted mismo'. Tengo un "+facLabel+(countPhrase?" — "+countPhrase:"")+(spendMo?", alrededor de "+spendMo+"/mes por instalación en electricidad":"")+". (Solo equipo / DIY)"; },
     // Dynamic render strings
     resultPreamble: function(noun,names,facKey){
       var SL=STRINGS.es;
@@ -3643,12 +3647,21 @@ function updateSignalBox(){
 function renderEquipCta(){
   var el=document.getElementById('rn-equip-cta'); if(!el) return;
   var S=STRINGS[state.lang]||STRINGS.en;
-  if(EQUIP_ONLY_CTA.mode==='sms' && EQUIP_ONLY_CTA.smsBody){
-    el.innerHTML=(S.equipCtaNote||"")+' <a href="sms:'+EP_NUMBER+'?body='+encodeURIComponent(EQUIP_ONLY_CTA.smsBody)+'">'+(S.equipCtaAction||"")+'</a>';
+  var note=S.equipCtaNote||"";
+  if(EQUIP_ONLY_CTA.mode==='sms'){
+    var facLabel=(S.facLabels&&S.facLabels[state.selected])||(INSIGHTS[state.selected]?INSIGHTS[state.selected].label:"facility");
+    var cp=countPhrase()?countPhrase().toLowerCase():"";
+    var spendMo=state.spend?fmtFull(state.spend/12):"";
+    var _diyFn=(S.smsDiyMsg||STRINGS.en.smsDiyMsg);
+    var body=_diyFn(facLabel,cp,spendMo);
+    el.innerHTML='<div class="rn-equip-cta-note">'+note+'</div>'+
+      '<a class="txt-cta-btn rn-equip-btn" href="sms:'+EP_NUMBER+'?body='+encodeURIComponent(body)+'">'+
+      '<span class="txt-cta-ico">&#128241;</span> '+(S.equipCtaAction||"")+'</a>';
   } else if(EQUIP_ONLY_CTA.mode==='link' && EQUIP_ONLY_CTA.link){
-    el.innerHTML=(S.equipCtaNote||"")+' <a href="'+EQUIP_ONLY_CTA.link+'" target="_blank">'+(S.equipCtaAction||"")+'</a>';
+    el.innerHTML='<div class="rn-equip-cta-note">'+note+'</div>'+
+      '<a class="txt-cta-btn rn-equip-btn" href="'+EQUIP_ONLY_CTA.link+'" target="_blank">'+(S.equipCtaAction||"")+'</a>';
   } else {
-    el.textContent=S.equipCtaNote||"";
+    el.textContent=note;
   }
 }
 function applyPathway(){
